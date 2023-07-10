@@ -135,6 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <button type="submit" class="btn btn-primary">Formulaire Suivant</button>
+                <button type="reset">Annuler</button>
             </form>
         </div>
     </div>
