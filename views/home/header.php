@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item <?php if ($page == 'home') {echo 'active';}?>">
-                    <a class="nav-link" href="/MSC-1/home">Accueil</a>
+                    <a class="nav-link" href="/MSC-1/home">Accueillette</a>
                 </li>
                 <li class="nav-item <?php if ($page == 'login') {echo 'active';}?>">
                     <a class="nav-link" href="/MSC-1/login">Connexion</a>
