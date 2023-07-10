@@ -13,10 +13,12 @@ require_once ROOT . 'App/Model.php';
 
 
 class ClientModel extends Model {
-    public function insertClient($nom, $prenom, $email, $telephone, $profession, $secteur) {
-        $sql = "INSERT INTO clients (nom, prenom, email, telephone, profession, secteur) VALUES (?, ?, ?, ?, ?, ?)";
+    public function insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo) {
+
+        $logovalue = ($logo==='oui') ? 1 : 0;
+        $sql = "INSERT INTO clients (nom, prenom, email, telephone, adresse, profession, secteur, logo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$nom, $prenom, $email, $telephone, $profession, $secteur]);
+        $stmt->execute([$nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logovalue]);
     }
 }
 
@@ -71,9 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
-            $logoValue = ($logo === 'oui') ? 1 : 0;
 
-            header("Location:".ROOT."views/client2/index.php?nom=$nom&prenom=$prenom&email=$email&telephone=$telephone&adresse=$adresse&profession=$profession&secteur=$secteur&logo=$logo");
+            header("Location: http://localhost/MSC-1/client2");
             exit();
         } catch (PDOException $e) {
             // Affichage d'une erreur en cas de problème avec la base de données
