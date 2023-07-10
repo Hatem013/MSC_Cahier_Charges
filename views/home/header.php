@@ -11,8 +11,9 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     
     <!-- Logo -->
         <a class="navbar-brand" href="https://www.mon-service-com.fr" target="_blank"><img src="./Public/asset/image/logo_msc.png" class="logo_msc"></a>
@@ -23,7 +24,7 @@
         </button>
 
     <!-- Desktop nav -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav">
 
                 <!-- Accueil -->
