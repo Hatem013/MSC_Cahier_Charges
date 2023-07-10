@@ -19,8 +19,8 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
         <div class="col-md-6">
             <form method="post" action="">
                 <div class="form-group">
-                    <label for="pet-select">Type de site</label><br>
-                    <select name="type_site" id="type_site">
+                    <label for="pet-select" style="display: block;">Type de site</label>
+                    <select name="type_site" id="type_site" class="form-control">
                         <option value="">Choisissez une option</option>
                         <option value="vitrine">Site Vitrine</option>
                         <option value="e-commerce">E-commerce</option>
@@ -31,20 +31,20 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="nombre-couleurs">Combien de couleurs sur votre site ? (1 à 3 max)</label>
-                    <input type="number" name="nombre-couleurs" id="nombre-couleurs" min="1" max="3">
+                    <label for="nombre-couleurs" style="display: block;">Combien de couleurs sur votre site ? (1 à 3 max)</label>
+                    <input type="number" name="nombre-couleurs" id="nombre-couleurs" min="1" max="3" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="couleur1">Choisissez votre couleur principale</label>
-                    <input type="color" name="couleur1" id="couleur1">
+                    <label for="couleur1" style="display: block;">Choisissez votre couleur principale</label>
+                    <input type="color" name="couleur1" id="couleur1" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="couleur2">Choisissez votre couleur secondaire</label>
-                    <input type="color" name="couleur2" id="couleur2">
+                    <label for="couleur2" style="display: block;">Choisissez votre couleur secondaire</label>
+                    <input type="color" name="couleur2" id="couleur2" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="couleur3">Choisissez votre couleur tertiaire</label>
-                    <input type="color" name="couleur3" id="couleur3">
+                    <label for="couleur3" style="display: block;">Choisissez votre couleur tertiaire</label>
+                    <input type="color" name="couleur3" id="couleur3" class="form-control">
                 </div>
             </form>
         </div>
