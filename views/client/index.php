@@ -38,6 +38,9 @@ function validateForm($formData) {
     if (empty($formData['telephone'])) {
         $errors['telephone'] = 'Le champ téléphone est requis.';
     }
+    if (empty($formData['adresse'])) {
+        $errors['adresse'] = 'Le champ adresse est requis.';
+    }
 
     if (empty($formData['profession'])) {
         $errors['profession'] = 'Le champ profession est requis.';
