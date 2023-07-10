@@ -9,6 +9,9 @@ include_once ROOT . 'views/home/footer.php';
 
 
 <?php
+session_start();
 require_once ROOT . 'App/Model.php';
+
+echo"<p>Bienvenue ". $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>";
 
 

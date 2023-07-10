@@ -7,7 +7,7 @@ include_once ROOT . 'views/home/footer.php';
 <h1>Créer votre site</h1>
 <p>Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>
 <?php
-
+session_start();
 
 require_once ROOT . 'App/Model.php';
 
@@ -73,6 +73,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
+
+            $_SESSION['nom'] = $nom;
+            $_SESSION['prenom'] = $prenom;
+            $_SESSION['email'] = $email;
+            $_SESSION['telephone'] = $telephone;
+            $_SESSION['adresse'] = $adresse;
+            $_SESSION['profession'] = $profession;
+            $_SESSION['secteur'] = $secteur;
+            $_SESSION['logo'] = $logo;
 
             header("Location: http://localhost/MSC-1/client2");
             exit();
