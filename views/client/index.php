@@ -38,6 +38,9 @@ function validateForm($formData) {
     if (empty($formData['telephone'])) {
         $errors['telephone'] = 'Le champ téléphone est requis.';
     }
+    if (empty($formData['adresse'])) {
+        $errors['adresse'] = 'Le champ adresse est requis.';
+    }
 
     if (empty($formData['profession'])) {
         $errors['profession'] = 'Le champ profession est requis.';
@@ -61,14 +64,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $prenom = $_POST['prenom'];
         $email = $_POST['email'];
         $telephone = $_POST['telephone'];
+        $adresse = $_POST['adresse'];
         $profession = $_POST['profession'];
         $secteur = $_POST['secteur'];
         $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
 
         try {
-            $clientModel->insertClient($nom, $prenom, $email, $telephone, $profession, $secteur, $logo);
+            $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
 
-            header("Location: second-form.php?nom=$nom&prenom=$prenom&email=$email&telephone=$telephone&profession=$profession&secteur=$secteur&logo=$logo");
+            header("Location: second-form.php?nom=$nom&prenom=$prenom&email=$email&telephone=$telephone&adresse=$adresse&profession=$profession&secteur=$secteur&logo=$logo");
             exit();
         } catch (PDOException $e) {
             // Affichage d'une erreur en cas de problème avec la base de données
@@ -109,6 +113,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="form-group">
+                    <label for="adresse">Adresse :</label>
+                    <input type="text" class="form-control" id="adresse" name="adresse" required>
+                </div>
+
+                <div class="form-group">
                     <label for="profession">Profession :</label>
                     <input type="text" class="form-control" id="profession" name="profession" required>
                 </div>
@@ -126,6 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <button type="submit" class="btn btn-primary">Formulaire Suivant</button>
+                <button type="reset">Annuler</button>
             </form>
         </div>
     </div>
