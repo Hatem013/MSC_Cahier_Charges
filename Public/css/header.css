@@ -1,0 +1,24 @@
+.logo_msc {
+    width:100px;
+    margin-left: 10px;
+}
+
+.header_svg {
+    width:30px;
+}
+
+.header_create_svg {
+    width: 25px;
+}
+
+.header_account_svg {
+    width: 35px;
+}
+
+.header_dashboard_svg {
+    width: 40px;
+}
+
+.dropdown-menu {
+    min-width: 200px;
+}
