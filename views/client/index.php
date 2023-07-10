@@ -71,8 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
+            $logoValue = ($logo === 'oui') ? 1 : 0;
 
-            header("Location: second-form.php?nom=$nom&prenom=$prenom&email=$email&telephone=$telephone&adresse=$adresse&profession=$profession&secteur=$secteur&logo=$logo");
+            header("Location:".ROOT."views/client2/index.php?nom=$nom&prenom=$prenom&email=$email&telephone=$telephone&adresse=$adresse&profession=$profession&secteur=$secteur&logo=$logo");
             exit();
         } catch (PDOException $e) {
             // Affichage d'une erreur en cas de problème avec la base de données
@@ -135,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <button type="submit" class="btn btn-primary">Formulaire Suivant</button>
-                <button type="reset">Annuler</button>
+                <button type="reset" class="btn btn-danger">Annuler</button>
             </form>
         </div>
     </div>
