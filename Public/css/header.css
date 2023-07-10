@@ -22,3 +22,7 @@
 .dropdown-menu {
     min-width: 200px;
 }
+
+.dropdown-toggle {
+    background-color: #24BDBD;
+}
