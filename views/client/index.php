@@ -58,8 +58,8 @@ function validateForm($formData) {
 ?>
 <div class="container formulaire">
 
-    <div class="container text-center">
-        <h1>Créer votre site</h1>
+    <div class="container text-center mt-4 mb-5">
+        <h1 class="mb-4">Créer votre site</h1>
         <p>Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>
     </div>
 
@@ -131,7 +131,7 @@ function validateForm($formData) {
                     </div>
 
                     <!-- Bouton d'envoie -->
-                    <div class="row p-2">
+                    <div class="row p-2 ">
                         <button type="submit" class="btn my-3">Étape suivante -></button>
                     </div>
                 </form>

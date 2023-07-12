@@ -1,7 +1,7 @@
 .formulaire {
-    margin-top: 10vh;
+    margin-top: 15vh;
     padding: 10px;
-    background-color: rgba(0,0,0, 0.7) ;
+    background-color: rgba(0,0,0, 0.8) ;
     color: white;
     border : 1px solid white;
     border-radius: 10px;
@@ -10,4 +10,14 @@
 .btn {
     background-color:#24BEBE;
     color:white;
+}
+
+.btn:hover {
+    background-color:#24bebe;
+    color:yellow;
+    border : 1px solid white;
+}
+
+.btn-form-1 {
+    width: 200px;
 }
