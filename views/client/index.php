@@ -9,18 +9,19 @@ session_start();
 
 require_once ROOT . 'App/Model.php';
 
+class ClientModel extends Model
+{
+    public function insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo)
+    {
 
-class ClientModel extends Model {
-    public function insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo) {
-
-        $logovalue = ($logo==='oui') ? 1 : 0;
+        $logovalue = ($logo === 'oui') ? 1 : 0;
         $sql = "INSERT INTO clients (nom, prenom, email, telephone, adresse, profession, secteur, logo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
         $stmt->execute([$nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logovalue]);
     }
 }
-
-function validateForm($formData) {
+function validateForm($formData)
+{
     $errors = [];
 
     if (empty($formData['nom'])) {
@@ -52,10 +53,8 @@ function validateForm($formData) {
 
     return $errors;
 }
-
 ?>
 
-?>
 <div class="container formulaire">
 
     <div class="container text-center mt-4 mb-5">
@@ -68,10 +67,10 @@ function validateForm($formData) {
         <!-- Container formulaire-->
         <div class="row justify-content-center">
             <div class="col-md-8">
-                
+
                 <!-- Formulaire -->
                 <form method="post" action="">
-                    
+
                     <!-- Nom et prénom -->
                     <div class="row my-3">
                         <div class="col-6">
@@ -138,57 +137,54 @@ function validateForm($formData) {
 
                 <!-- Message d'erreur -->
                 <div>
+
                     <?php
-
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $clientModel = new ClientModel();
-    $clientModel->getConnexion();
+                        $clientModel = new ClientModel();
+                        $clientModel->getConnexion();
 
-    $formErrors = validateForm($_POST);
+                        $formErrors = validateForm($_POST);
 
-    if (empty($formErrors)) {
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $email = $_POST['email'];
-        $telephone = $_POST['telephone'];
-        $adresse = $_POST['adresse'];
-        $profession = $_POST['profession'];
-        $secteur = $_POST['secteur'];
-        $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
+                        if (empty($formErrors)) {
+                            $nom = $_POST['nom'];
+                            $prenom = $_POST['prenom'];
+                            $email = $_POST['email'];
+                            $telephone = $_POST['telephone'];
+                            $adresse = $_POST['adresse'];
+                            $profession = $_POST['profession'];
+                            $secteur = $_POST['secteur'];
+                            $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
 
-        try {
-            $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
+                            try {
+                                $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
 
-            $_SESSION['nom'] = $nom;
-            $_SESSION['prenom'] = $prenom;
-            $_SESSION['email'] = $email;
-            $_SESSION['telephone'] = $telephone;
-            $_SESSION['adresse'] = $adresse;
-            $_SESSION['profession'] = $profession;
-            $_SESSION['secteur'] = $secteur;
-            $_SESSION['logo'] = $logo;
+                                $_SESSION['nom'] = $nom;
+                                $_SESSION['prenom'] = $prenom;
+                                $_SESSION['email'] = $email;
+                                $_SESSION['telephone'] = $telephone;
+                                $_SESSION['adresse'] = $adresse;
+                                $_SESSION['profession'] = $profession;
+                                $_SESSION['secteur'] = $secteur;
+                                $_SESSION['logo'] = $logo;
 
-            header("Location: http://localhost/MSC-1/client2");
-            exit();
-        } catch (PDOException $e) {
-            // Affichage d'une erreur en cas de problème avec la base de données
-            echo "Erreur : " . $e->getMessage();
-        }
-    } else {
-        // Affichage des erreurs de validation
-        foreach ($formErrors as $fieldName => $errorMessage) {
-            echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
-        }
-    }
-}
-
-
-
+                                header("Location: http://localhost/MSC-1/client2");
+                                exit();
+                            } catch (PDOException $e) {
+                                // Affichage d'une erreur en cas de problème avec la base de données
+                                echo "Erreur : " . $e->getMessage();
+                            }
+                        } else {
+                            // Affichage des erreurs de validation
+                            foreach ($formErrors as $fieldName => $errorMessage) {
+                                echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
+                            }
+                        }
+                    }
                     ?>
                 </div>
 
             </div>
         </div>
-        
+
     </div>
 </div>

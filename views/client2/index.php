@@ -1,26 +1,26 @@
+<!-- Include header et footer-->
 <?php
-
 include_once ROOT . 'views/home/header.php';
 include_once ROOT . 'views/home/footer.php';
 ?>
 
-<div class="container text-center">
-<h1>Suite du formualire de création de site</h1>
-<h2>Entrez les différentes informations pour un site plus personnel</h2>
-</div>
-
+<!-- Session start-->
 <?php
 session_start();
+
+/// Connexion BDD
 require_once ROOT . '/App/Model.php';
-class ClientModel extends Model {
-    public function insertSiteInformation($nombreCouleurs, $couleurs, $logo) {
+
+/// Insertion info BDD
+class ClientModel extends Model
+{
+    public function insertSiteInformation($nombreCouleurs, $couleurs, $logo)
+    {
         $sql = "INSERT INTO clients (nombre_couleurs, couleur1, couleur2, couleur3, logo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
         $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], $couleurs[2], $logo]);
     }
 }
-
-// ...
 
 // Vérifie si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -40,57 +40,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $clientModel->insertSiteInformation($nombreCouleurs, $couleurs, $logo);
 
- 
+
     header("Location: http://localhost/MSC-1/client3");
     exit();
 }
 ?>
 
 <script>
-function showColorFields() {
-    var nombreCouleurs = document.getElementById('nombre-couleurs').value;
-    
-    // Affiche les champs de couleur et les labels en fonction du nombre sélectionné
-    for (var i = 1; i <= 3; i++) {
-        var couleurField = document.getElementById('couleur' + i);
-        var couleurLabel = document.getElementById('label-couleur' + i);
-        
-        if (i <= nombreCouleurs) {
-            couleurField.style.display = 'block';
-            couleurLabel.style.display = 'block';
-        } else {
-            couleurField.style.display = 'none';
-            couleurLabel.style.display = 'none';
+    function showColorFields() {
+        var nombreCouleurs = document.getElementById('nombre-couleurs').value;
+
+        // Affiche les champs de couleur et les labels en fonction du nombre sélectionné
+        for (var i = 1; i <= 3; i++) {
+            var couleurField = document.getElementById('couleur' + i);
+            var couleurLabel = document.getElementById('label-couleur' + i);
+
+            if (i <= nombreCouleurs) {
+                couleurField.style.display = 'block';
+                couleurLabel.style.display = 'block';
+            } else {
+                couleurField.style.display = 'none';
+                couleurLabel.style.display = 'none';
+            }
         }
     }
-}
-function showLogoFields() {
-    var logoOui = document.getElementById('logo_oui');
-    var logoNon = document.getElementById('logo_non');
-    var logoFileField = document.getElementById('logo-file-field');
-    var createLogoField = document.getElementById('create-logo-field');
-    
-    // Affiche le champ de fichier si "Oui" est sélectionné, sinon affiche le champ de création de logo
-    if (logoOui.checked) {
-        logoFileField.style.display = 'block';
-        createLogoField.style.display = 'none';
-    } else if (logoNon.checked) {
-        logoFileField.style.display = 'none';
-        createLogoField.style.display = 'block';
+
+    function showLogoFields() {
+        var logoOui = document.getElementById('logo_oui');
+        var logoNon = document.getElementById('logo_non');
+        var logoFileField = document.getElementById('logo-file-field');
+        var createLogoField = document.getElementById('create-logo-field');
+
+        // Affiche le champ de fichier si "Oui" est sélectionné, sinon affiche le champ de création de logo
+        if (logoOui.checked) {
+            logoFileField.style.display = 'block';
+            createLogoField.style.display = 'none';
+        } else if (logoNon.checked) {
+            logoFileField.style.display = 'none';
+            createLogoField.style.display = 'block';
+        }
     }
-}
 </script>
 
 <?php
 echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>";
 ?>
 <div class="container formulaire">
+
+    <div class="container text-center mt-4 mb-5">
+        <h1>Suite du formulaire</h1>
+        <h2>Entrez les différentes informations pour un site plus personnel</h2>
+    </div>
+
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
                 <div class="form-group">
                     <label for="nombre-couleurs">Combien de couleurs sur votre site ? (1 à 3 max)</label>
                     <input type="number" name="nombre-couleurs" id="nombre-couleurs" min="1" max="3" oninput="showColorFields()">
+
                 </div>
 
                 <?php for ($i = 1; $i <= 3; $i++) { ?>
@@ -98,7 +106,7 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                         <label for="couleur<?php echo $i; ?>">Choisissez votre couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>
                     </div>
                     <div class="form-group">
-                        <input type="color" name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
+                        <input type="text" data-coloris name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
                     </div>
                 <?php } ?>
                 <div class="form-group">
@@ -126,10 +134,11 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                     </div>
                 </div>
                 <div class="row p-2">
-                        <button type="submit" class="btn my-3">Étape suivante -></button>
+                    <button type="submit" class="btn my-3">Étape suivante -></button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+<script src="./Public/js/coloris.min.js"></script>
