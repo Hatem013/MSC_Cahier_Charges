@@ -12,6 +12,38 @@ include_once ROOT . 'views/home/footer.php';
 <?php
 session_start();
 require_once ROOT . '/App/Model.php';
+class ClientModel extends Model {
+    public function insertSiteInformation($nombreCouleurs, $couleurs, $logo) {
+        $sql = "INSERT INTO clients (nombre_couleurs, couleur1, couleur2, couleur3, logo) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], $couleurs[2], $logo]);
+    }
+}
+
+// ...
+
+// Vérifie si le formulaire a été soumis
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $clientModel = new ClientModel();
+    $clientModel->getConnexion();
+
+    $nombreCouleurs = $_POST['nombre-couleurs'];
+    $couleurs = array();
+
+    // Récupérer les valeurs des couleurs
+    for ($i = 1; $i <= $nombreCouleurs; $i++) {
+        $couleur = $_POST['couleur' . $i];
+        $couleurs[] = $couleur;
+    }
+
+    $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
+
+    $clientModel->insertSiteInformation($nombreCouleurs, $couleurs, $logo);
+
+ 
+    header("Location: http://localhost/MSC-1/client3");
+    exit();
+}
 ?>
 
 <script>
@@ -92,6 +124,9 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                         <input type="radio" name="create-logo" id="create-logo_non" value="non">
                         <label for="create-logo_non">Non</label>
                     </div>
+                </div>
+                <div class="row p-2">
+                        <button type="submit" class="btn my-3">Étape suivante -></button>
                 </div>
             </form>
         </div>
