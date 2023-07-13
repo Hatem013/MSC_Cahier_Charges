@@ -8,7 +8,7 @@ require_once ROOT . 'App/Model.php';
 ?>
 <div class="container formulaire">
 <form method="post" action="">
-<label>Sélectionnez une image :</label><br>
+<label>Sélectionnez un type de header :</label><br>
     <?php
     $imageFolder = "./Public/asset/image/"; 
 
@@ -21,7 +21,8 @@ require_once ROOT . 'App/Model.php';
         echo '</label>';
     }
     ?>
-  
-  <button type="submit" class="btn btn-primary">Envoyer</button>
+  <div class="row p-2">
+  <button type="submit" class="btn my-3">Formulaire suivant</button>
+  </div>
 </form>
 </div>
