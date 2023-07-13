@@ -2,52 +2,52 @@
     list-style-type: none;
     padding: 0;
     margin-bottom: 20px;
-    background-color: #00679c; /* Couleur de fond de la progress bar */
-    border-radius: 10px; /* Bordure arrondie */
-    overflow: hidden; /* Masquer le contenu débordant */
-    display: flex; /* Utiliser le modèle de flexbox pour répartir l'espacement */
-    justify-content: space-between; /* Répartir l'espacement entre les éléments */
-    width: 1300px; /* Largeur totale de la progress bar */
-    align-items: center; /* Centrer verticalement les éléments */
-    padding: 10px; /* Espace interne des éléments */
+    background-color: #00679c;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex; 
+    justify-content: space-between; 
+    width: 1300px;
+    align-items: center;
+    padding: 10px;
 }
 
 .progressbar li {
     position: relative;
-    text-align: center; /* Centrer le texte horizontalement */
+    text-align: center;
 }
 
 .progressbar li:not(:last-child):after {
     content: "";
     position: absolute;
-    top: calc(50% - 2px); /* Ajuster la position verticale du fil */
-    left: calc(100% + 10px); /* Espacement entre les étapes */
+    top: calc(50% - 2px);
+    left: calc(100% + 10px);
     height: 4px;
-    background-color: #24BEBE; /* Couleur du fil entre les étapes */
-    width: calc(100% - 40px); /* Largeur du fil entre les étapes */
+    background-color: #24BEBE; 
+    width: calc(100% - 40px); 
 }
 
 .progressbar li.active {
-    font-weight: bold; /* Gras pour l'étape active */
+    font-weight: bold;
 }
 
 .progressbar li.active a {
-    background-color: #24BEBE; /* Couleur de fond de la bulle de l'étape active */
-    color: white; /* Couleur du texte de la bulle de l'étape active */
-    border: 2px solid #24BEBE; /* Bordure de la bulle de l'étape active */
+    background-color: #24BEBE; 
+    color: white; 
+    border: 2px solid #24BEBE; 
 }
 
 .progressbar li a {
     position: relative;
     display: inline-block;
     text-decoration: none;
-    color: white; /* Couleur du texte de la bulle */
-    width: 40px; /* Largeur de la bulle */
-    height: 40px; /* Hauteur de la bulle */
-    line-height: 40px; /* Centrer le texte verticalement */
-    border-radius: 50%; /* Bordure arrondie pour créer une bulle */
-    background-color: #00679c; /* Couleur de fond de la bulle */
-    transition: background-color 0.3s ease; /* Transition lors du survol */
+    color: white; 
+    width: 40px; 
+    height: 40px; 
+    line-height: 40px; 
+    border-radius: 50%; 
+    background-color: #00679c; 
+    transition: background-color 0.3s ease;
 }
 
 .progressbar li.active a:before {
@@ -56,11 +56,11 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 12px; /* Taille du texte de l'étape */
-    color: #24BEBE; /* Couleur du texte de l'étape */
-    white-space: nowrap; /* Empêcher le texte de se retourner à la ligne */
+    font-size: 12px;
+    color: #24BEBE;
+    white-space: nowrap;
 }
 
 .progressbar li a:hover {
-    background-color: #24BEBE; /* Couleur de fond de la bulle lors du survol */
+    background-color: #24BEBE;
 }
