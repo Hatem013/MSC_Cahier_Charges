@@ -63,11 +63,11 @@ function validateForm($formData)
     </div>
     <ul class="progressbar">
             <li <?php if ($_SESSION['currentStep'] == 1) { echo 'class="active"'; } ?>>Étape 1</li>
-            <li <?php if ($_SESSION['currentStep'] >= 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> >Étape 2</a></li>
-            <li <?php if ($_SESSION['currentStep'] >= 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> >Étape 3</a></li>
-            <li <?php if ($_SESSION['currentStep'] >= 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> >Étape 4</a></li>
-            <li <?php if ($_SESSION['currentStep'] >= 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> >Étape 5</a></li>
-            <li <?php if ($_SESSION['currentStep'] >= 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> >Étape 6</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> >Étape 2</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> >Étape 3</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> >Étape 4</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> >Étape 5</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> >Étape 6</a></li>
         </ul>
     <div class="container">
 

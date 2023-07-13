@@ -3,64 +3,63 @@
     padding: 0;
     margin-bottom: 20px;
     background-color: #00679c;
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     width: 1300px;
     align-items: center;
     padding: 10px;
-}
-
-.progressbar li {
+  }
+  
+  .progressbar li {
     position: relative;
     text-align: center;
-}
-
-.progressbar li:not(:last-child):after {
+  }
+  
+  .progressbar li:not(:last-child):after {
     content: "";
     position: absolute;
     top: calc(50% - 2px);
     left: calc(100% + 10px);
     height: 4px;
-    background-color: #24BEBE; 
-    width: calc(100% - 40px); 
-}
-
-.progressbar li.active {
+    background-color: #24BEBE;
+    width: calc(100% - 40px);
+  }
+  
+  .progressbar li.active {
     font-weight: bold;
-}
-
-.progressbar li.active a {
-    background-color: #24BEBE; 
-    color: white; 
-    border: 2px solid #24BEBE; 
-}
-
-.progressbar li a {
+  }
+  
+  .progressbar li.active a {
+    background-color: #24BEBE;
+    color: yellow;
+  }
+  
+  .progressbar li a {
     position: relative;
     display: inline-block;
     text-decoration: none;
-    color: white; 
-    width: 40px; 
-    height: 40px; 
-    line-height: 40px; 
-    border-radius: 50%; 
-    background-color: #00679c; 
+    color: white;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #00679c;
     transition: background-color 0.3s ease;
-}
-
-.progressbar li.active a:before {
+  }
+  
+  .progressbar li.active a:before {
     content: attr(data-step);
     position: absolute;
-    top: 100%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
     color: #24BEBE;
-    white-space: nowrap;
-}
-
-.progressbar li a:hover {
+  }
+  
+  .progressbar li a:hover {
     background-color: #24BEBE;
-}
+    color: yellow;
+  }
