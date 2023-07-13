@@ -32,6 +32,7 @@ require_once ROOT . 'App/Model.php';
           echo 'class="active"';
         } ?>><a href=<?php ROOT . "views/client6" ?>>Étape 6</a></li>
   </ul>
+  <div class="progress"></div>
 
 
   <form method="post" action="">
@@ -53,3 +54,4 @@ require_once ROOT . 'App/Model.php';
     </div>
   </form>
 </div>
+<script src="./Public/js/progress.js"></script>

@@ -99,9 +99,23 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
             <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> >Étape 5</a></li>
             <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> >Étape 6</a></li>
         </ul>
+        <div class="progress"></div>
+        
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
+            <div class="form-group">
+                    <label for="pet-select">Type de site</label><br>
+                    <select name="type_site" id="type_site">
+                        <option value="">Choisissez une option</option>
+                        <option value="vitrine">Site Vitrine</option>
+                        <option value="e-commerce">E-commerce</option>
+                        <option value="portfolio">Portfolio</option>
+                        <option value="annnonce">Site d'annonce</option>
+                        <option value="association">Site pour association</option>
+                        <option value="agence-immo">Site pour agence immobilière</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="nombre-couleurs">Combien de couleurs sur votre site ? (1 à 3 max)</label>
                     <input type="number" name="nombre-couleurs" id="nombre-couleurs" min="1" max="3" oninput="showColorFields()">
@@ -149,3 +163,4 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
 </div>
 
 <script src="./Public/js/coloris.min.js"></script>
+<script src="./Public/js/progress.js"></script>

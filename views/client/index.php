@@ -69,6 +69,7 @@ function validateForm($formData)
             <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> >Étape 5</a></li>
             <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> >Étape 6</a></li>
         </ul>
+        <div class="progress"></div>
     <div class="container">
 
         <!-- Container formulaire-->
@@ -195,3 +196,4 @@ function validateForm($formData)
 
     </div>
 </div>
+<script src="./Public/js/progress.js"></script>
