@@ -90,14 +90,15 @@ function validateForm($formData)
         <p>Veuillez rentrer les informations concernant votre entreprise afin de faciliter la création de votre site.</p>
     </div>
     <ul class="progressbar">
-            <li <?php if ($_SESSION['currentStep'] == 1) { echo 'class="active"'; } ?>>Étape 1</li>
-            <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> >Étape 2</a></li>
-            <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> >Étape 3</a></li>
-            <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> >Étape 4</a></li>
-            <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> >Étape 5</a></li>
-            <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> >Étape 6</a></li>
+    <li <?php if ($_SESSION['currentStep'] == 1) { echo 'class="active"'; } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+            <li class="progressed"> -----✔️----- </li>
+            <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> ><img src="./Public/asset/svg/two.svg" class="logo_current_progress"></a></li>
+            <li> ----------- </li>
+            <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> ><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
+            <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> ><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
+            <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> ><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+            <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> ><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
         </ul>
-        <div class="progress"></div>
     <div class="container">
 
         <!-- Container formulaire-->
@@ -152,15 +153,15 @@ function validateForm($formData)
                 </div>
 
                 <div id="logo-file-field" style="display: none;">
-                    <div class="form-group">
-                        <label for="logo-file">Sélectionnez votre logo</label>
+                    <div class="form-group my-4">
+                        <label for="logo-file">Sélectionnez votre logo : </label>
                         <input type="file" name="logo-file" id="logo-file">
                     </div>
                 </div>
 
                 <div id="create-logo-field" style="display: none;">
-                    <div class="form-group">
-                        <label for="create-logo">Souhaitez-vous que nous vous créions un logo ?</label>
+                    <div class="form-group my-4">
+                        <label for="create-logo">Souhaitez-vous que nous vous créons un logo ?</label>
                         <input type="radio" name="create-logo" id="create-logo_oui" value="oui">
                         <label for="create-logo_oui">Oui</label>
                         <input type="radio" name="create-logo" id="create-logo_non" value="non">

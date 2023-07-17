@@ -3,12 +3,12 @@
     padding: 10px;
     background-color: rgba(0,0,0, 0.8) ;
     color: white;
-    border : 1px solid white;
+    border : 1px solid rgba(255,255,255,0.3);
     border-radius: 10px;
 }
 
 .btn {
-    background-color:#24BEBE;
+    background-color:#00679C;
     color:white;
 }
 
@@ -20,4 +20,28 @@
 
 .btn-form-1 {
     width: 200px;
+}
+
+.logo_progress {
+    width: 50px;
+}
+
+.logo_current_progress {
+    width:90px;
+    background-color: white;
+    border-radius: 100%;
+}
+
+.logo_previous_progress {
+    width:70px;
+    background-color: rgb(0, 255, 255);
+    border-radius: 100%;
+}
+
+.progressed {
+    color: rgb(0, 255, 255);
+}
+
+hr {
+    width: 900px!important;
 }
