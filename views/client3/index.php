@@ -13,26 +13,29 @@ require_once ROOT . 'App/Model.php';
     <h2>Entrez les différentes informations pour un site plus personnel</h2>
   </div>
   <ul class="progressbar">
-    <li <?php if ($_SESSION['currentStep'] == '') {
+    <li <?php if ($_SESSION['currentStep'] == 1) {
           echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client" ?>>Étape 1</a></li>
+        } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+    <li class="progressed"> ------✔️----- </li>
     <li <?php if ($_SESSION['currentStep'] == 2) {
           echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client2" ?>>Étape 2</a></li>
+        } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
+    <li class="progressed"> ------✔️----- </li>
     <li <?php if ($_SESSION['currentStep'] == 3) {
           echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client3" ?>>Étape 3</a></li>
+        } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a></li>
+    <li class="progressed"> ------✔️----- </li>
     <li <?php if ($_SESSION['currentStep'] == 4) {
           echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client4" ?>>Étape 4</a></li>
+        } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_current_progress"></a></li>
+        <li> ----------- </li>
     <li <?php if ($_SESSION['currentStep'] == 5) {
           echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client5" ?>>Étape 5</a></li>
+        } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
     <li <?php if ($_SESSION['currentStep'] == 6) {
           echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client6" ?>>Étape 6</a></li>
+        } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
   </ul>
-  <div class="progress"></div>
 
 
   <form method="post" action="">

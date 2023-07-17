@@ -1,16 +1,14 @@
 .progressbar {
     list-style-type: none;
     padding: 10px;
-    margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     overflow: hidden;
     display: flex;
-    justify-content: space-between;
-    width: 1300px;
     align-items: center;
+    justify-content: center;
   }
   
+    /*
   .progressbar li {
     position: relative;
     text-align: center;
@@ -35,7 +33,7 @@
     background-color: #24BEBE;
     color: yellow;
   }
-  
+
   .progressbar li a {
     position: relative;
     display: inline-block;
@@ -63,13 +61,5 @@
     background-color: #24BEBE;
     color: yellow;
   }
-  
-  .progressbar .progress {
-    position: absolute;
-    top: calc(50% - 2px);
-    left: calc(100% + 35px);
-    height: 4px;
-    background-color: #24BEBE!important;
-    width: 0;
-    transition: width 0.3s ease;
-}
+
+  */
