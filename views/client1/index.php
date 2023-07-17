@@ -14,7 +14,7 @@ class ClientModel extends Model
     public function insertClient($nom, $email, $telephone, $adresse, $message)
     {
 
-        
+
         $sql = "INSERT INTO clients (nom_ent, email_ent, telephone_ent, adresse_ent, message_ent) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
         $stmt->execute([$nom, $email, $telephone, $adresse, $message]);
@@ -90,15 +90,30 @@ function validateForm($formData)
         <p>Veuillez rentrer les informations concernant votre entreprise afin de faciliter la création de votre site.</p>
     </div>
     <ul class="progressbar">
-    <li <?php if ($_SESSION['currentStep'] == 1) { echo 'class="active"'; } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
-            <li class="progressed"> -----✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> ><img src="./Public/asset/svg/two.svg" class="logo_current_progress"></a></li>
-            <li> ----------- </li>
-            <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> ><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
-            <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> ><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
-            <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> ><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-            <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> ><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-        </ul>
+        <li <?php if ($_SESSION['currentStep'] == 1) {
+                echo 'class="active"';
+            } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+        <li class="progressed"> -----✔️----- </li>
+        <li <?php if ($_SESSION['currentStep'] == 2) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_current_progress"></a></li>
+        <li class="in_progress"> -----🚧------ </li>
+        <li <?php if ($_SESSION['currentStep'] == 3) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
+            <li class="in_progress"> ----------- </li> 
+        <li <?php if ($_SESSION['currentStep'] == 4) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
+            <li class="in_progress"> ----------- </li> 
+        <li <?php if ($_SESSION['currentStep'] == 5) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+            <li class="in_progress"> ----------- </li> 
+        <li <?php if ($_SESSION['currentStep'] == 6) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+    </ul>
     <div class="container">
 
         <!-- Container formulaire-->
@@ -113,7 +128,7 @@ function validateForm($formData)
                         <div class="col-6">
                             <div class="form-group ">
 
-                                <label for="nom_ent">Nom de l'entreprise</label>
+                                <label for="nom_ent">Nom</label>
                                 <input type="text" class="form-control" id="nom_ent" name="nom_ent" required>
 
                             </div>
@@ -123,7 +138,7 @@ function validateForm($formData)
                         <div class="col-6">
                             <div class="form-group">
 
-                                <label for="prenom_ent">Adresse email de l'entreprise :</label>
+                                <label for="prenom_ent">Adresse email :</label>
                                 <input type="text" class="form-control" id="email_ent" name="email_ent" required>
 
                             </div>
@@ -133,105 +148,112 @@ function validateForm($formData)
                     <!-- Adresse -->
                     <div class="row">
                         <div class="form-group my-3 col-6">
-                            <label for="adresse_ent">Adresse postale de l'entreprise :</label>
+                            <label for="adresse_ent">Adresse postale :</label>
                             <input type="email" class="form-control" id="adresse_ent" name="adresse_ent" required">
                         </div>
-    
+
                         <!-- Numéro de téléphone -->
                         <div class="form-group my-3 col-6">
-                            <label for="telephone_ent">Numéro de téléphone de l'entreprise :</label>
+                            <label for="telephone_ent">Numéro de téléphone :</label>
                             <input type="tel" class="form-control" id="telephone_ent" name="telephone_ent" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                    <label for="logo">Avez-vous un logo ?</label>
-                    <input type="radio" name="logo" id="logo_oui" value="oui" onclick="showLogoFields()">
-                    <label for="logo_oui">Oui</label>
-                    <input type="radio" name="logo" id="logo_non" value="non" onclick="showLogoFields()">
-                    <label for="logo_non">Non</label>
-                </div>
-
-                <div id="logo-file-field" style="display: none;">
-                    <div class="form-group my-4">
-                        <label for="logo-file">Sélectionnez votre logo : </label>
-                        <input type="file" name="logo-file" id="logo-file">
+                        <label for="logo">Avez-vous un logo ?</label>
+                        <input type="radio" name="logo" id="logo_oui" value="oui" onclick="showLogoFields()">
+                        <label for="logo_oui">Oui</label>
+                        <input type="radio" name="logo" id="logo_non" value="non" onclick="showLogoFields()">
+                        <label for="logo_non">Non</label>
                     </div>
-                </div>
 
-                <div id="create-logo-field" style="display: none;">
-                    <div class="form-group my-4">
-                        <label for="create-logo">Souhaitez-vous que nous vous créons un logo ?</label>
-                        <input type="radio" name="create-logo" id="create-logo_oui" value="oui">
-                        <label for="create-logo_oui">Oui</label>
-                        <input type="radio" name="create-logo" id="create-logo_non" value="non">
-                        <label for="create-logo_non">Non</label>
+                    <div id="logo-file-field" style="display: none;">
+                        <div class="form-group my-4">
+                            <label for="logo-file">Sélectionnez votre logo : </label>
+                            <input type="file" accept="image/*" name="logo-file" id="logo_file">
+                            <img id="blah" src="#" style="width:300px" />
+                        </div>
                     </div>
-                </div>
+                    <script>
+                        logo_file.onchange = evt => {
+                            const [file] = logo_file.files
+                            if (file) {
+                                blah.src = URL.createObjectURL(file)
+                            }
+                        }
+                    </script>
+
+                    <div id="create-logo-field" style="display: none;">
+                        <div class="form-group my-4">
+                            <label for="create-logo">Souhaitez-vous que nous vous créons un logo ?</label>
+                            <input type="radio" name="create-logo" id="create-logo_oui" value="oui">
+                            <label for="create-logo_oui">Oui</label>
+                            <input type="radio" name="create-logo" id="create-logo_non" value="non">
+                            <label for="create-logo_non">Non</label>
+                        </div>
+                    </div>
 
                     <!-- Message -->
 
                     <div class="form-group my-3">
-                            <label for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
-                            <textarea  class="form-control" name="message_ent" id="message_ent" rows="12"></textarea>
-                        </div>
+                        <label for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
+                        <textarea class="form-control" name="message_ent" id="message_ent" rows="12"></textarea>
                     </div>
+            </div>
 
 
+            <!-- Bouton d'envoie -->
+            <div class="row p-2 ">
+                <button type="submit" class="btn my-3">Étape suivante -></button>
+            </div>
+            </form>
 
+            <!-- Message d'erreur -->
+            <div>
 
-                    <!-- Bouton d'envoie -->
-                    <div class="row p-2 ">
-                        <button type="submit" class="btn my-3">Étape suivante -></button>
-                    </div>
-                </form>
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $clientModel = new ClientModel();
+                    $clientModel->getConnexion();
 
-                <!-- Message d'erreur -->
-                <div>
+                    $formErrors = validateForm($_POST);
 
-                    <?php
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $clientModel = new ClientModel();
-                        $clientModel->getConnexion();
+                    if (empty($formErrors)) {
+                        $nom = $_POST['nom-ent'];
+                        $email = $_POST['email-ent'];
+                        $telephone = $_POST['telephone-ent'];
+                        $adresse = $_POST['adresse-ent'];
+                        $message = $_POST['message-ent'];
 
-                        $formErrors = validateForm($_POST);
+                        try {
+                            $clientModel->insertClient($nom, $message, $email, $telephone, $adresse);
 
-                        if (empty($formErrors)) {
-                            $nom = $_POST['nom-ent'];
-                            $email = $_POST['email-ent'];
-                            $telephone = $_POST['telephone-ent'];
-                            $adresse = $_POST['adresse-ent'];
-                            $message = $_POST['message-ent'];
+                            $_SESSION['nom-ent'] = $nom;
+                            $_SESSION['message-ent'] = $message;
+                            $_SESSION['email-ent'] = $email;
+                            $_SESSION['telephone-ent'] = $telephone;
+                            $_SESSION['adresse-ent'] = $adresse;
 
-                            try {
-                                $clientModel->insertClient($nom, $message, $email, $telephone, $adresse);
-
-                                $_SESSION['nom-ent'] = $nom;
-                                $_SESSION['message-ent'] = $message;
-                                $_SESSION['email-ent'] = $email;
-                                $_SESSION['telephone-ent'] = $telephone;
-                                $_SESSION['adresse-ent'] = $adresse;
-
-                                header("Location: http://localhost/MSC-1/client2");
-                                exit();
-                            } catch (PDOException $e) {
-                                // Affichage d'une erreur en cas de problème avec la base de données
-                                echo "Erreur : " . $e->getMessage();
-                            }
-                        } else {
-                            // Affichage des erreurs de validation
-                            foreach ($formErrors as $fieldName => $errorMessage) {
-                                echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
-                            }
+                            header("Location: http://localhost/MSC-1/client2");
+                            exit();
+                        } catch (PDOException $e) {
+                            // Affichage d'une erreur en cas de problème avec la base de données
+                            echo "Erreur : " . $e->getMessage();
+                        }
+                    } else {
+                        // Affichage des erreurs de validation
+                        foreach ($formErrors as $fieldName => $errorMessage) {
+                            echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
                         }
                     }
-                    ?>
-                </div>
-
+                }
+                ?>
             </div>
-        </div>
 
+        </div>
     </div>
+
+</div>
 </div>
 <script src="./Public/js/progress.js"></script>
 <script src="./Public/js/formulaire.js"></script>

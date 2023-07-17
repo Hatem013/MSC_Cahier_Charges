@@ -39,5 +39,9 @@
 }
 
 .progressed {
-    color: rgb(0, 255, 255);
+    color: green;
+}
+
+.in_progress {
+    color: yellow;
 }

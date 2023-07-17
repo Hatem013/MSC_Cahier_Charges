@@ -61,10 +61,12 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
     <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> ><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
     <li class="progressed"> ------✔️----- </li>        
     <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> ><img src="./Public/asset/svg/three.svg" class="logo_current_progress"></a></li>
-    <li> -----------</li>        
+    <li class="in_progress"> ------🚧----- </li>       
     <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> ><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
-            <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> ><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-            <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> ><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+    <li class="in_progress"> ----------- </li>        
+    <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> ><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+    <li class="in_progress"> ----------- </li>         
+    <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> ><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
         </ul>
         
     <div class="row justify-content-center">
