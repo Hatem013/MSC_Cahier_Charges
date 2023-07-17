@@ -41,18 +41,30 @@ require_once ROOT . 'App/Model.php';
 
   <form method="post" action="">
     <label>Sélectionnez un type de header :</label><br>
-    <?php
-    $imageFolder = "./Public/asset/image/";
+    <div class="row">
+  <?php
+  $imageFolder = "./Public/asset/image/";
 
-    for ($i = 1; $i <= 20; $i++) {
-      $imageName = "header" . $i . ".png";
-      $imagePath = $imageFolder . $imageName;
-      echo '<label for="header' . $i . '">';
-      echo '<input type="radio" id="header' . $i . '" name="header" value="' . $imagePath . '">';
-      echo '<img class="headerTaille" src="' . $imagePath . '" alt="Header ' . $i . '">';
-      echo '</label>';
+  for ($i = 1; $i <= 9; $i++) {
+    $image1Name = "frameh" . $i . ".svg";
+    $image1Path = $imageFolder . $image1Name;
+
+    // Affichage des 3 dernières images dans une div séparée
+    if ($i > 6) {
+      echo '<div class="col-md-4">';
+    } else {
+      echo '<div class="col-md-6">';
     }
-    ?>
+
+    echo '<label for="header' . $i . '">';
+    echo '<input type="radio" id="header' . $i . '" name="header" value="' . $image1Path . '">';
+    echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
+    echo '</label>';
+    echo '</div>';
+  }
+  ?>
+</div>
+
     <div class="row p-2">
       <button type="submit" class="btn my-3">Formulaire suivant</button>
     </div>

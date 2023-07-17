@@ -41,7 +41,6 @@ require_once ROOT . 'App/Model.php';
         <h2>Entrez les différentes informations pour un site plus personnel</h2>
     <form method="post" action="">
     <label for="footer">Séléctionnez un type de footer</label>
-    
 
 
 
