@@ -33,7 +33,11 @@ require_once ROOT . 'App/Model.php';
         } ?>><a href=<?php ROOT . "views/client6" ?>>Étape 6</a></li>
   </ul>
   <div class="progress"></div>
-
+  <h1>Suite du formulaire</h1>
+        <h2>Entrez les différentes informations pour un site plus personnel</h2>
+    <form method="post" action="">
+    <label for="footer">Séléctionnez un type de footer</label>
+    
 
 
 
