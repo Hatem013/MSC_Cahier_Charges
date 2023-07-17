@@ -7,7 +7,7 @@ include_once ROOT . 'views/home/footer.php';
 <!-- Session start-->
 <?php
 session_start();
-
+$_SESSION['currentStep'] = 2;
 /// Connexion BDD
 require_once ROOT . '/App/Model.php';
 
@@ -91,10 +91,31 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
         <h1>Suite du formulaire</h1>
         <h2>Entrez les différentes informations pour un site plus personnel</h2>
     </div>
-
+    <ul class="progressbar">
+            <li <?php if ($_SESSION['currentStep'] == 1) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client"?> >Étape 1</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> >Étape 2</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> >Étape 3</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> >Étape 4</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> >Étape 5</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> >Étape 6</a></li>
+        </ul>
+        <div class="progress"></div>
+        
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
+            <div class="form-group">
+                    <label for="pet-select">Type de site</label><br>
+                    <select name="type_site" id="type_site">
+                        <option value="">Choisissez une option</option>
+                        <option value="vitrine">Site Vitrine</option>
+                        <option value="e-commerce">E-commerce</option>
+                        <option value="portfolio">Portfolio</option>
+                        <option value="annnonce">Site d'annonce</option>
+                        <option value="association">Site pour association</option>
+                        <option value="agence-immo">Site pour agence immobilière</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="nombre-couleurs">Combien de couleurs sur votre site ? (1 à 3 max)</label>
                     <input type="number" name="nombre-couleurs" id="nombre-couleurs" min="1" max="3" oninput="showColorFields()">
@@ -142,3 +163,4 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
 </div>
 
 <script src="./Public/js/coloris.min.js"></script>
+<script src="./Public/js/progress.js"></script>

@@ -6,7 +6,7 @@ include_once ROOT . 'views/home/footer.php';
 
 <?php
 session_start();
-
+$_SESSION['currentStep'] = 1;
 require_once ROOT . 'App/Model.php';
 
 class ClientModel extends Model
@@ -61,7 +61,15 @@ function validateForm($formData)
         <h1 class="mb-4">Créer votre site</h1>
         <p>Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>
     </div>
-
+    <ul class="progressbar">
+            <li <?php if ($_SESSION['currentStep'] == 1) { echo 'class="active"'; } ?>>Étape 1</li>
+            <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> >Étape 2</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> >Étape 3</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> >Étape 4</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> >Étape 5</a></li>
+            <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> >Étape 6</a></li>
+        </ul>
+        <div class="progress"></div>
     <div class="container">
 
         <!-- Container formulaire-->
@@ -188,3 +196,4 @@ function validateForm($formData)
 
     </div>
 </div>
+<script src="./Public/js/progress.js"></script>

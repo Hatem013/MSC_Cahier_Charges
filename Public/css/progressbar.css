@@ -1,0 +1,75 @@
+.progressbar {
+    list-style-type: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    width: 1300px;
+    align-items: center;
+  }
+  
+  .progressbar li {
+    position: relative;
+    text-align: center;
+  }
+  
+  .progressbar li:not(:last-child):after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 2px);
+    left: calc(100% + 35px);
+    height: 4px;
+    background-color: #24BEBE;
+    width: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .progressbar li.active {
+    font-weight: bold;
+  }
+  
+  .progressbar li.active a {
+    background-color: #24BEBE;
+    color: yellow;
+  }
+  
+  .progressbar li a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    background-color: #00679c;
+    transition: background-color 0.3s ease;
+  }
+  
+  .progressbar li.active a:before {
+    content: attr(data-step);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: #24BEBE;
+  }
+  
+  .progressbar li a:hover {
+    background-color: #24BEBE;
+    color: yellow;
+  }
+  
+  .progressbar .progress {
+    position: absolute;
+    top: calc(50% - 2px);
+    left: calc(100% + 35px);
+    height: 4px;
+    background-color: #24BEBE!important;
+    width: 0;
+    transition: width 0.3s ease;
+}
