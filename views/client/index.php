@@ -91,7 +91,7 @@ function validateForm($formData)
                         </div>
 
                         <div class="col-6">
-                            <div class="form-group">
+                            <div class="form-group ">
 
                                 <label for="prenom">Prénom :</label>
                                 <input type="text" class="form-control" id="prenom" name="prenom" required>
