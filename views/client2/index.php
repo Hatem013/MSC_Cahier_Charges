@@ -107,3 +107,4 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
 
 <script src="./Public/js/coloris.min.js"></script>
 <script src="./Public/js/progress.js"></script>
+<script src="./Public/js/formulaire.js"></script>
