@@ -110,7 +110,7 @@ function validateForm($formData)
                     <!-- Message -->
 
                     <div class="form-group my-3">
-                            <label for="message_ent">Parlez-nous un peu de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
+                            <label for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
                             <textarea  class="form-control" name="message_ent" id="message_ent" rows="12"></textarea>
                         </div>
                     </div>
