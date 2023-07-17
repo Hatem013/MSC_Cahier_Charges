@@ -28,10 +28,11 @@ require_once ROOT . 'App/Model.php';
     <li <?php if ($_SESSION['currentStep'] == 4) {
           echo 'class="active"';
         } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_current_progress"></a></li>
-        <li> ----------- </li>
+    <li class="in_progress"> ------🚧----- </li>
     <li <?php if ($_SESSION['currentStep'] == 5) {
           echo 'class="active"';
         } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+    <li class="in_progress"> ----------- </li>
     <li <?php if ($_SESSION['currentStep'] == 6) {
           echo 'class="active"';
         } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>

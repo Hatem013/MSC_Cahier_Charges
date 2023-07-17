@@ -30,3 +30,15 @@ function showLogoFields() {
         createLogoField.style.display = 'block';
     }
 }
+
+var logo_file = document.getElementById('logo_file');
+
+function showLogoPreview() {
+    
+    logo_file.onchange = evt => {
+        const [file] = logo_file.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
+    }
+}
