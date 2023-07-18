@@ -46,6 +46,8 @@
     color: yellow;
 }
 
-.color_form {
-    
+.color_title {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px;
 }

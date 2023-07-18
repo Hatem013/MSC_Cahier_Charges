@@ -5,7 +5,6 @@ function showColorFields() {
     for (var i = 1; i <= 3; i++) {
         var couleurField = document.getElementById('couleur' + i);
         var couleurLabel = document.getElementById('label-couleur' + i);
-       
 
         if (i <= nombreCouleurs) {
             couleurField.style.display = 'block';
@@ -46,3 +45,15 @@ function showLogoPreview() {
         }
     }
 }
+
+
+// color picker
+var test1 = document.getElementById('couleur' + 1);
+var test2 = document.getElementById('label-couleur' + 1);
+var test3 = document.getElementById('lblclr')
+
+        test1.addEventListener("change", testing);
+        
+        function testing() {
+            test3.style.backgroundColor = test1.value;
+         }
