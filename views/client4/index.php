@@ -69,7 +69,12 @@ require_once ROOT . 'App/Model.php';
   }
   ?>
 </div>
-
+<div class="row p-2">
+      <button type="submit" class="btn my-3">Formulaire suivant</button>
+    </div>
+  </form>
+</div>
+<script src="./Public/js/progress.js"></script>
 
 
 
