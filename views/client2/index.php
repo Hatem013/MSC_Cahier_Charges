@@ -72,9 +72,9 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
-            <div class="form-group">
-                    <label for="pet-select">Type de site</label><br>
-                    <select name="type_site" id="type_site">
+            <div class="form-group mb-5">
+                    <label for="pet-select">Quel type de site souhaitez-vous?</label><br>
+                    <select name="type_site" id="type_site" class="form-select-sm" required>
                         <option value="">Choisissez une option</option>
                         <option value="vitrine">Site Vitrine</option>
                         <option value="e-commerce">E-commerce</option>
@@ -83,21 +83,30 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                         <option value="association">Site pour association</option>
                         <option value="agence-immo">Site pour agence immobilière</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="nombre-couleurs">Combien de couleurs sur votre site ? (1 à 3 max)</label>
-                    <input type="number" name="nombre-couleurs" id="nombre-couleurs" min="1" max="3" oninput="showColorFields()">
+            </div>
+                <div class="form-group mb-3">
+                    <label for="nombre-couleurs">Faites glisser la barre ci-dessous pour choisir le nombre et les couleurs de votre site</label>
+                    <input type="range" class="form-range" name="nombre-couleurs" id="nombre-couleurs" min="0" max="3" value="0"oninput="showColorFields()">
 
                 </div>
 
-                <?php for ($i = 1; $i <= 3; $i++) { ?>
-                    <div class="form-group" id="label-couleur<?php echo $i; ?>" style="display: none;">
-                        <label for="couleur<?php echo $i; ?>">Choisissez votre couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" data-coloris name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
-                    </div>
-                <?php } ?>
+                <div class="color_form">
+                    <div class="container d-flex justify-content-center text-center">
+                    <?php for ($i = 1; $i <= 3; $i++) { ?>
+                            <div class="row mx-2">
+                                
+                                    <div class="form-group" id="label-couleur<?php echo $i; ?>" style="display: none;">
+                                        <label class="mb-2"for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>   
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" data-coloris name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
+                                    </div>
+                                    
+                            </div>
+                            
+                            <?php } ?>
+                        </div>
+                </div>
                 
                 <div class="row p-2">
                     <button type="submit" class="btn my-3">Étape suivante -></button>
