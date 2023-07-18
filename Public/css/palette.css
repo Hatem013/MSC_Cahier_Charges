@@ -1,0 +1,27 @@
+.color-palettes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .color-palette {
+    display: flex;
+    margin: 10px;
+  }
+  
+  .color {
+    width: 50px;
+    height: 100px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .color-palette:hover .color {
+    transform:translateX(10px);
+    z-index: 1;
+  }
+  
+  
+  button {
+    margin-top: 10px;
+  }
