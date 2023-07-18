@@ -56,24 +56,36 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
         <h2>Entrez les différentes informations pour un site plus personnel</h2>
     </div>
     <ul class="progressbar">
-    <li <?php if ($_SESSION['currentStep'] == 1) { echo 'class="active"'; } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
-    <li class="progressed"> -----✔️----- </li>        
-    <li <?php if ($_SESSION['currentStep'] == 2) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client2"?> ><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
-    <li class="progressed"> ------✔️----- </li>        
-    <li <?php if ($_SESSION['currentStep'] == 3) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client3"?> ><img src="./Public/asset/svg/three.svg" class="logo_current_progress"></a></li>
-    <li class="in_progress"> ------🚧----- </li>       
-    <li <?php if ($_SESSION['currentStep'] == 4) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client4"?> ><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
-    <li class="in_progress"> ----------- </li>        
-    <li <?php if ($_SESSION['currentStep'] == 5) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client5"?> ><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-    <li class="in_progress"> ----------- </li>         
-    <li <?php if ($_SESSION['currentStep'] == 6) { echo 'class="active"'; } ?>><a href=<?php ROOT . "views/client6"?> ><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-        </ul>
-        
+        <li <?php if ($_SESSION['currentStep'] == 1) {
+                echo 'class="active"';
+            } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+        <li class="progressed"> -----✔️----- </li>
+        <li <?php if ($_SESSION['currentStep'] == 2) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
+        <li class="progressed"> ------✔️----- </li>
+        <li <?php if ($_SESSION['currentStep'] == 3) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_current_progress"></a></li>
+        <li class="in_progress"> ------🚧----- </li>
+        <li <?php if ($_SESSION['currentStep'] == 4) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
+        <li class="in_progress"> ----------- </li>
+        <li <?php if ($_SESSION['currentStep'] == 5) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+        <li class="in_progress"> ----------- </li>
+        <li <?php if ($_SESSION['currentStep'] == 6) {
+                echo 'class="active"';
+            } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+    </ul>
+
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
-            <div class="form-group mb-5">
-                    <label class="mb-2"for="pet-select">Quel type de site souhaitez-vous?</label><br>
+                <div class="form-group mb-5">
+                    <label class="mb-2" for="pet-select">Quel type de site souhaitez-vous?</label><br>
                     <select name="type_site" id="type_site" class="form-select-sm" required>
                         <option value="">Choisissez une option</option>
                         <option value="vitrine">Site Vitrine</option>
@@ -83,7 +95,9 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                         <option value="association">Site pour association</option>
                         <option value="agence-immo">Site pour agence immobilière</option>
                     </select>
-            </div>
+                </div>
+
+                
                 <div class="form-group mb-3">
                     <label class="mb-2" for="nombre-couleurs">Faites glisser la barre ci-dessous pour choisir le nombre et les couleurs de votre site</label>
                     <input type="range" class="form-range" name="nombre-couleurs" id="nombre-couleurs" min="0" max="3" value="0"oninput="showColorFields()">
@@ -107,18 +121,17 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                             <?php } ?>
                         </div>
                
-                
+                    
                 <div class="row p-2">
                     <button type="submit" class="btn my-3">Étape suivante -></button>
                 </div>
-                            
-                
-                
+
+
+
             </form>
         </div>
     </div>
 </div>
 
 <script src="./Public/js/coloris.min.js"></script>
-<script src="./Public/js/progress.js"></script>
 <script src="./Public/js/formulaire.js"></script>

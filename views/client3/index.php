@@ -70,4 +70,3 @@ require_once ROOT . 'App/Model.php';
     </div>
   </form>
 </div>
-<script src="./Public/js/progress.js"></script>
