@@ -38,9 +38,37 @@ require_once ROOT . 'App/Model.php';
         } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
   </ul>
   <h1>Suite du formulaire</h1>
-        <h2>Entrez les différentes informations pour un site plus personnel</h2>
-    <form method="post" action="">
-    <label for="footer">Séléctionnez un type de footer</label>
+        <h2>Choisissez un type de footer</h2>
+        <div class="row">
+        <div class="row">
+        <div class="row">
+  <?php
+  $imageFolder = "./Public/asset/image/";
+
+  for ($i = 1; $i <= 9; $i += 2) {
+    $image1Name = "framef" . $i . ".svg";
+    $image2Name = "framef" . ($i + 1) . ".svg";
+    $image1Path = $imageFolder . $image1Name;
+    $image2Path = $imageFolder . $image2Name;
+
+    echo '<div class="col-md-6">';
+    echo '<label for="footer' . $i . '">';
+    echo '<input type="radio" id="footer' . $i . '" name="footer" value="' . $image1Path . '">';
+    echo '<img class="footerTaille img-fluid" src="' . $image1Path . '" alt="Footer ' . $i . '">';
+    echo '</label>';
+
+    // Vérifie si l'image suivante existe
+    if (file_exists($image2Path)) {
+      echo '<label for="footer' . ($i + 1) . '">';
+      echo '<input type="radio" id="footer' . ($i + 1) . '" name="footer" value="' . $image2Path . '">';
+      echo '<img class="footerTaille img-fluid" src="' . $image2Path . '" alt="Footer ' . ($i + 1) . '">';
+      echo '</label>';
+    }
+
+    echo '</div>';
+  }
+  ?>
+</div>
 
 
 
