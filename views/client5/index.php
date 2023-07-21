@@ -55,25 +55,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php
                 $imageFolder = "./Public/asset/image/";
 
-for ($i = 1; $i <= 9; $i++) {
+for ($i = 1; $i <= 8; $i++) {
   $image1Name = "body" . $i . ".svg";
   $image1Path = $imageFolder . $image1Name;
 
   // Affichage des 3 dernières images dans une div séparée
-  if ($i > 6) {
-    echo '<div class="col-md-4">';
-  } else {
-    echo '<div class="col-md-6">';
-  }
-
-  echo '<label for="header' . $i . '">';
-  echo '<input type="radio" id="header' . $i . '" name="header" value="' . $image1Path . '">';
-  echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
+?>
+<div class="row">
+<div class="col-md-12">
+<?php
+  echo '<label for="body' . $i . '">';
+  echo '<input type="radio" id="body' . $i . '" name="body" value="' . $image1Path . '">';
+  echo '<img class="bodyTaille img-fluid" src="' . $image1Path . '" alt="body ' . $i . '">';
   echo '</label>';
-  echo '</div>';
 }
 ?>
-
+</div>
+</div>
             </div>
     </div>
     <div class="row p-2">

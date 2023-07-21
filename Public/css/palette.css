@@ -25,3 +25,8 @@
   button {
     margin-top: 10px;
   }
+.bodyTaille{
+    margin: 20px;
+    width: 900px;
+    height: 900px;
+}
