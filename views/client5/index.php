@@ -52,28 +52,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     ?>
                 </div>
-                    <?php
+                <div class="container text-center mt-4 mb-5">
+    <h1>Choisissez le body de votre site</h1>
+    <div class="container mt-5 mb-5">
+        <div id="bodyCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <?php
                 $imageFolder = "./Public/asset/image/";
 
-for ($i = 1; $i <= 8; $i++) {
-  $image1Name = "body" . $i . ".svg";
-  $image1Path = $imageFolder . $image1Name;
+                for ($i = 1; $i <= 8; $i++) {
+                    $image1Name = "body" . $i . ".svg";
+                    $image1Path = $imageFolder . $image1Name;
 
-  // Affichage des 3 dernières images dans une div séparée
-?>
-<div class="row">
-<div class="col-md-12">
-<?php
-  echo '<label for="body' . $i . '">';
-  echo '<input type="radio" id="body' . $i . '" name="body" value="' . $image1Path . '">';
-  echo '<img class="bodyTaille img-fluid" src="' . $image1Path . '" alt="body ' . $i . '">';
-  echo '</label>';
-}
-?>
-</div>
-</div>
+                    echo '<div class="carousel-item' . ($i === 1 ? ' active' : '') . '">';
+                    echo '<label for="body' . $i . '">';
+                    echo '<input type="radio" id="body' . $i . '" name="body" value="' . $image1Path . '">';
+                    echo '<img class="bodyTaille img-fluid" src="' . $image1Path . '" alt="body ' . $i . '">';
+                    echo '</label>';
+                    echo '</div>';
+                }
+                ?>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#bodyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bodyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
     </div>
+</div>
     <div class="row p-2">
         <button type="submit" class="btn my-3">Formulaire suivant</button>
     </div>
