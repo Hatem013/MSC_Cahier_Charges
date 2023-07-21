@@ -51,3 +51,28 @@
     border-radius: 5px;
     padding: 5px;
 }
+
+#logo_file_preview {
+    border: 1px solid white;
+    border-radius:10px;
+    background-color: black;
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.card, .card-body {
+    background-color: transparent!important;
+}
+
+.btn_validate {
+
+background-color: green!important;
+}
