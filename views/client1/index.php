@@ -129,7 +129,7 @@ function validateForm($formData)
                             <div class="col-6">
                                 <div class="form-group ">
 
-                                    <label for="nom_ent">Nom</label>
+                                    <label for="nom_ent">Nom commercial</label>
                                     <input type="text" class="form-control" id="nom_ent" name="nom_ent" required>
 
                                 </div>
@@ -160,6 +160,7 @@ function validateForm($formData)
                             </div>
                         </div>
 
+                        <!-- Logo-->
                         <div class="row align-items-center">
                             <div class="col-7">
                                 <div class="form-group" required>
@@ -169,7 +170,8 @@ function validateForm($formData)
                                     <input type="radio" name="logo" id="logo_non" value="non" onclick="showLogoFields()" required>
                                     <label for="logo_non">Non</label>
                                 </div>
-
+                        
+                                <!-- Import logo -->
                                 <div id="logo-file-field" style="display: none;">
                                     <div class="form-group my-4">
                                         <label for="logo_file" class="custom-file-upload">
@@ -181,89 +183,88 @@ function validateForm($formData)
                             </div>
                             <div class="col"><img id="logo_file_preview" src="#" style="width:150px" /></div>
                         </div>
-
+                                <!-- Pas de logo -->  
                         <div id="create-logo-field" style="display: none;">
                             <div class="form-group my-4">
-                                <p>Attention : Le logo étant nécessaire, nous vous facturerons la création du logo</p>
+                                <p>Attention : Le logo étant nécessaire, une proposition vous sera faites afin de vous créer un logo personnalisé</p>
                             </div>
+                        </div>
+
+                                <!-- Preview du logo si importé -->
+                        <script>
+                            if (logo_file.files.length == 0) {
+                                logo_file_preview.style.display = "none"
+                            }
+
+                            logo_file.onchange = evt => {
+                                const [file] = logo_file.files
+                                if (file) {
+                                    logo_file_preview.src = URL.createObjectURL(file)
+                                    logo_file_preview.style.display = "unset"
+                                }
+                            }
+                        </script>
+
+                        <!-- Message -->
+                        <div class="form-group my-3">
+                            <label class="mb-2" for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
+                            <textarea class="form-control" name="message_ent" id="message_ent" rows="12" required></textarea>
                         </div>
                     </div>
 
-                    <script>
-                        if (logo_file.files.length == 0) {
-                            logo_file_preview.style.display = "none"
-                        }
 
-                        logo_file.onchange = evt => {
-                            const [file] = logo_file.files
-                            if (file) {
-                                logo_file_preview.src = URL.createObjectURL(file)
-                                logo_file_preview.style.display = "unset"
+                    <!-- Bouton d'envoie -->
+                    <div class="row p-2 ">
+                        <button type="submit" class="btn my-3">Étape suivante -></button>
+                    </div>
+                </form>
+
+                <!-- Message d'erreur -->
+                <div>
+
+                    <?php
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        $clientModel = new ClientModel();
+                        $clientModel->getConnexion();
+
+                        $formErrors = validateForm($_POST);
+
+                        if (empty($formErrors)) {
+                            $nom = $_POST['nom-ent'];
+                            $email = $_POST['email-ent'];
+                            $telephone = $_POST['telephone-ent'];
+                            $adresse = $_POST['adresse-ent'];
+                            $message = $_POST['message-ent'];
+
+                            try {
+                                $clientModel->insertClient($nom, $message, $email, $telephone, $adresse);
+
+                                $_SESSION['nom-ent'] = $nom;
+                                $_SESSION['message-ent'] = $message;
+                                $_SESSION['email-ent'] = $email;
+                                $_SESSION['telephone-ent'] = $telephone;
+                                $_SESSION['adresse-ent'] = $adresse;
+
+                                header("Location: http://localhost/MSC-1/client2");
+                                exit();
+                            } catch (PDOException $e) {
+                                // Affichage d'une erreur en cas de problème avec la base de données
+                                echo "Erreur : " . $e->getMessage();
+                            }
+                        } else {
+                            // Affichage des erreurs de validation
+                            foreach ($formErrors as $fieldName => $errorMessage) {
+                                echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
                             }
                         }
-                    </script>
-
-                    <!-- Message -->
-
-                    <div class="form-group my-3">
-                        <label class="mb-2" for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
-                        <textarea class="form-control" name="message_ent" id="message_ent" rows="12" required></textarea>
-                    </div>
-            </div>
-
-
-            <!-- Bouton d'envoie -->
-            <div class="row p-2 ">
-                <button type="submit" class="btn my-3">Étape suivante -></button>
-            </div>
-            </form>
-
-            <!-- Message d'erreur -->
-            <div>
-
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $clientModel = new ClientModel();
-                    $clientModel->getConnexion();
-
-                    $formErrors = validateForm($_POST);
-
-                    if (empty($formErrors)) {
-                        $nom = $_POST['nom-ent'];
-                        $email = $_POST['email-ent'];
-                        $telephone = $_POST['telephone-ent'];
-                        $adresse = $_POST['adresse-ent'];
-                        $message = $_POST['message-ent'];
-
-                        try {
-                            $clientModel->insertClient($nom, $message, $email, $telephone, $adresse);
-
-                            $_SESSION['nom-ent'] = $nom;
-                            $_SESSION['message-ent'] = $message;
-                            $_SESSION['email-ent'] = $email;
-                            $_SESSION['telephone-ent'] = $telephone;
-                            $_SESSION['adresse-ent'] = $adresse;
-
-                            header("Location: http://localhost/MSC-1/client2");
-                            exit();
-                        } catch (PDOException $e) {
-                            // Affichage d'une erreur en cas de problème avec la base de données
-                            echo "Erreur : " . $e->getMessage();
-                        }
-                    } else {
-                        // Affichage des erreurs de validation
-                        foreach ($formErrors as $fieldName => $errorMessage) {
-                            echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
-                        }
                     }
-                }
-                ?>
+                    ?>
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 <script src="./Public/js/progress.js"></script>
 <script src="./Public/js/formulaire.js"></script>

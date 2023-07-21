@@ -40,33 +40,99 @@ require_once ROOT . 'App/Model.php';
 
 
   <form method="post" action="">
-    <label>Sélectionnez un type de header :</label><br>
+
+    <!-- Header -->
     <div class="row">
-  <?php
-  $imageFolder = "./Public/asset/image/";
+      <div class="col-3">
+        <p>
+          <button class="btn" id="header_desktop_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHeader" aria-expanded="false" aria-controls="collapseHeader">
+            Selectionnez votre header sur ordinateur
+          </button>
+        </p>
+      </div>
+      <div class="col-6" style="min-height: 120px;">
+        <div class="collapse collapse-horizontal" id="collapseHeader">
+          <div class="card card-body" id="header_desktop_card">
 
-  for ($i = 1; $i <= 9; $i++) {
-    $image1Name = "frameh" . $i . ".svg";
-    $image1Path = $imageFolder . $image1Name;
+            <?php
+            $imageFolder = "./Public/asset/image/";
 
-    // Affichage des 3 dernières images dans une div séparée
-    if ($i > 6) {
-      echo '<div class="col-md-4">';
-    } else {
-      echo '<div class="col-md-6">';
-    }
+            for ($i = 1; $i <= 6; $i++) {
+              $image1Name = "frameh" . $i . ".svg";
+              $image1Path = $imageFolder . $image1Name;
 
-    echo '<label for="header' . $i . '">';
-    echo '<input type="radio" id="header' . $i . '" name="header" value="' . $image1Path . '">';
-    echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
-    echo '</label>';
-    echo '</div>';
-  }
-  ?>
-</div>
+              // Affichage des 3 dernières images dans une div séparée
+              if ($i > 6) {
+                echo '<div class="row header_desktop">';
+              } else {
+                echo '<div class="row header_desktop">';
+              }
+
+              echo '<label for="header' . $i . '">';
+              echo '<input type="radio" id="header' . $i . '" name="header" value="' . $image1Path . '">';
+              echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
+              echo '</label>';
+              echo '</div>';
+            }
+            ?>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header mobile -->
+    <div class="row">
+      <div class="col-3">
+        <p>
+          <button class="btn btn-primary" id="header_mobile_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHeaderMobile" aria-expanded="false" aria-controls="collapseHeaderMobile">
+            Selectionnez l'affichage sur mobile et tablette
+          </button>
+        </p>
+      </div>
+      <div class="col-6" style="min-height: 120px;">
+        <div class="collapse collapse-horizontal" id="collapseHeaderMobile">
+          <div class="card card-body" id="header_mobile_card">
+
+            <?php
+            $imageFolder = "./Public/asset/image/";
+
+            for ($i = 7; $i <= 9; $i++) {
+              $image1Name = "framehm" . $i . ".svg";
+              $image1Path = $imageFolder . $image1Name;
+
+              // Affichage des 3 dernières images dans une div séparée
+              if ($i > 3) {
+                echo '<div class="row">';
+              } else {
+                echo '<div class="row">';
+              }
+              echo '<div class="row">';
+
+              echo '<label class="col-3" for="header_mobile' . $i . '">';
+              echo '<input type="radio" id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '">';
+              echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header_mobile ' . $i . '">';
+              echo '</label>';
+              echo '</div>';
+              echo '</div>';
+            }
+            ?>
+
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="row p-2">
       <button type="submit" class="btn my-3">Formulaire suivant</button>
     </div>
-  </form>
+
+
+
 </div>
+</div>
+
+</form>
+</div>
+
+<script src="./Public/js/formulaire.js"></script>

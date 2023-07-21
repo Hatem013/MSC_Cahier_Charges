@@ -84,6 +84,8 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
+
+            <!-- Type de site -->
                 <div class="form-group mb-5">
                     <label class="mb-2" for="pet-select">Quel type de site souhaitez-vous?</label><br>
                     <select name="type_site" id="type_site" class="form-select-sm" required>
@@ -97,14 +99,14 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                     </select>
                 </div>
 
-                
+            <!-- Selection de couleur -->
                 <div class="form-group mb-3">
                     <label class="mb-2" for="nombre-couleurs">Faites glisser la barre ci-dessous pour choisir le nombre et les couleurs de votre site</label>
                     <input type="range" class="form-range" name="nombre-couleurs" id="nombre-couleurs" min="0" max="3" value="0"oninput="showColorFields()">
 
                 </div>
 
-                
+            <!-- Nombre de couleur variable-->
                     <div class="container d-flex justify-content-center text-center">
                     <?php for ($i = 1; $i <= 3; $i++) { ?>
                             <div class="row mx-2">
