@@ -45,12 +45,15 @@ require_once ROOT . 'App/Model.php';
     <div class="row">
       <div class="col-3">
         <p>
-          <button class="btn" id="header_desktop_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHeader" aria-expanded="false" aria-controls="collapseHeader">
+          <button class="btn" id="header_desktop_btn" type="button" onclick="desktopMenuDisplay()"data-bs-toggle="collapse" data-bs-target="#collapseHeader" aria-expanded="false" aria-controls="collapseHeader">
             Selectionnez votre header sur ordinateur
           </button>
         </p>
       </div>
-      <div class="col-6" style="min-height: 120px;">
+      <div class="col-6 d-none" id="header_preview">
+        <img  id="header_preview_img" src="">
+      </div>
+      <div class="col-6 d-none" id="header_selection_display"style="min-height: 120px;">
         <div class="collapse collapse-horizontal" id="collapseHeader">
           <div class="card card-body" id="header_desktop_card">
 
@@ -62,16 +65,15 @@ require_once ROOT . 'App/Model.php';
               $image1Path = $imageFolder . $image1Name;
 
               // Affichage des 3 dernières images dans une div séparée
-              if ($i > 6) {
-                echo '<div class="row header_desktop">';
-              } else {
-                echo '<div class="row header_desktop">';
-              }
+              
+               echo '<div class="container header_desktop">';
+               echo '<div class="row">';
 
               echo '<label for="header' . $i . '">';
-              echo '<input type="radio" id="header' . $i . '" name="header" value="' . $image1Path . '">';
+              echo '<input type="radio" onchange="desktopPreview()" class="form-check-input" id="header' . $i . '" name="header" value="' . $image1Path . '">';
               echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
               echo '</label>';
+              echo '</div>';
               echo '</div>';
             }
             ?>
@@ -82,7 +84,7 @@ require_once ROOT . 'App/Model.php';
     </div>
 
     <!-- Header mobile -->
-    <div class="row">
+    <div class="row d-none" id="header_mobile_div">
       <div class="col-3">
         <p>
           <button class="btn btn-primary" id="header_mobile_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHeaderMobile" aria-expanded="false" aria-controls="collapseHeaderMobile">
@@ -111,7 +113,7 @@ require_once ROOT . 'App/Model.php';
 
               echo '<label class="col-3" for="header_mobile' . $i . '">';
               echo '<input type="radio" id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '">';
-              echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header_mobile ' . $i . '">';
+              echo '<img class="headerMobileTaille img-fluid" src="' . $image1Path . '" alt="Header_mobile ' . $i . '">';
               echo '</label>';
               echo '</div>';
               echo '</div>';
@@ -135,4 +137,4 @@ require_once ROOT . 'App/Model.php';
 </form>
 </div>
 
-<script src="./Public/js/formulaire.js"></script>
+<script src="./Public/js/header_form.js"></script>
