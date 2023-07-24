@@ -18,31 +18,42 @@ class ClientModel extends Model
     {
         $sql = "INSERT INTO clients (nombre_couleurs, couleur1, couleur2, couleur3, logo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], $couleurs[2], $logo]);
+    
+        // Utilisez la variable $nombreCouleurs pour déterminer combien de couleurs insérer
+        if ($nombreCouleurs >= 1) {
+            $stmt->execute([$nombreCouleurs, $couleurs[0], null, null, $logo]);
+        } elseif ($nombreCouleurs >= 2) {
+            $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], null, $logo]);
+        } elseif ($nombreCouleurs >= 3) {
+            $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], $couleurs[2], $logo]);
+        }
     }
 }
 
 // Vérifie si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $clientModel = new ClientModel();
-    $clientModel->getConnexion();
-
+    // Récupérer les données du formulaire
+    $typeSite = $_POST['type_site'];
     $nombreCouleurs = $_POST['nombre-couleurs'];
     $couleurs = array();
 
-    // Récupérer les valeurs des couleurs
+    // Récupérer les valeurs des couleurs et leurs codes hexadécimaux
     for ($i = 1; $i <= $nombreCouleurs; $i++) {
         $couleur = $_POST['couleur' . $i];
+        $hex = $_POST['hex' . $i];
         $couleurs[] = $couleur;
+        $couleurs['hex' . $i] = $hex; // Stocker le code hexadécimal dans l'array des couleurs
     }
 
-    $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
+    // Insérer les données dans la base de données
+    $clientModel = new ClientModel();
+    $clientModel->getConnexion();
+    $clientModel->insertSiteInformation($typeSite, $nombreCouleurs, $couleurs);
 
-    $clientModel->insertSiteInformation($nombreCouleurs, $couleurs, $logo);
-
-
+    // Rediriger vers la page suivante
     header("Location: http://localhost/MSC-1/client3");
     exit();
+
 }
 ?>
 
