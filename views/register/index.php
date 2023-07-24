@@ -2,15 +2,14 @@
 // Inclure les fichiers nécessaires ici (header, footer, etc.)
 include_once ROOT . '/views/home/header.php';
 include_once ROOT . '/views/home/footer.php';
-require_once ROOT . 'App/Model.php';
+require_once ROOT . '/App/Model.php'; // Assurez-vous que le chemin vers Model.php est correct
 
 class ClientModel extends Model
 {
-
     public function insertClient($nom, $prenom, $pseudo, $email, $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO clients (nom, prenom, pseudo, email, password) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO clients (nom, prenom, pseudo, email, mot_de_passe) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
         $stmt->execute([$nom, $prenom, $pseudo, $email, $hashedPassword]);
     }
@@ -61,11 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // S'il n'y a pas d'erreurs de validation, enregistrer les données dans la base de données
     if (empty($formData['errors'])) {
         $clientModel = new ClientModel();
+        $clientModel->getConnexion(); // Assurez-vous que la méthode getConnexion() se connecte à la base de données
         $clientModel->insertClient($formData['nom'], $formData['prenom'], $formData['pseudo'], $formData['email'], $formData['password']);
+         header("Location: http://localhost/MSC-1/dashboard");
+         exit();
     }
 }
 
-// Afficher le formulaire HTML ici
 ?>
 <div class="container formulaire">
     <form class="mx-auto text-center" method="post">

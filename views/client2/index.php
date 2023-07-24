@@ -18,42 +18,31 @@ class ClientModel extends Model
     {
         $sql = "INSERT INTO clients (nombre_couleurs, couleur1, couleur2, couleur3, logo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
-    
-        // Utilisez la variable $nombreCouleurs pour déterminer combien de couleurs insérer
-        if ($nombreCouleurs >= 1) {
-            $stmt->execute([$nombreCouleurs, $couleurs[0], null, null, $logo]);
-        } elseif ($nombreCouleurs >= 2) {
-            $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], null, $logo]);
-        } elseif ($nombreCouleurs >= 3) {
-            $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], $couleurs[2], $logo]);
-        }
+        $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], $couleurs[2], $logo]);
     }
 }
 
 // Vérifie si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les données du formulaire
-    $typeSite = $_POST['type_site'];
+    $clientModel = new ClientModel();
+    $clientModel->getConnexion();
+
     $nombreCouleurs = $_POST['nombre-couleurs'];
     $couleurs = array();
 
-    // Récupérer les valeurs des couleurs et leurs codes hexadécimaux
+    // Récupérer les valeurs des couleurs
     for ($i = 1; $i <= $nombreCouleurs; $i++) {
         $couleur = $_POST['couleur' . $i];
-        $hex = $_POST['hex' . $i];
         $couleurs[] = $couleur;
-        $couleurs['hex' . $i] = $hex; // Stocker le code hexadécimal dans l'array des couleurs
     }
 
-    // Insérer les données dans la base de données
-    $clientModel = new ClientModel();
-    $clientModel->getConnexion();
-    $clientModel->insertSiteInformation($typeSite, $nombreCouleurs, $couleurs);
+    $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
 
-    // Rediriger vers la page suivante
+    $clientModel->insertSiteInformation($nombreCouleurs, $couleurs, $logo);
+
+
     header("Location: http://localhost/MSC-1/client3");
     exit();
-
 }
 ?>
 
@@ -95,8 +84,6 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
-
-            <!-- Type de site -->
                 <div class="form-group mb-5">
                     <label class="mb-2" for="pet-select">Quel type de site souhaitez-vous?</label><br>
                     <select name="type_site" id="type_site" class="form-select-sm" required>
@@ -110,14 +97,14 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                     </select>
                 </div>
 
-            <!-- Selection de couleur -->
+                
                 <div class="form-group mb-3">
                     <label class="mb-2" for="nombre-couleurs">Faites glisser la barre ci-dessous pour choisir le nombre et les couleurs de votre site</label>
                     <input type="range" class="form-range" name="nombre-couleurs" id="nombre-couleurs" min="0" max="3" value="0"oninput="showColorFields()">
 
                 </div>
 
-            <!-- Nombre de couleur variable-->
+                
                     <div class="container d-flex justify-content-center text-center">
                     <?php for ($i = 1; $i <= 3; $i++) { ?>
                             <div class="row mx-2">
