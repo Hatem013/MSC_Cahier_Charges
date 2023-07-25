@@ -7,48 +7,28 @@ include_once ROOT . 'views/home/footer.php';
 <!-- Session start-->
 <?php
 session_start();
-$_SESSION['currentStep'] = 2;
-/// Connexion BDD
-require_once ROOT . '/App/Model.php';
+$_SESSION['currentStep'] = 1;
+require_once ROOT . 'App/Model.php';
 
-/// Insertion info BDD
 class ClientModel extends Model
 {
-    public function insertSiteInformation($nombreCouleurs, $couleurs, $logo)
+    public function insertClient($typesite, $nombre_couleur, $couleur1, $couleur2, $couleur3)
     {
-        $sql = "INSERT INTO clients (nombre_couleurs, couleur1, couleur2, couleur3, logo) VALUES (?, ?, ?, ?, ?)";
+
+    {
+
+       
+        $sql = "INSERT INTO site (type_site, nombre_couleur, couleur1, couleur2, couleur3) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$nombreCouleurs, $couleurs[0], $couleurs[1], $couleurs[2], $logo]);
+        $stmt->execute([$typesite, $nombre_couleur, $couleur1, $couleur2, $couleur3]);
     }
 }
 
-// Vérifie si le formulaire a été soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $clientModel = new ClientModel();
-    $clientModel->getConnexion();
-
-    $nombreCouleurs = $_POST['nombre-couleurs'];
-    $couleurs = array();
-
-    // Récupérer les valeurs des couleurs
-    for ($i = 1; $i <= $nombreCouleurs; $i++) {
-        $couleur = $_POST['couleur' . $i];
-        $couleurs[] = $couleur;
-    }
-
-    $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
-
-    $clientModel->insertSiteInformation($nombreCouleurs, $couleurs, $logo);
-
-
-    header("Location: http://localhost/MSC-1/client3");
-    exit();
 }
 ?>
 
-<?php
-echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>";
-?>
+
+
 <div class="container formulaire">
 
     <div class="container text-center mt-4 mb-5">
@@ -85,7 +65,7 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
         <div class="col-md-6">
             <form method="post" action="">
                 <div class="form-group mb-5">
-                    <label class="mb-2" for="pet-select">Quel type de site souhaitez-vous?</label><br>
+                    <label class="mb-2" for="type_site">Quel type de site souhaitez-vous?</label><br>
                     <select name="type_site" id="type_site" class="form-select-sm" required>
                         <option value="">Choisissez une option</option>
                         <option value="vitrine">Site Vitrine</option>
@@ -114,6 +94,8 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                                     </div>
                                     <div class="form-group">
                                         <input type="text" data-coloris name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
+                                    
+                                     
                                     </div>
                                     
                             </div>
@@ -133,5 +115,62 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
     </div>
 </div>
 
+
+<?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $clientModel = new ClientModel();
+                    $clientModel->getConnexion();
+
+                    
+
+                    if (empty($formErrors)) {
+                        $typesite = $_POST['type_site'];
+                        $nombre_couleurs = $_POST['nombre-couleurs'];
+                        $couleur1 = $_POST['couleur1'];
+                        $couleur2 = $_POST['couleur2'];
+                        $couleur3 = $_POST['couleur3'];
+
+                        try {
+                            $clientModel->insertClient($typesite, $nombre_couleurs, $couleur1, $couleur2, $couleur3);
+
+                            $_SESSION['type_site'] = $typesite;
+                            $_SESSION['nombre-couleurs'] = $nombre_couleurs;
+                            $_SESSION['couleur1'] = $couleur1;
+                            $_SESSION['couleur2'] = $couleur2;
+                            $_SESSION['couleur3'] = $couleur3; 
+
+                            header("Location: http://localhost/MSC-1/client2");
+                            exit();
+                        } catch (PDOException $e) {
+                            // Affichage d'une erreur en cas de problème avec la base de données
+                            echo "Erreur : " . $e->getMessage();
+                        }
+                    } else {
+                        // Affichage des erreurs de validation
+                        foreach ($formErrors as $fieldName => $errorMessage) {
+                            echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
+                        }
+                    }
+                }
+                var_dump($_POST);
+                ?>
+
 <script src="./Public/js/coloris.min.js"></script>
 <script src="./Public/js/formulaire.js"></script>
+<script>
+function addEventListenerToColorField(couleurField, index) {
+    couleurField.addEventListener("change", function() {
+        console.log("Couleur " + index + " : " + this.value);
+        document.getElementById("couleur" + index + "_hidden").value = this.value;
+    });
+}
+
+function addEventListenersToColors() {
+    for (var i = 1; i <= 3; i++) {
+        var couleurField = document.getElementById("couleur" + i);
+        addEventListenerToColorField(couleurField, i);
+    }
+}
+
+addEventListenersToColors();
+</script>

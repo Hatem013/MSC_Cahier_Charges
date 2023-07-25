@@ -54,7 +54,7 @@ function showLogoPreview() {
     }
   };
 }
-
+/*
 // color picker
 var test1 = document.getElementById("couleur" + 1);
 var test2 = document.getElementById("label-couleur" + 1);
@@ -65,3 +65,4 @@ test1.addEventListener("change", testing);
 function testing() {
   test3.style.backgroundColor = test1.value;
 }
+*/

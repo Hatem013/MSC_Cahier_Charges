@@ -11,77 +11,20 @@ require_once ROOT . 'App/Model.php';
 
 class ClientModel extends Model
 {
-    public function insertClient($nom, $email, $telephone, $adresse, $message)
+    public function insertClient($nom, $email, $telephone, $adresse, $message, $secteur, $logo)
     {
 
+    {
 
-        $sql = "INSERT INTO clients (nom_ent, email_ent, telephone_ent, adresse_ent, message_ent) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $logovalue = ($logo === 'oui') ? 1 : 0;
+        $sql = "INSERT INTO entreprise (nom_entreprise, email_entreprise, telephone_entreprise, adresse_entreprise, message_entreprise, secteur_activite ,logo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$nom, $email, $telephone, $adresse, $message]);
+        $stmt->execute([$nom, $email, $telephone, $adresse, $message, $secteur, $logovalue]);
     }
 }
-function validateForm($formData)
-{
-    $errors = [];
 
-    if (empty($formData['nom_ent'])) {
-        $errors['nom-ent'] = 'Le champ nom est requis.';
-    }
-
-    if (empty($formData['email_ent']) || !filter_var($formData['email_ent'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email-ent'] = 'Veuillez entrer une adresse email valide.';
-    }
-
-    if (empty($formData['telephone_ent'])) {
-        $errors['telephone-ent'] = 'Le champ téléphone est requis.';
-    }
-    if (empty($formData['adresse_ent'])) {
-        $errors['adresse-ent'] = 'Le champ adresse est requis.';
-    }
-
-    if (empty($formData['message_ent'])) {
-        $errors['message-ent'] = "Donnez un minimum d'information concernant votre entreprise.";
-    }
-
-    return $errors;
 }
 ?>
-
-<script>
-    function showColorFields() {
-        var nombreCouleurs = document.getElementById('nombre-couleurs').value;
-
-        // Affiche les champs de couleur et les labels en fonction du nombre sélectionné
-        for (var i = 1; i <= 3; i++) {
-            var couleurField = document.getElementById('couleur' + i);
-            var couleurLabel = document.getElementById('label-couleur' + i);
-
-            if (i <= nombreCouleurs) {
-                couleurField.style.display = 'block';
-                couleurLabel.style.display = 'block';
-            } else {
-                couleurField.style.display = 'none';
-                couleurLabel.style.display = 'none';
-            }
-        }
-    }
-
-    function showLogoFields() {
-        var logoOui = document.getElementById('logo_oui');
-        var logoNon = document.getElementById('logo_non');
-        var logoFileField = document.getElementById('logo-file-field');
-        var createLogoField = document.getElementById('create-logo-field');
-
-        // Affiche le champ de fichier si "Oui" est sélectionné, sinon affiche le champ de création de logo
-        if (logoOui.checked) {
-            logoFileField.style.display = 'block';
-            createLogoField.style.display = 'none';
-        } else if (logoNon.checked) {
-            logoFileField.style.display = 'none';
-            createLogoField.style.display = 'block';
-        }
-    }
-</script>
 
 <div class="container formulaire">
 
@@ -159,6 +102,11 @@ function validateForm($formData)
                                 <input type="tel" class="form-control" id="telephone_ent" name="telephone_ent" required>
                             </div>
                         </div>
+                            <div class="form-group my-3 col-6">
+                                <label for="secteur_ent">Secteur d'activité :</label>
+                                <input type="text" class="form-control" id="secteur_ent" name="secteur_ent" required>
+                            </div>
+                        </div>
 
                         <div class="row align-items-center">
                             <div class="col-7">
@@ -226,23 +174,27 @@ function validateForm($formData)
                     $clientModel = new ClientModel();
                     $clientModel->getConnexion();
 
-                    $formErrors = validateForm($_POST);
+                    
 
                     if (empty($formErrors)) {
-                        $nom = $_POST['nom-ent'];
-                        $email = $_POST['email-ent'];
-                        $telephone = $_POST['telephone-ent'];
-                        $adresse = $_POST['adresse-ent'];
-                        $message = $_POST['message-ent'];
+                        $nom = $_POST['nom_ent'];
+                        $email = $_POST['email_ent'];
+                        $telephone = $_POST['telephone_ent'];
+                        $adresse = $_POST['adresse_ent'];
+                        $message = $_POST['message_ent'];
+                        $secteur = $_POST['secteur_ent'];
+                        $logo = $_POST['logo'];
 
                         try {
-                            $clientModel->insertClient($nom, $message, $email, $telephone, $adresse);
+                            $clientModel->insertClient($nom, $message, $email, $telephone, $adresse, $secteur, $logo );
 
-                            $_SESSION['nom-ent'] = $nom;
-                            $_SESSION['message-ent'] = $message;
-                            $_SESSION['email-ent'] = $email;
-                            $_SESSION['telephone-ent'] = $telephone;
-                            $_SESSION['adresse-ent'] = $adresse;
+                            $_SESSION['nom_ent'] = $nom;
+                            $_SESSION['message_ent'] = $message;
+                            $_SESSION['email_ent'] = $email;
+                            $_SESSION['telephone_ent'] = $telephone;
+                            $_SESSION['adresse_ent'] = $adresse;
+                            $_SESSION['secteur_ent'] = $secteur;
+                            $_SESSION['logo'] = $logo;
 
                             header("Location: http://localhost/MSC-1/client2");
                             exit();
@@ -257,6 +209,7 @@ function validateForm($formData)
                         }
                     }
                 }
+                var_dump($_POST);
                 ?>
             </div>
 
@@ -265,5 +218,4 @@ function validateForm($formData)
 
 </div>
 </div>
-<script src="./Public/js/progress.js"></script>
 <script src="./Public/js/formulaire.js"></script>
