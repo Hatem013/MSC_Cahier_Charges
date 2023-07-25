@@ -135,5 +135,5 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
     </div>
 </div>
 
-<script src="./Public/js/formulaire.js"></script>
+<script src="./Public/js/color_logo_form.js"></script>
 <script src="./Public/js/coloris.min.js"></script>
