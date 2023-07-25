@@ -6,24 +6,105 @@ include_once ROOT . 'views/home/footer.php';
 
 <!-- Session start-->
 <?php
+
 session_start();
 $_SESSION['currentStep'] = 1;
 require_once ROOT . 'App/Model.php';
 
 class ClientModel extends Model
 {
-    public function insertClient($typesite, $nombre_couleur, $couleur1, $couleur2, $couleur3)
+    public function insertClient($typesite, $nombreCouleurs, $couleur1, $couleur2, $couleur3)
     {
-
-    {
-
-       
-        $sql = "INSERT INTO site (type_site, nombre_couleur, couleur1, couleur2, couleur3) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO sites (type_site, nombre_couleur, couleur1, couleur2, couleur3) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$typesite, $nombre_couleur, $couleur1, $couleur2, $couleur3]);
+        $stmt->execute([$typesite, $nombreCouleurs, $couleur1, $couleur2, $couleur3]);
     }
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $clientModel = new ClientModel();
+    $clientModel->getConnexion();
+
+    $formErrors = [];
+
+    // Validation des champs du formulaire
+    $typeSite = trim($_POST['type_site']);
+    if (empty($typeSite)) {
+        $formErrors['type_site'] = 'Veuillez sélectionner le type de site.';
+    } else {
+        $typeSite = htmlspecialchars($typeSite);
+    }
+
+    // Vérifier le nombre de couleurs
+    $nombreCouleurs = filter_input(INPUT_POST, 'nombre-couleurs', FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 3]]);
+    if ($nombreCouleurs === false) {
+        $formErrors['nombre-couleurs'] = 'Le nombre de couleurs sélectionné est invalide.';
+    }
+
+    // Vérifier la couleur 1
+    $couleur1 = trim($_POST['couleur1']);
+    if (!preg_match('/^#[0-9A-Fa-f]{6}$/', $couleur1)) {
+        $formErrors['couleur1'] = 'La couleur 1 n\'est pas au format valide (ex: #RRGGBB).';
+    } else {
+        $couleur1 = htmlspecialchars($couleur1);
+    }
+
+    // Vérifier la couleur 2
+    $couleur2 = trim($_POST['couleur2']);
+    if (!preg_match('/^#[0-9A-Fa-f]{6}$/', $couleur2)) {
+        $formErrors['couleur2'] = 'La couleur 2 n\'est pas au format valide (ex: #RRGGBB).';
+    } else {
+        $couleur2 = htmlspecialchars($couleur2);
+    }
+
+    // Vérifier la couleur 3
+    $couleur3 = trim($_POST['couleur3']);
+    if (!preg_match('/^#[0-9A-Fa-f]{6}$/', $couleur3)) {
+        $formErrors['couleur3'] = 'La couleur 3 n\'est pas au format valide (ex: #RRGGBB).';
+    } else {
+        $couleur3 = htmlspecialchars($couleur3);
+    }
+
+    if (empty($typesite)) {
+        $formErrors['type_site'] = "Veuillez sélectionner un type de site.";
+    }
+
+    if ($nombre_couleurs === false) {
+        $formErrors['nombre-couleurs'] = "Le nombre de couleurs doit être un nombre entre 0 et 3.";
+    }
+
+    // Vérification de la validité des couleurs si le nombre de couleurs est supérieur à 0
+    if ($nombreCouleurs > 0) {
+        $pattern = "/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/";
+        if (!preg_match($pattern, $couleur1)) {
+            $formErrors['couleur1'] = "Couleur 1 invalide. Veuillez entrer une couleur au format hexadécimal (#RRGGBB).";
+        }
+        if ($nombreCouleurs > 1 && !preg_match($pattern, $couleur2)) {
+            $formErrors['couleur2'] = "Couleur 2 invalide. Veuillez entrer une couleur au format hexadécimal (#RRGGBB).";
+        }
+        if ($nombreCouleurs > 2 && !preg_match($pattern, $couleur3)) {
+            $formErrors['couleur3'] = "Couleur 3 invalide. Veuillez entrer une couleur au format hexadécimal (#RRGGBB).";
+        }
+    }
+
+    // Si le formulaire ne contient pas d'erreurs, insérer les données dans la base de données
+    if (empty($formErrors)) {
+        try {
+            $clientModel->insertClient($typesite, $nombreCouleurs, $couleur1, $couleur2, $couleur3);
+
+            $_SESSION['type_site'] = $typesite;
+            $_SESSION['nombre-couleurs'] = $nombreCouleurs;
+            $_SESSION['couleur1'] = $couleur1;
+            $_SESSION['couleur2'] = $couleur2;
+            $_SESSION['couleur3'] = $couleur3;
+
+            header("Location: http://localhost/MSC-1/client3");
+            exit();
+        } catch (PDOException $e) {
+            // Affichage d'une erreur en cas de problème avec la base de données
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
 }
 ?>
 
@@ -109,7 +190,9 @@ class ClientModel extends Model
                 </div>
 
 
-
+                        <?php
+                        var_dump($_POST);
+                        ?>
             </form>
         </div>
     </div>
@@ -117,42 +200,7 @@ class ClientModel extends Model
 
 
 <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $clientModel = new ClientModel();
-                    $clientModel->getConnexion();
 
-                    
-
-                    if (empty($formErrors)) {
-                        $typesite = $_POST['type_site'];
-                        $nombre_couleurs = $_POST['nombre-couleurs'];
-                        $couleur1 = $_POST['couleur1'];
-                        $couleur2 = $_POST['couleur2'];
-                        $couleur3 = $_POST['couleur3'];
-
-                        try {
-                            $clientModel->insertClient($typesite, $nombre_couleurs, $couleur1, $couleur2, $couleur3);
-
-                            $_SESSION['type_site'] = $typesite;
-                            $_SESSION['nombre-couleurs'] = $nombre_couleurs;
-                            $_SESSION['couleur1'] = $couleur1;
-                            $_SESSION['couleur2'] = $couleur2;
-                            $_SESSION['couleur3'] = $couleur3; 
-
-                            header("Location: http://localhost/MSC-1/client2");
-                            exit();
-                        } catch (PDOException $e) {
-                            // Affichage d'une erreur en cas de problème avec la base de données
-                            echo "Erreur : " . $e->getMessage();
-                        }
-                    } else {
-                        // Affichage des erreurs de validation
-                        foreach ($formErrors as $fieldName => $errorMessage) {
-                            echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
-                        }
-                    }
-                }
-                var_dump($_POST);
                 ?>
 
 <script src="./Public/js/coloris.min.js"></script>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Inclure les fichiers nécessaires ici (header, footer, etc.)
 include_once ROOT . '/views/home/header.php';
 include_once ROOT . '/views/home/footer.php';
@@ -62,12 +63,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $clientModel = new ClientModel();
         $clientModel->getConnexion(); // Assurez-vous que la méthode getConnexion() se connecte à la base de données
         $clientModel->insertClient($formData['nom'], $formData['prenom'], $formData['pseudo'], $formData['email'], $formData['password']);
-         header("Location: http://localhost/MSC-1/dashboard");
-         exit();
+
+        $_SESSION['nom'] = $formData['nom'];
+        $_SESSION['prenom'] = $formData['prenom'];
+        $_SESSION['pseudo'] = $formData['pseudo'];
+        $_SESSION['email'] = $formData['email'];
+
+        // Redirection vers le dashboard
+        header("Location: http://localhost/MSC-1/dashboard");
+        exit();
     }
 }
-
 ?>
+
 <div class="container formulaire">
     <form class="mx-auto text-center" method="post">
         <div class="mb-5 form-group">
