@@ -223,5 +223,3 @@ function validateForm($formData)
         </div>
     </div>
 </div>
-
-<script src="./Public/js/formulaire.js"></script>

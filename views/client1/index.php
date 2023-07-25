@@ -289,4 +289,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     </div>
 </div>
-<script src="./Public/js/formulaire.js"></script>
+<script src="./Public/js/color_logo_form.js"></script>

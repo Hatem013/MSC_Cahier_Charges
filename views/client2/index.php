@@ -203,7 +203,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script src="./Public/js/color_logo_form.js"></script>
 <script src="./Public/js/coloris.min.js"></script>
-<script src="./Public/js/formulaire.js"></script>
+
+<!--
 
 <script>
 function addEventListenerToColorField(couleurField, index) {
@@ -221,5 +222,8 @@ function addEventListenersToColors() {
 }
 
 addEventListenersToColors();
+
 </script>
+
+-->
 
