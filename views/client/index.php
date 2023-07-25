@@ -110,7 +110,7 @@ function validateForm($formData)
                                     <input type="text" class="form-control" id="nom" name="nom" required>
 
                                 </div>
-                            </div>
+                             </div>
 
                         <!-- Prénom-->  
                             <div class="col-6">

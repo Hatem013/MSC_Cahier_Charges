@@ -165,17 +165,17 @@ function validateForm($formData)
                             <div class="col-7">
                                 <div class="form-group" required>
                                     <label for="logo">Avez-vous un logo ?</label>
-                                    <input type="radio" name="logo" id="logo_oui" value="oui" onclick="showLogoFields()" required>
-                                    <label for="logo_oui">Oui</label>
-                                    <input type="radio" name="logo" id="logo_non" value="non" onclick="showLogoFields()" required>
-                                    <label for="logo_non">Non</label>
+                                    <input type="radio" name="logo" id="logo_oui" value="oui" onclick="showLogoFields(); logoSelectionValidate()" required>
+                                    <label id="logo_label_oui" class="btn" for="logo_oui">Oui</label>
+                                    <input type="radio" name="logo" id="logo_non" value="non" onclick="showLogoFields(); logoSelectionValidate()" required>
+                                    <label id="logo_label_non" class="btn" for="logo_non">Non</label>
                                 </div>
                         
                                 <!-- Import logo -->
                                 <div id="logo-file-field" style="display: none;">
                                     <div class="form-group my-4">
-                                        <label for="logo_file" class="custom-file-upload">
-                                            <i class="fa fa-cloud-upload"></i> Importez votre fichier
+                                        <label id="logo_import_label" for="logo_file" class="btn">
+                                            <i class="fa fa-cloud-upload"></i> Cliquez ici pour importez votre fichier
                                         </label>
                                         <input type="file" accept="image/*" name="logo-file" id="logo_file">
                                     </div>
@@ -186,7 +186,7 @@ function validateForm($formData)
                                 <!-- Pas de logo -->  
                         <div id="create-logo-field" style="display: none;">
                             <div class="form-group my-4">
-                                <p>Attention : Le logo étant nécessaire, une proposition vous sera faites afin de vous créer un logo personnalisé</p>
+                                <p>⚠️ Le logo étant nécessaire, une proposition vous sera faites afin de vous créer un logo personnalisé ⚠️</p>
                             </div>
                         </div>
 
@@ -202,6 +202,9 @@ function validateForm($formData)
                                     logo_file_preview.src = URL.createObjectURL(file)
                                     logo_file_preview.style.display = "unset"
                                 }
+                                    logo_import_label.innerHTML = "Cliquez ici pour modifier votre logo";
+                                    logo_import_label.classList.add("btn_validate");
+
                             }
                         </script>
 

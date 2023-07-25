@@ -112,7 +112,7 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
                             <div class="row mx-2">
                                 
                                     <div class="form-group" id="label-couleur<?php echo $i; ?>" style="display: none;">
-                                        <label class="mb-2 color_title" id="lblclr"for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>   
+                                        <label class="mb-2 color_title" id="lblclr" for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>   
                                     </div>
                                     <div class="form-group">
                                         <input type="text" data-coloris name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
@@ -135,5 +135,5 @@ echo "<p>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . " Vous ave
     </div>
 </div>
 
+<script src="./Public/js/color_logo_form.js"></script>
 <script src="./Public/js/coloris.min.js"></script>
-<script src="./Public/js/formulaire.js"></script>

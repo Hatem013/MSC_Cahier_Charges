@@ -1,83 +1,104 @@
 .formulaire {
-    margin-top: 15vh;
-    padding: 10px;
-    background-color: rgba(0,0,0, 0.8) ;
-    color: white;
-    border : 1px solid rgba(255,255,255,0.3);
-    border-radius: 10px;
+  margin-top: 15vh;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
 }
 
 .btn {
-    background-color:#00679C;
-    color:white;
+  background-color: #00679c;
+  color: white;
 }
 
 .btn:hover {
-    background-color:#24bebe;
-    color:yellow;
-    border : 1px solid white;
+  background-color: #24bebe;
+  color: yellow;
+  border: 1px solid white;
 }
 
 .btn-form-1 {
-    width: 200px;
+  width: 200px;
 }
 
 .logo_progress {
-    width: 50px;
+  width: 50px;
 }
 
 .logo_current_progress {
-    width:90px;
-    background-color: white;
-    border-radius: 100%;
+  width: 90px;
+  background-color: white;
+  border-radius: 100%;
 }
 
 .logo_previous_progress {
-    width:70px;
-    background-color: rgb(0, 255, 255);
-    border-radius: 100%;
+  width: 70px;
+  background-color: rgb(0, 255, 255);
+  border-radius: 100%;
 }
 
 .progressed {
-    color: green;
+  color: green;
 }
 
 .in_progress {
-    color: yellow;
+  color: yellow;
 }
 
 .color_title {
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 #logo_file_preview {
-    border: 1px solid white;
-    border-radius:10px;
-    background-color: black;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: black;
 }
 
 input[type="file"] {
-    display: none;
+  display: none;
 }
 .custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
-.card, .card-body {
-    background-color: transparent!important;
+.card,
+.card-body {
+  background-color: transparent !important;
 }
 
 .btn_validate {
+  background-color: green !important;
+}
 
-background-color: green!important;
+*:focus {
+  box-shadow: none !important;
 }
 
 input[type="radio"] {
   visibility: hidden;
 }
 
+.headerTaille{
+    max-height: 400px!important;
+    margin-bottom: 20px!important;
+}
+
+#header_desktop_preview_img,
+#header_mobile_preview_img,
+.headerTaille,
+.headerMobileTaille {
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+
+.logo_input_label {
+    border: 1px solid white;
+}
