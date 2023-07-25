@@ -1,6 +1,5 @@
-///// Logo
+////////////////// Logo
 
-// Selection oui ou non du logo
 var logoOui = document.getElementById("logo_oui");
 var logoNon = document.getElementById("logo_non");
 var logoFileField = document.getElementById("logo-file-field");
@@ -34,6 +33,8 @@ function showLogoFields() {
 }
 ;
 
+// Change la couleur du bouton
+
 function logoSelectionValidate() {
   var selected = document.querySelector('input[name="logo"]:checked').value;
   
@@ -64,6 +65,26 @@ function logoSelectionValidate() {
   }
 };
 
+////// Couleurs
+function showColorFields() {
+  var nombreCouleurs = document.getElementById("nombre-couleurs").value;
+
+  // Affiche les champs de couleur et les labels en fonction du nombre sélectionné
+  for (var i = 1; i <= 3; i++) {
+    var couleurField = document.getElementById("couleur" + i);
+    var couleurLabel = document.getElementById("label-couleur" + i);
+
+    if (i <= nombreCouleurs) {
+      couleurField.style.display = "block";
+      couleurLabel.style.display = "block";
+    } else {
+      couleurField.style.display = "none";
+      couleurLabel.style.display = "none";
+    }
+  }
+}
+
+
 
 /* color picker test (ne pas toucher)
 var test1 = document.getElementById("couleur" + 1);
@@ -76,61 +97,3 @@ function testing() {
   test3.style.backgroundColor = test1.value;
 }
 */
-
-////// Couleurs
-
-
-const couleur_group = [
-  document.getElementById("couleur1"),
-  document.getElementById("couleur2"),
-  document.getElementById("couleur3"),
-];
-
-const label_couleur_group = [
-  document.getElementById("label-couleur1"),
-  document.getElementById("label-couleur2"),
-  document.getElementById("label-couleur3"),
-];
-
-function showColorFields() {
-  
-  let color_input = document.getElementById("nombre-couleurs");
-  let temp_value = parseInt(color_input.value);
-
-  
-switch (temp_value) {
-  
-  case 0: 
-  couleur_group[0].style.display = "none";
-  label_couleur_group[0].style.display = "none";
-  break;
-  
-  case 1: 
-  couleur_group[0].style.display = "unset";
-  label_couleur_group[0].style.display = "unset";
-
-  couleur_group[1].style.display = "none";
-  label_couleur_group[1].style.display = "none";
-
-  couleur_group[2].style.display = "none";
-  label_couleur_group[2].style.display = "none";
-  break; 
-
-  case 2:
-  couleur_group[1].style.display = "unset";
-  label_couleur_group[1].style.display = "unset";
-
-  couleur_group[2].style.display = "none";
-  label_couleur_group[2].style.display = "none";
-  break;
-
-  case 3:
-  couleur_group[2].style.display = "unset";
-  label_couleur_group[2].style.display = "unset";
-  break;
-
-  default:
-    break;
-}
-
-}
