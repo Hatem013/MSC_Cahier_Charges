@@ -3,7 +3,6 @@ session_start();
 
 include_once ROOT . 'views/home/header.php';
 include_once ROOT . 'views/home/footer.php';
-
 require_once ROOT . 'App/Model.php';
 
 class ClientModel extends Model
