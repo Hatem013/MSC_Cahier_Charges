@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <div class="col-6">
                                 <div class="form-group ">
 
-                                    <label for="nom_ent">Nom</label>
+                                    <label for="nom_ent">Nom commercial</label>
                                     <input type="text" class="form-control" id="nom_ent" name="nom_ent" required>
 
                                 </div>
@@ -214,20 +214,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </div>
                         </div>
 
+                        <!-- Logo-->
                         <div class="row align-items-center">
                             <div class="col-7">
                                 <div class="form-group" required>
                                     <label for="logo">Avez-vous un logo ?</label>
-                                    <input type="radio" name="logo" id="logo_oui" value="oui" onclick="showLogoFields()" required>
-                                    <label for="logo_oui">Oui</label>
-                                    <input type="radio" name="logo" id="logo_non" value="non" onclick="showLogoFields()" required>
-                                    <label for="logo_non">Non</label>
+                                    <input type="radio" name="logo" id="logo_oui" value="oui" onclick="showLogoFields(); logoSelectionValidate()" required>
+                                    <label id="logo_label_oui" class="btn" for="logo_oui">Oui</label>
+                                    <input type="radio" name="logo" id="logo_non" value="non" onclick="showLogoFields(); logoSelectionValidate()" required>
+                                    <label id="logo_label_non" class="btn" for="logo_non">Non</label>
                                 </div>
-
-                                <div id="logo-file-field" style="display: none;">
+                        
+                                <!-- Import logo -->
+                                <div id="logo_file_field" style="display: none;">
                                     <div class="form-group my-4">
-                                        <label for="logo_file" class="custom-file-upload">
-                                            <i class="fa fa-cloud-upload"></i> Importez votre fichier
+                                        <label id="logo_import_label" for="logo_file" class="btn">
+                                            <i class="fa fa-cloud-upload"></i> Cliquez ici pour importez votre fichier
                                         </label>
                                         <input type="file" accept="image/*" name="logo_file" id="logo_file">
                                     </div>
@@ -235,35 +237,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </div>
                             <div class="col"><img id="logo_file_preview" src="#" style="width:150px" /></div>
                         </div>
-
-                        <div id="create-logo-field" style="display: none;">
+                                <!-- Pas de logo -->  
+                        <div id="logo_alert_field" style="display: none;">
                             <div class="form-group my-4">
-                                <p>Attention : Le logo étant nécessaire, nous vous facturerons la création du logo</p>
+                                <p>⚠️ Le logo étant nécessaire, une proposition vous sera faites afin de vous créer un logo personnalisé ⚠️</p>
                             </div>
+                        </div>
+
+                                <!-- Preview du logo si importé -->
+                        <script>
+                            if (logo_file.files.length == 0) {
+                                logo_file_preview.style.display = "none"
+                            }
+
+                            logo_file.onchange = evt => {
+                                const [file] = logo_file.files
+                                if (file) {
+                                    logo_file_preview.src = URL.createObjectURL(file)
+                                    logo_file_preview.style.display = "unset"
+                                }
+                                    logo_import_label.innerHTML = "Cliquez ici pour modifier votre logo";
+                                    logo_import_label.classList.add("btn_validate");
+
+                            }
+                        </script>
+
+                        <!-- Message -->
+                        <div class="form-group my-3">
+                            <label class="mb-2" for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
+                            <textarea class="form-control" name="message_ent" id="message_ent" rows="12" required></textarea>
                         </div>
                     </div>
 
-                    <script>
-                        if (logo_file.files.length == 0) {
-                            logo_file_preview.style.display = "none"
-                        }
-
-                        logo_file.onchange = evt => {
-                            const [file] = logo_file.files
-                            if (file) {
-                                logo_file_preview.src = URL.createObjectURL(file)
-                                logo_file_preview.style.display = "unset"
-                            }
-                        }
-                    </script>
-
-                    <!-- Message -->
-
-                    <div class="form-group my-3">
-                        <label class="mb-2" for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
-                        <textarea class="form-control" name="message_ent" id="message_ent" rows="12" required></textarea>
-                    </div>
-            </div>
 
             <!-- Bouton d'envoie -->
             <div class="row p-2 ">
@@ -277,10 +282,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 var_dump($_POST);
                 var_dump($_SESSION['client_id']);
                 ?>
+
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
-</div>
-<script src="./Public/js/formulaire.js"></script>
+<script src="./Public/js/color_logo_form.js"></script>

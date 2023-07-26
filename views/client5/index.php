@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container text-center mt-4 mb-5">
         <h1>Choisissez votre palette de couleurs</h1>
         <form method="post" action="">
-            <div class="container mt-5 mb-5">
-                <div class="color-palettes mt-5">
+            <div class="container row mt-5 mb-5">
+                <div class="color-palettes col-md-12 mt-5">
                     <?php
                     $colorPalettes = [
                         ['#293241', '#5A677D', '#98A6BD'],
@@ -52,6 +52,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     ?>
                 </div>
+                    <?php
+                $imageFolder = "./Public/asset/image/";
+
+for ($i = 1; $i <= 8; $i++) {
+  $image1Name = "body" . $i . ".svg";
+  $image1Path = $imageFolder . $image1Name;
+
+  // Affichage des 3 dernières images dans une div séparée
+?>
+<div class="row">
+<div class="col-md-12">
+<?php
+  echo '<label for="body' . $i . '">';
+  echo '<input type="radio" id="body' . $i . '" name="body" value="' . $image1Path . '">';
+  echo '<img class="bodyTaille img-fluid" src="' . $image1Path . '" alt="body ' . $i . '">';
+  echo '</label>';
+}
+?>
+</div>
+</div>
             </div>
     </div>
     <div class="row p-2">

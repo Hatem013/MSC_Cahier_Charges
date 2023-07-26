@@ -100,15 +100,19 @@ function validateForm($formData)
 
                         <!-- Nom et prénom -->
                         <div class="row my-3">
+                            
+                        <!-- Nom-->
                             <div class="col-6">
                                 <div class="form-group ">
-
+                                
+                               
                                     <label for="nom">Nom :</label>
                                     <input type="text" class="form-control" id="nom" name="nom" required>
 
                                 </div>
-                            </div>
+                             </div>
 
+                        <!-- Prénom-->  
                             <div class="col-6">
                                 <div class="form-group ">
 
@@ -140,6 +144,8 @@ function validateForm($formData)
 
                         <!-- Profession + Secteur d'activité -->
                         <div class="row">
+
+                            <!-- Profession -->
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="profession">Profession :</label>
@@ -148,6 +154,7 @@ function validateForm($formData)
 
                             </div>
 
+                            <!-- Secteur d'activité-->
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="secteur">Secteur d'activité :</label>
@@ -216,4 +223,3 @@ function validateForm($formData)
         </div>
     </div>
 </div>
-<script type="module" src="./Public/js/main.js"></script>

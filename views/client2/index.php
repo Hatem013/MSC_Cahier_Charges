@@ -145,6 +145,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="post" action="">
+
+            <!-- Type de site -->
                 <div class="form-group mb-5">
                     <label class="mb-2" for="type_site">Quel type de site souhaitez-vous?</label><br>
                     <select name="type_site" id="type_site" class="form-select-sm" required>
@@ -158,20 +160,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </select>
                 </div>
 
-                
+            <!-- Selection de couleur -->
                 <div class="form-group mb-3">
                     <label class="mb-2" for="nombre-couleurs">Faites glisser la barre ci-dessous pour choisir le nombre et les couleurs de votre site</label>
                     <input type="range" class="form-range" name="nombre-couleurs" id="nombre-couleurs" min="0" max="3" value="0"oninput="showColorFields()">
 
                 </div>
 
-                
+            <!-- Nombre de couleur variable-->
                     <div class="container d-flex justify-content-center text-center">
                     <?php for ($i = 1; $i <= 3; $i++) { ?>
                             <div class="row mx-2">
                                 
                                     <div class="form-group" id="label-couleur<?php echo $i; ?>" style="display: none;">
-                                        <label class="mb-2 color_title" id="lblclr"for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>   
+                                        <label class="mb-2 color_title" id="lblclr" for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>   
                                     </div>
                                     <div class="form-group">
                                         <input type="text" data-coloris name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
@@ -199,12 +201,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 
-<?php
-
-                ?>
-
+<script src="./Public/js/color_logo_form.js"></script>
 <script src="./Public/js/coloris.min.js"></script>
-<script src="./Public/js/formulaire.js"></script>
+
+<!--
+
 <script>
 function addEventListenerToColorField(couleurField, index) {
     couleurField.addEventListener("change", function() {
@@ -221,4 +222,8 @@ function addEventListenersToColors() {
 }
 
 addEventListenersToColors();
+
 </script>
+
+-->
+
