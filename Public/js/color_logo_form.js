@@ -30,30 +30,7 @@ function showLogoFields() {
   }
 }
 
-function showLogFields() {
-  if (logoOui.checked) {
-    logoFileField.style.display = "unset";
-    createLogoField.style.display = "none";
-    logoFile.required = true;
-
-    if (logoFile.files.length == 0) {
-      logoFilePreview.style.display = "none";
-    } else {
-      logoFilePreview.style.display = "unset";
-    }
-    
-  } else if (logoNon.checked) {
-    logoFileField.style.display = "none";
-
-    createLogoField.style.display = "unset";
-
-    logoFilePreview.style.display = "none";
-
-    logoFile.required = false;
-  }
-}
 // Change la couleur du bouton
-
 function logoSelectionValidate() {
   var selected = document.querySelector('input[name="logo"]:checked').value;
   var labelOui = document.getElementById("logo_label_oui");
@@ -80,7 +57,7 @@ function showColorFields() {
   // Affiche les champs de couleur et les labels en fonction du nombre sélectionné
   for (var i = 1; i <= 3; i++) {
     var couleurField = document.getElementById("couleur" + i);
-    var couleurLabel = document.getElementById("label-couleur" + i);
+    var couleurLabel = document.getElementById("label_couleur_div" + i);
 
     if (i <= nombreCouleurs) {
       couleurField.style.display = "unset";
@@ -91,6 +68,34 @@ function showColorFields() {
     }
   }
 }
+
+
+const couleurField = [
+  document.getElementById("couleur1"),
+  document.getElementById("couleur2"),
+  document.getElementById("couleur3")
+]
+
+const couleurLabel = [
+  document.getElementById("label_couleur1"),
+  document.getElementById("label_couleur2"),
+  document.getElementById("label_couleur3")
+]
+
+
+couleurField[0].addEventListener("change", ()=>{
+  couleurLabel[0].style.backgroundColor = couleurField[0].value
+})
+
+couleurField[1].addEventListener("change", ()=>{
+  couleurLabel[1].style.backgroundColor = couleurField[1].value
+})
+couleurField[2].addEventListener("change", ()=>{
+  couleurLabel[2].style.backgroundColor = couleurField[2].value
+}) 
+
+
+
 
 /* color picker test (ne pas toucher)
 var test1 = document.getElementById("couleur" + 1);

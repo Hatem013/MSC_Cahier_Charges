@@ -46,7 +46,7 @@ const header_mobile = new Header(
 
 // Boucle desktop
 for (var i = 0; i < header_desktop.input_div.length; i++) {
-  header_desktop.input_div[i].addEventListener("mouseover", mouseoverScale);
+ // header_desktop.input_div[i].addEventListener("mouseover", mouseoverScale);
   header_desktop.input_div[i].addEventListener("click", selectHeaderDesktop);
 }
 
@@ -108,8 +108,8 @@ function desktopMenuDisplay() {
 
 // Boucle mobile
 for (var i = 0; i < header_mobile.input_div.length; i++) {
-  header_mobile.input_div[i].addEventListener("mouseover", mouseoverScale);
-  header_mobile.input_div[i].addEventListener("click", selectMobileHeader);
+  //header_mobile.input_div[i].addEventListener("mouseover", mouseoverScale);
+  header_mobile.input_div[i].addEventListener("click", selectMobileHeader); 
 
 }
 

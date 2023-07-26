@@ -172,8 +172,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php for ($i = 1; $i <= 3; $i++) { ?>
                             <div class="row mx-2">
                                 
-                                    <div class="form-group" id="label-couleur<?php echo $i; ?>" style="display: none;">
-                                        <label class="mb-2 color_title" id="lblclr" for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>   
+                                    <div class="form-group" id="label_couleur_div<?php echo $i; ?>" style="display: none;">
+                                        <label class="mb-2 color_title" id="label_couleur<?php echo $i; ?>" for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>   
                                     </div>
                                     <div class="form-group">
                                         <input type="text" data-coloris name="couleur<?php echo $i; ?>" id="couleur<?php echo $i; ?>" style="display: none;">
