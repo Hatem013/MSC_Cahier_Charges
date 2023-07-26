@@ -2,7 +2,7 @@
 
 abstract class Model{
     private $host = "localhost";
-    private $dbname = "msc_cahier";
+    private $dbname = "msc_cahier_charges";
     private $username = "root";
     private $password = "";
 
