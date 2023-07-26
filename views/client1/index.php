@@ -227,7 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 </div>
                         
                                 <!-- Import logo -->
-                                <div id="logo-file-field" style="display: none;">
+                                <div id="logo_file_field" style="display: none;">
                                     <div class="form-group my-4">
                                         <label id="logo_import_label" for="logo_file" class="btn">
                                             <i class="fa fa-cloud-upload"></i> Cliquez ici pour importez votre fichier
@@ -239,7 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <div class="col"><img id="logo_file_preview" src="#" style="width:150px" /></div>
                         </div>
                                 <!-- Pas de logo -->  
-                        <div id="create-logo-field" style="display: none;">
+                        <div id="logo_alert_field" style="display: none;">
                             <div class="form-group my-4">
                                 <p>⚠️ Le logo étant nécessaire, une proposition vous sera faites afin de vous créer un logo personnalisé ⚠️</p>
                             </div>

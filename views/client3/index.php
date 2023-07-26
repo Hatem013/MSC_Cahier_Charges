@@ -43,7 +43,7 @@ require_once ROOT . 'App/Model.php';
   <form method="post" action="">
 
     <!-- Header ordinateur-->
-    <div class="row mb-3">
+    <div class="row mb-3" id="header_desktop_div">
       <div class="col-3 p-5">
         <p>
           <button class="btn" id="header_desktop_btn" type="button"
@@ -74,7 +74,7 @@ require_once ROOT . 'App/Model.php';
               echo '<div class="row">';
 
               echo '<label for="header' . $i . '">';
-              echo '<input type="radio" onchange="desktopPreview()" class="form-check-input" id="header' . $i . '" name="header" value="' . $image1Path . '">';
+              echo '<input type="radio" class="form-check-input header_input" id="header' . $i . '" name="header" value="' . $image1Path . '">';
               echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
               echo '</label>';
               echo '</div>';
@@ -91,9 +91,7 @@ require_once ROOT . 'App/Model.php';
     <div class="row d-none" id="header_mobile_div">
       <div class="col-3 p-5">
         <p>
-          <button class="btn btn-primary" id="header_mobile_btn" type="button" onclick="mobileMenuDisplay()"
-            data-bs-toggle="collapse" data-bs-target="#collapseHeaderMobile" aria-expanded="false"
-            aria-controls="collapseHeaderMobile">
+          <button class="btn btn-primary" id="header_mobile_btn" type="button" onclick="mobileMenuDisplay()">
             Selectionnez l'affichage sur mobile et tablette
           </button>
         </p>
@@ -125,7 +123,7 @@ require_once ROOT . 'App/Model.php';
 
 
                 echo '<label class="col-3" for="header_mobile' . $i . '">';
-                echo '<input type="radio" onchange="mobilePreview()" id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '">';
+                echo '<input type="radio" class="form-check-input header_mobile_input"  id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '">';
                 echo '<img class="headerMobileTaille img-fluid" src="' . $image1Path . '" alt="Header_mobile ' . $i . '">';
                 echo '</label>';
 

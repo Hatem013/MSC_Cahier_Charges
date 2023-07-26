@@ -1,69 +1,77 @@
-////////////////// Logo
+////////////////// Logo ////////////////// 
 
 var logoOui = document.getElementById("logo_oui");
 var logoNon = document.getElementById("logo_non");
-var logoFileField = document.getElementById("logo-file-field");
-var createLogoField = document.getElementById("create-logo-field");
-var logo_preview = document.getElementById("logo_file_preview");
-var logo_file = document.getElementById("logo_file");
+var logoFileField = document.getElementById("logo_file_field");
+var createLogoField = document.getElementById("logo_alert_field");
+var logoFilePreview = document.getElementById("logo_file_preview");
+var logoFile = document.getElementById("logo_file");
 
 // Affiche la preview si "Oui" est sélectionné, sinon affiche le message
 function showLogoFields() {
-
   if (logoOui.checked) {
-    logoFileField.style.display = "block";
+    logoFileField.style.display = "unset";
     createLogoField.style.display = "none";
+    logoFile.required = true;
 
-    logo_file.required = true;
-
-    if (logo_file.files.length == 0) {
-      logo_file_preview.style.display = "none";
+    if (logoFile.files.length == 0) {
+      logoFilePreview.style.display = "none";
     } else {
-      logo_file_preview.style.display = "unset";
+      logoFilePreview.style.display = "unset";
     }
   } else if (logoNon.checked) {
     logoFileField.style.display = "none";
 
-    createLogoField.style.display = "block";
+    createLogoField.style.display = "unset";
 
-    logo_preview.style.display = "none";
+    logoFilePreview.style.display = "none";
 
-    logo_file.required = false;
+    logoFile.required = false;
   }
 }
-;
 
+function showLogFields() {
+  if (logoOui.checked) {
+    logoFileField.style.display = "unset";
+    createLogoField.style.display = "none";
+    logoFile.required = true;
+
+    if (logoFile.files.length == 0) {
+      logoFilePreview.style.display = "none";
+    } else {
+      logoFilePreview.style.display = "unset";
+    }
+    
+  } else if (logoNon.checked) {
+    logoFileField.style.display = "none";
+
+    createLogoField.style.display = "unset";
+
+    logoFilePreview.style.display = "none";
+
+    logoFile.required = false;
+  }
+}
 // Change la couleur du bouton
 
 function logoSelectionValidate() {
   var selected = document.querySelector('input[name="logo"]:checked').value;
-  
-  var oui = document.getElementById("logo_label_oui");
-  var non = document.getElementById("logo_label_non");
-  
-  var import_label = document.getElementById("logo_import_label");
-  
-  
+  var labelOui = document.getElementById("logo_label_oui");
+  var labelNon = document.getElementById("logo_label_non");
+  var importLabel = document.getElementById("logo_import_label");
+
   if (selected == "oui") {
-    
-    
-    oui.classList.add("btn_validate")
-    non.classList.remove("btn_validate")
-    
-    
-    
+    labelOui.classList.add("btn_validate");
+    labelNon.classList.remove("btn_validate");
+    importLabel.innerHTML = "Cliquez ici pour importer votre logo";
   } else {
-    non.classList.add("btn_validate")
-    oui.classList.remove("btn_validate")
-    
-    import_label.innerHTML = "Cliquez ici pour modifier votre logo";
-    import_label.classList.remove("btn_validate");
+    labelNon.classList.add("btn_validate");
+    labelOui.classList.remove("btn_validate");
+    importLabel.innerHTML = "Cliquez ici pour modifier votre logo";
+    importLabel.classList.remove("btn_validate");
     logo_file.value = null;
-    
-    
-    
   }
-};
+}
 
 ////// Couleurs
 function showColorFields() {
@@ -75,16 +83,14 @@ function showColorFields() {
     var couleurLabel = document.getElementById("label-couleur" + i);
 
     if (i <= nombreCouleurs) {
-      couleurField.style.display = "block";
-      couleurLabel.style.display = "block";
+      couleurField.style.display = "unset";
+      couleurLabel.style.display = "unset";
     } else {
       couleurField.style.display = "none";
       couleurLabel.style.display = "none";
     }
   }
 }
-
-
 
 /* color picker test (ne pas toucher)
 var test1 = document.getElementById("couleur" + 1);
