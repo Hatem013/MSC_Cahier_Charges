@@ -22,7 +22,6 @@ class ClientModel extends Model {
         $stmt->execute([$pseudo]);
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
-
     // Vous pouvez ajouter d'autres méthodes liées aux clients ici selon vos besoins
 }
 
@@ -69,10 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Vérifier si l'utilisateur a été trouvé dans la base de données
       if ($user) {
           // Vérifier si le mot de passe saisi correspond au mot de passe haché dans la base de données
-          if (password_verify($formData['password'], $user->mot_de_passe)) {
+          if (password_verify($formData['password'], $user->password)) {
               // Authentification réussie, définir les variables de session pour l'ID de l'utilisateur et son pseudo
-              $_SESSION['user_id'] = $user->id;
-              $_SESSION['user_pseudo'] = $user->pseudo;
+              $_SESSION['client_id'] = $user->id; // Assurez-vous que la colonne dans votre base de données s'appelle "id"
+              $_SESSION['pseudo'] = $user->pseudo;
               // Rediriger l'utilisateur vers le dashboard ou toute autre page appropriée
               header("Location: http://localhost/MSC-1/dashboard");
               exit();
