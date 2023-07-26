@@ -1,23 +1,34 @@
 <?php
 session_start();
 
-include_once ROOT . 'views/home/header.php';
-include_once ROOT . 'views/home/footer.php';
-
-require_once ROOT . 'App/Model.php';
+// Inclure les fichiers d'en-tête et de pied de page
+include_once  ROOT . '/views/home/header.php';
+include_once  ROOT . '/views/home/footer.php';
+require_once  ROOT . '/App/Model.php';
 
 class ClientModel extends Model
 {
-    public function insertClient($client_id, $nom, $email, $telephone, $adresse, $message, $secteur, $logo)
+    // Fonction pour obtenir l'ID du client à partir de l'e-mail
+    public function getClientId($pseudo)
     {
-        $logovalue = ($logo === 'oui') ? 1 : 0;
+        $sql = "SELECT id FROM clients WHERE pseudo = ?";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->execute([$pseudo]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    // Fonction pour insérer les informations du client dans la base de données
+    public function insertClient($client_id, $nom, $email, $telephone, $adresse, $message, $secteur, $logoPathString)
+    {
+        $logovalue = ($logoPathString !== '') ? 1 : 0; // Vérifier s'il y a un logo et définir la valeur en conséquence
         $sql = "INSERT INTO entreprises (client_id, nom_entreprise, email, telephone, adresse_entreprise, message_entreprise, secteur_activite, logo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         echo "Requête SQL : " . $sql . "<br>";
         $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$client_id, $nom, $email, $telephone, $adresse, $message, $secteur, $logovalue]);
+        $stmt->execute([$client_id, $nom, $email, $telephone, $adresse, $message, $secteur, $logoPathString]);
     }
 }
 
+// Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $formErrors = [];
 
@@ -29,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $nom = htmlspecialchars($nom);
     }
 
-    // Vérifier l'email de l'entreprise
+    // Vérifier l'e-mail de l'entreprise
     $email = filter_var($_POST['email_ent'], FILTER_VALIDATE_EMAIL);
     if (empty($email)) {
         $formErrors['email_ent'] = 'L\'adresse email de l\'entreprise est invalide.';
@@ -77,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($logo === 'oui') {
         $logoFile = $_FILES['logo_file'];
         $logoPath = '';
+
         if (!empty($logoFile['name'])) {
             // Vérifier le type de fichier
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
@@ -88,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $newLogoName = hash('sha256', uniqid() . $logoFile['name']) . '.' . $fileExtension;
 
                 // Déplacer le fichier vers le dossier uploads
-                $uploadPath = ROOT.'Public/uploads/' . $newLogoName;
+                $uploadPath = ROOT . 'Public/uploads/' . $newLogoName;
                 if (!move_uploaded_file($logoFile['tmp_name'], $uploadPath)) {
                     $formErrors['logo-file'] = 'Une erreur est survenue lors du téléchargement du logo.';
                 } else {
@@ -101,6 +113,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // Convertir le chemin de l'image en une chaîne de caractères
+    $logoPathString = ($logoPath !== '') ? strval($logoPath) : '';
+
     // S'il n'y a pas d'erreurs de validation, insérer les données dans la base de données
     if (empty($formErrors)) {
         $clientModel = new ClientModel();
@@ -111,8 +126,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $client_id = $_SESSION['client_id'];
 
             // Enregistrer les informations de l'entreprise dans la base de données avec l'ID du client correspondant
-            $clientModel->insertClient($client_id, $nom, $email, $telephone, $adresse, $message, $secteur, $logo);
+            $clientModel->insertClient($client_id, $nom, $email, $telephone, $adresse, $message, $secteur, $logoPathString);
 
+            // Stocker les informations dans la session
             $_SESSION['nom_ent'] = $nom;
             $_SESSION['message_ent'] = $message;
             $_SESSION['email_ent'] = $email;
@@ -281,7 +297,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div>
                 <?php
                 var_dump($_POST);
-                var_dump($_SESSION['client_id']);
                 ?>
 
             </div>

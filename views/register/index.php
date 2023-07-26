@@ -10,9 +10,10 @@ class ClientModel extends Model
     public function insertClient($nom, $prenom, $pseudo, $email, $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO clients (nom, prenom, pseudo, email, mot_de_passe) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO clients (nom, prenom, pseudo, email, password) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
         $stmt->execute([$nom, $prenom, $pseudo, $email, $hashedPassword]);
+        return $this->connexion->lastInsertId();
     }
 }
 
@@ -62,8 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($formData['errors'])) {
         $clientModel = new ClientModel();
         $clientModel->getConnexion(); // Assurez-vous que la méthode getConnexion() se connecte à la base de données
-        $clientModel->insertClient($formData['nom'], $formData['prenom'], $formData['pseudo'], $formData['email'], $formData['password']);
+        $newClientId = $clientModel->insertClient($formData['nom'], $formData['prenom'], $formData['pseudo'], $formData['email'], $formData['password']);
 
+        // Stocker l'ID du client dans la session
+        $_SESSION['client_id'] = $newClientId;
+        $_SESSION['pseudo'] = $formData['pseudo'];
         $_SESSION['nom'] = $formData['nom'];
         $_SESSION['prenom'] = $formData['prenom'];
         $_SESSION['pseudo'] = $formData['pseudo'];
