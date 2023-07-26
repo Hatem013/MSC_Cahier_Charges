@@ -26,3 +26,9 @@
 .dropdown-toggle {
     background-color: #24BDBD!important;
 }
+
+
+.headerTaille:hover, .headerMobileTaille:hover {
+    transform: scale(1.2);
+    transition-duration: 0.8s;
+}
