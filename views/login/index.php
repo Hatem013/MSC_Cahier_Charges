@@ -69,8 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ($user) {
           // Vérifier si le mot de passe saisi correspond au mot de passe haché dans la base de données
           if (password_verify($formData['password'], $user->password)) {
-              // Authentification réussie, définir les variables de session pour l'ID de l'utilisateur et son pseudo
-              $_SESSION['client_id'] = $user->id; // Assurez-vous que la colonne dans votre base de données s'appelle "id"
+           
+              $_SESSION['client_id'] = $user->id; 
               $_SESSION['pseudo'] = $user->pseudo;
               // Rediriger l'utilisateur vers le dashboard ou toute autre page appropriée
               header("Location: http://localhost/MSC-1/dashboard");
