@@ -45,45 +45,46 @@ function validateForm($formData) {
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Valider les données du formulaire
-  $formData = validateForm($_POST);
+    // Valider les données du formulaire
+    $formData = validateForm($_POST);
 
-  // S'il n'y a pas d'erreurs de validation, vérifier les informations de connexion
-  if (empty($formData['errors'])) {
-      $clientModel = new ClientModel();
-      $clientModel->getConnexion(); // Assurez-vous que la méthode getConnexion() se connecte à la base de données
-      
-      // Nettoyer et valider l'identifiant (email ou pseudo) avec FILTER_SANITIZE_EMAIL
-      $cleanedIdentifiant = filter_var($formData['identifiant'], FILTER_SANITIZE_EMAIL);
+    // S'il n'y a pas d'erreurs de validation, vérifier les informations de connexion
+    if (empty($formData['errors'])) {
+        $clientModel = new ClientModel();
+        $clientModel->getConnexion();
 
-      // Rechercher l'utilisateur par identifiant (email ou pseudo) dans la base de données
-      if (filter_var($cleanedIdentifiant, FILTER_VALIDATE_EMAIL)) {
-          // Rechercher l'utilisateur par e-mail dans la base de données
-          $user = $clientModel->getUserByEmail($cleanedIdentifiant);
-      } else {
-          // Rechercher l'utilisateur par pseudo dans la base de données
-          $user = $clientModel->getUserByPseudo($cleanedIdentifiant);
-      }
+        // Nettoyer et valider l'identifiant (email ou pseudo) avec FILTER_SANITIZE_EMAIL
+        $cleanedIdentifiant = filter_var($formData['identifiant'], FILTER_SANITIZE_EMAIL);
 
-      // Vérifier si l'utilisateur a été trouvé dans la base de données
-      if ($user) {
-          // Vérifier si le mot de passe saisi correspond au mot de passe haché dans la base de données
-          if (password_verify($formData['password'], $user->password)) {
-           
-              $_SESSION['client_id'] = $user->id; 
-              $_SESSION['pseudo'] = $user->pseudo;
-              // Rediriger l'utilisateur vers le dashboard ou toute autre page appropriée
-              header("Location: http://localhost/MSC-1/dashboard");
-              exit();
-          } else {
-              // Mot de passe incorrect
-              $formData['errors']['password'] = 'Mot de passe incorrect';
-          }
-      } else {
-          // Utilisateur non trouvé dans la base de données
-          $formData['errors']['identifiant'] = 'Identifiant invalide';
-      }
-  }
+        // Rechercher l'utilisateur par identifiant (email ou pseudo) dans la base de données
+        if (filter_var($cleanedIdentifiant, FILTER_VALIDATE_EMAIL)) {
+            // Rechercher l'utilisateur par e-mail dans la base de données
+            $user = $clientModel->getUserByEmail($cleanedIdentifiant);
+        } else {
+            // Rechercher l'utilisateur par pseudo dans la base de données
+            $user = $clientModel->getUserByPseudo($cleanedIdentifiant);
+        }
+
+        // Vérifier si l'utilisateur a été trouvé dans la base de données
+        if ($user) {
+            // Vérifier si le mot de passe saisi correspond au mot de passe haché dans la base de données
+            if (password_verify($formData['password'], $user->password)) {
+                // Mot de passe correct
+
+                $_SESSION['client_id'] = $user->id;
+                $_SESSION['pseudo'] = $user->pseudo;
+                // Rediriger l'utilisateur vers le dashboard ou toute autre page appropriée
+                header("Location: http://localhost/MSC-1/dashboard");
+                exit();
+            } else {
+                // Mot de passe incorrect
+                $formData['errors']['password'] = 'Mot de passe incorrect';
+            }
+        } else {
+            // Utilisateur non trouvé dans la base de données
+            $formData['errors']['identifiant'] = 'Identifiant invalide';
+        }
+    }
 }
 ?>
 
