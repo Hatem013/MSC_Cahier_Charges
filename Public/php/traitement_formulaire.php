@@ -1,4 +1,3 @@
-
 <?php
 //Formulaire 1
 class ClientModel extends Model
@@ -21,7 +20,7 @@ class ClientModel extends Model
         $stmt = $this->connexion->prepare($sql);
         $stmt->execute([$client_id, $nom, $email, $telephone, $adresse, $message, $secteur, $logoPathString]);
     }
-    public function insertClient($typesite, $nombreCouleurs, $couleur1, $couleur2, $couleur3)
+    public function insertClientSite($typesite, $nombreCouleurs, $couleur1, $couleur2, $couleur3)
     {
         $sql = "INSERT INTO sites (type_site, nombre_couleur, couleur1, couleur2, couleur3) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connexion->prepare($sql);
@@ -225,7 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si le formulaire ne contient pas d'erreurs, insérer les données dans la base de données
     if (empty($formErrors)) {
         try {
-            $clientModel->insertClient($typesite, $nombreCouleurs, $couleur1, $couleur2, $couleur3);
+            $clientModel->insertClientSite($typesite, $nombreCouleurs, $couleur1, $couleur2, $couleur3);
 
             $_SESSION['type_site'] = $typesite;
             $_SESSION['nombre-couleurs'] = $nombreCouleurs;
@@ -285,4 +284,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-?>
+
