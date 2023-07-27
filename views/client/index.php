@@ -4,6 +4,7 @@ session_start();
 // Inclure les fichiers d'en-tête et de pied de page
 include_once ROOT . 'views/home/header.php';
 include_once ROOT . 'views/home/footer.php';
+include_once ROOT . 'views/home/form_step.php';
 require_once ROOT . 'App/Model.php';
 require_once ROOT . 'Public/php/traitement_formulaire.php';
 ?>
@@ -16,7 +17,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
     <form method="post" action="">
 
         <!-- Formulaire 1-->
-        <div id="formulaire1" class="container">
+        <div id="formulaire1" class="container ">
             <div class="row">
 
                 <div class="container text-center mt-4">
@@ -177,7 +178,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                             </div>
 
                             <div class="row p-2">
-                                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                                <button type="button" id="formulaire1_btn" class="btn my-3">Passer à l'étape suivante</button>
                             </div>
                         </div>
                     </div>
@@ -191,7 +192,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
             <div class="container text-center mt-4 mb-5">
                 <h1 class="mb-4">Information concernant votre entreprise</h1>
                 <p>
-                    <?php echo 'Bonjour ' . $_SESSION['pseudo'] ?> veuillez rentrer les informations concernant votre
+                    Veuillez rentrer les informations concernant votre
                     entreprise afin de faciliter la création de votre site.
                 </p>
             </div>
@@ -230,7 +231,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
 
 
                         <!-- Nom -->
-                        <div class="testing">
+                        <div class="container">
                             <div class="row my-3">
                                 <div class="col-6">
                                     <div class="form-group ">
@@ -274,6 +275,10 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                                 <label for="secteur_ent">Secteur d'activité :</label>
                                 <input type="text" class="form-control" id="secteur_ent" name="secteur_ent" required>
                             </div>
+
+                            <div class="row p-2">
+                                <button type="button" id="formulaire2_btn" class="btn my-3">Passer à l'étape suivante</button>
+                            </div>
                         </div>
 
                         <div>
@@ -288,7 +293,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
         </div>
 
         <!-- Formulaire 3-->
-        <div id="formulaire3" class="container ">
+        <div id="formulaire3" class="container d-none ">
 
             <div class="container text-center mt-4 mb-5">
                 <h1>Suite du formulaire</h1>
@@ -435,18 +440,9 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                     </div>
 
                     <div class="row p-2">
-                        <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                        <button type="button" id="formulaire3_btn" class="btn my-3">Passer à l'étape suivante</button>
                     </div>
                 </div>
-
-
-
-                <div class="row p-2">
-                    <button type="button" class="btn my-3">Passer à l'étape suivante</button>
-                </div>
-
-
-
 
             </div>
         </div>
@@ -587,7 +583,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
             </div>
 
             <div class="row p-2">
-                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                <button type="button" id="formulaire4_btn" class="btn my-3">Passer à l'étape suivante</button>
             </div>
 
 
@@ -670,7 +666,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
             </div>
 
             <div class="row p-2">
-                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                <button type="button" id="formulaire5_btn" class="btn my-3">Passer à l'étape suivante</button>
             </div>
 
         </div>
@@ -734,15 +730,15 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                 </div>
 
                 <div class="row p-2">
-                    <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                    <button type="button" id="formulaire6_btn" class="btn my-3">Passer à l'étape suivante</button>
                 </div>
             </div>
 
         
         </div> -->
 
-        <div class="row p-2 ">
-            <button type="submit" class="btn my-3">Envoyer le formulaire -></button>
+        <div class="row p-2 d-none" id="form_btn">
+            <button type="submit"  class="btn my-3">Envoyer le formulaire -></button>
         </div>
     </form>
 </div>
@@ -753,6 +749,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
 <script src="./Public/js/progress.js"></script>
+<script src="./Public/js/formulaire_event.js"></script>
 <script src="./Public/js/header_form.js"></script>
 <script src="./Public/js/coloris.min.js"></script>
 <script src="./Public/js/color_logo_form.js"></script>
