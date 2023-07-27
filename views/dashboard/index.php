@@ -1,10 +1,8 @@
 <?php
-
-include_once ROOT.'views/home/header.php';
-include_once ROOT.'views/home/footer.php';
-require_once ROOT.'App/Model.php';
+include_once ROOT . 'views/home/header.php';
+include_once ROOT . 'views/home/footer.php';
+require_once ROOT . 'App/Model.php';
 session_start();
-
 
 // Fonction pour déconnecter l'utilisateur
 function deconnexion() {
@@ -20,7 +18,7 @@ function deconnexion() {
 }
 
 // Vérifier si l'utilisateur est connecté avant d'afficher le contenu de la page
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_pseudo'])) {
+if (!isset($_SESSION['client_id']) || !isset($_SESSION['pseudo'])) {
     // Rediriger vers la page de connexion (ou toute autre page appropriée)
     header("Location: http://localhost/MSC-1/login");
     exit();
@@ -31,8 +29,9 @@ if (isset($_POST['logout'])) {
     deconnexion();
 }
 ?>
+
 <div class="container mt-5">
-    <h1 class="text-center">Bienvenue <?php echo htmlspecialchars($_SESSION['user_pseudo']); ?></h1>
+    <h1 class="text-center">Bienvenue <?php echo htmlspecialchars($_SESSION['pseudo']); ?></h1>
 
     <div class="row mt-5">
         <!-- Bouton "Créer site" -->
