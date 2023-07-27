@@ -341,7 +341,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                     </div>
 
                     <!-- Selection de couleur -->
-                    <div class="form-group mb-4" >
+                    <div class="form-group mb-4">
                         <label class="mb-2" for="nombre-couleurs">Faites glisser la barre ci-dessous pour choisir le
                             nombre et les couleurs de votre site</label>
                         <input type="range" class="form-range" name="nombre-couleurs" id="nombre-couleurs" min="0"
@@ -450,238 +450,236 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
 
             </div>
         </div>
-</div>
 
-<!-- Formulaire 4-->
-<div id="formulaire4" class="container d-none">
-    <div class="container text-center mt-4 mb-5">
-        <h1>Suite du formulaire</h1>
-        <h2>Entrez les différentes informations pour un site plus personnel</h2>
-    </div>
+        <!-- Formulaire 4-->
+        <div id="formulaire4" class="container d-none">
+            <div class="container text-center mt-4 mb-5">
+                <h1>Suite du formulaire</h1>
+                <h2>Entrez les différentes informations pour un site plus personnel</h2>
+            </div>
 
-    <ul class="progressbar">
-        <li <?php if ($_SESSION['currentStep'] == 1) {
-            echo 'class="active"';
-        } ?>><img src="./Public/asset/svg/one.svg"
-                class="logo_previous_progress"></li>
-        <li class="progressed"> ------✔️----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 2) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a>
-        </li>
-        <li class="progressed"> ------✔️----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 3) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a>
-        </li>
-        <li class="progressed"> ------✔️----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 4) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_current_progress"></a>
-        </li>
-        <li class="in_progress"> ------🚧----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 5) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-        <li class="in_progress"> ----------- </li>
-        <li <?php if ($_SESSION['currentStep'] == 6) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-    </ul>
+            <ul class="progressbar">
+                <li <?php if ($_SESSION['currentStep'] == 1) {
+                    echo 'class="active"';
+                } ?>><img   src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 2) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a>
+                </li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 3) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a>
+                </li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 4) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_current_progress"></a>
+                </li>
+                <li class="in_progress"> ------🚧----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 5) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+                <li class="in_progress"> ----------- </li>
+                <li <?php if ($_SESSION['currentStep'] == 6) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+            </ul>
 
 
 
 
-    <!-- Header ordinateur-->
-    <div class="row mb-3" id="header_desktop_div">
-        <div class="col-3 p-5">
-            <p>
-                <button class="btn" id="header_desktop_btn" type="button"
-                    onclick="desktopMenuDisplay();setTimeout(() => { window.scrollTo(0,250);}, 230);">
-                    Selectionnez votre header sur ordinateur
-                </button>
-            </p>
-        </div>
+            <!-- Header ordinateur-->
+            <div class="row mb-3" id="header_desktop_div">
+                <div class="col-3 p-5">
+                    <p>
+                        <button class="btn" id="header_desktop_btn" type="button"
+                            onclick="desktopMenuDisplay();setTimeout(() => { window.scrollTo(0,250);}, 230);">
+                            Selectionnez votre header sur ordinateur
+                        </button>
+                    </p>
+                </div>
 
-        <div class="col-6 d-none justify-content-center p-5 text-center" id="header_desktop_preview">
-            <img id="header_desktop_preview_img" src="">
-        </div>
+                <div class="col-6 d-none justify-content-center p-5 text-center" id="header_desktop_preview">
+                    <img id="header_desktop_preview_img" src="">
+                </div>
 
-        <div class="col-6 d-none" id="header_desktop_selection_display" style="min-height: 120px;">
-            <div class="collapse collapse-horizontal" id="collapseHeader">
-                <div class="card card-body" id="header_desktop_card">
+                <div class="col-6 d-none" id="header_desktop_selection_display" style="min-height: 120px;">
+                    <div class="collapse collapse-horizontal" id="collapseHeader">
+                        <div class="card card-body" id="header_desktop_card">
 
-                    <?php
-                    $imageFolder = "./Public/asset/image/";
+                            <?php
+                            $imageFolder = "./Public/asset/image/";
 
-                    for ($i = 1; $i <= 6; $i++) {
-                        $image1Name = "frameh" . $i . ".svg";
-                        $image1Path = $imageFolder . $image1Name;
+                            for ($i = 1; $i <= 6; $i++) {
+                                $image1Name = "frameh" . $i . ".svg";
+                                $image1Path = $imageFolder . $image1Name;
 
-                        // Affichage des 3 dernières images dans une div séparée
-                    
-                        echo '<div class="container header_desktop">';
-                        echo '<div class="row">';
+                                // Affichage des 3 dernières images dans une div séparée
+                            
+                                echo '<div class="container header_desktop">';
+                                echo '<div class="row">';
 
-                        echo '<label for="header' . $i . '">';
-                        echo '<input type="radio" class="form-check-input header_input" id="header' . $i . '" name="header" value="' . $image1Path . '">';
-                        echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
-                        echo '</label>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                    ?>
+                                echo '<label for="header' . $i . '">';
+                                echo '<input type="radio" class="form-check-input header_input" id="header' . $i . '" name="header" value="' . $image1Path . '">';
+                                echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
+                                echo '</label>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                            ?>
 
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Header mobile -->
-    <div class="row d-none" id="header_mobile_div">
-        <div class="col-3 p-5">
-            <p>
-                <button class="btn btn-primary" id="header_mobile_btn" type="button" onclick="mobileMenuDisplay()">
-                    Selectionnez l'affichage sur mobile et tablette
-                </button>
-            </p>
-        </div>
-
-
-        <div class="col-6 d-none justify_content_center text-center" id="header_mobile_preview">
-            <img id="header_mobile_preview_img" src="">
-        </div>
-
-        <div class="col-6 d-none" id="header_mobile_selection_display" style="min-height: 120px;">
-            <div class="collapse collapse-horizontal" id="collapseHeaderMobile">
-                <div class="card card-body" id="header_mobile_card">
-                    <div class="row">
-                        <?php
-                        $imageFolder = "./Public/asset/image/";
+            <!-- Header mobile -->
+            <div class="row d-none" id="header_mobile_div">
+                <div class="col-3 p-5">
+                    <p>
+                        <button class="btn btn-primary" id="header_mobile_btn" type="button"
+                            onclick="mobileMenuDisplay()">
+                            Selectionnez l'affichage sur mobile et tablette
+                        </button>
+                    </p>
+                </div>
 
 
+                <div class="col-6 d-none justify_content_center text-center" id="header_mobile_preview">
+                    <img id="header_mobile_preview_img" src="">
+                </div>
 
-                        for ($i = 7; $i <= 10; $i++) {
-                            $image1Name = "framehm" . $i . ".svg";
-                            $image1Path = $imageFolder . $image1Name;
+                <div class="col-6 d-none" id="header_mobile_selection_display" style="min-height: 120px;">
+                    <div class="collapse collapse-horizontal" id="collapseHeaderMobile">
+                        <div class="card card-body" id="header_mobile_card">
+                            <div class="row">
+                                <?php
+                                $imageFolder = "./Public/asset/image/";
 
-                            // Affichage des 3 dernières images dans une div séparée
-                        
 
+
+                                for ($i = 7; $i <= 10; $i++) {
+                                    $image1Name = "framehm" . $i . ".svg";
+                                    $image1Path = $imageFolder . $image1Name;
+
+                                    // Affichage des 3 dernières images dans une div séparée
+                                
 
 
 
 
-                            echo '<label class="col-3" for="header_mobile' . $i . '">';
-                            echo '<input type="radio" class="form-check-input header_mobile_input"  id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '">';
-                            echo '<img class="headerMobileTaille img-fluid" src="' . $image1Path . '" alt="Header_mobile ' . $i . '">';
-                            echo '</label>';
-                        }
-                        ?>
+
+                                    echo '<label class="col-3" for="header_mobile' . $i . '">';
+                                    echo '<input type="radio" class="form-check-input header_mobile_input"  id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '">';
+                                    echo '<img class="headerMobileTaille img-fluid" src="' . $image1Path . '" alt="Header_mobile ' . $i . '">';
+                                    echo '</label>';
+                                }
+                                ?>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
 
-        </div>
-    </div>
-
-    <div class="row p-2">
-        <button type="button" class="btn my-3">Passer à l'étape suivante</button>
-    </div>
-
-
-
-</div>
-
-<!-- Formulaire 5-->
-<div id="formulaire5" class="container d-none">
-    <div class="container text-center mt-4 mb-5">
-        <h1>Suite du formulaire</h1>
-        <h2>Entrez les différentes informations pour un site plus personnel</h2>
-    </div>
-    <ul class="progressbar">
-        <li <?php if ($_SESSION['currentStep'] == 1) {
-            echo 'class="active"';
-        } ?>><img src="./Public/asset/svg/one.svg"
-                class="logo_previous_progress"></li>
-        <li class="progressed"> ------✔️----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 2) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a>
-        </li>
-        <li class="progressed"> ------✔️----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 3) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a>
-        </li>
-        <li class="progressed"> ------✔️----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 4) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_previous_progress"></a>
-        </li>
-        <li class="progressed"> ------✔️----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 5) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_current_progress"></a>
-        </li>
-        <li class="in_progress"> ------🚧----- </li>
-        <li <?php if ($_SESSION['currentStep'] == 6) {
-            echo 'class="active"';
-        } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-    </ul>
-
-    <h1>Suite du formulaire</h1>
-    <h2>Choisissez un type de footer</h2>
-    <div class="row">
-        <div class="row">
-            <div class="row">
-                <?php
-
-                $imageFolder = "./Public/asset/image/";
-                for ($i = 1; $i <= 9; $i += 2) {
-                    $image1Name = "framef" . $i . ".svg";
-                    $image2Name = "framef" . ($i + 1) . ".svg";
-                    $image1Path = $imageFolder . $image1Name;
-                    $image2Path = $imageFolder . $image2Name;
-
-                    echo '<div class="col-md-6">';
-                    echo '<label for="footer' . $i . '">';
-                    echo '<input type="radio" id="footer' . $i . '" name="footer" value="' . $image1Path . '">';
-                    echo '<img class="footerTaille img-fluid" src="' . $image1Path . '" alt="Footer ' . $i . '">';
-                    echo '</label>';
-
-                    // Vérifie si l'image suivante existe
-                    if (file_exists($image2Path)) {
-                        echo '<label for="footer' . ($i + 1) . '">';
-                        echo '<input type="radio" id="footer' . ($i + 1) . '" name="footer" value="' . $image2Path . '">';
-                        echo '<img class="footerTaille img-fluid" src="' . $image2Path . '" alt="Footer ' . ($i + 1) . '">';
-                        echo '</label>';
-                    }
-
-                    echo '</div>';
-                }
-                ?>
-
-
-
+            <div class="row p-2">
+                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
             </div>
+
+
+
         </div>
 
-    </div>
-
-    <div class="row p-2">
-        <button type="button" class="btn my-3">Passer à l'étape suivante</button>
-    </div>
-
-</div>
-
-<!-- Formulaire 6
-        <div id="formulaire6" class="container">
+        <!-- Formulaire 5-->
+        <div id="formulaire5" class="container d-none">
             <div class="container text-center mt-4 mb-5">
-                <h1>Choisissez votre palette de couleurs</h1>
+                <h1>Suite du formulaire</h1>
+                <h2>Entrez les différentes informations pour un site plus personnel</h2>
+            </div>
+            <ul class="progressbar">
+                <li <?php if ($_SESSION['currentStep'] == 1) {
+                    echo 'class="active"';
+                } ?>><img               src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 2) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a>
+                </li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 3) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a>
+                </li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 4) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_previous_progress"></a>
+                </li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 5) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_current_progress"></a>
+                </li>
+                <li class="in_progress"> ------🚧----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 6) {
+                    echo 'class="active"';
+                } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+            </ul>
 
+            <h1>Suite du formulaire</h1>
+            <h2>Choisissez un type de footer</h2>
+            <div class="row">
+                <div class="row">
+                    <div class="row">
+                        <?php
+
+                        $imageFolder = "./Public/asset/image/";
+                        for ($i = 1; $i <= 9; $i += 2) {
+                            $image1Name = "framef" . $i . ".svg";
+                            $image2Name = "framef" . ($i + 1) . ".svg";
+                            $image1Path = $imageFolder . $image1Name;
+                            $image2Path = $imageFolder . $image2Name;
+
+                            echo '<div class="col-md-6">';
+                            echo '<label for="footer' . $i . '">';
+                            echo '<input type="radio" id="footer' . $i . '" name="footer" value="' . $image1Path . '">';
+                            echo '<img class="footerTaille img-fluid" src="' . $image1Path . '" alt="Footer ' . $i . '">';
+                            echo '</label>';
+
+                            // Vérifie si l'image suivante existe
+                            if (file_exists($image2Path)) {
+                                echo '<label for="footer' . ($i + 1) . '">';
+                                echo '<input type="radio" id="footer' . ($i + 1) . '" name="footer" value="' . $image2Path . '">';
+                                echo '<img class="footerTaille img-fluid" src="' . $image2Path . '" alt="Footer ' . ($i + 1) . '">';
+                                echo '</label>';
+                            }
+
+                            echo '</div>';
+                        }
+                        ?>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row p-2">
+                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+            </div>
+
+        </div>
+
+        <!-- Formulaire 6
+        <div id="formulaire6" class="container">
+    <div class="container text-center mt-4 mb-5">
+        <h1>Choisissez votre palette de couleurs</h1>
+        
                 <div class="container row mt-5 mb-5">
                     <div class="color-palettes col-md-12 mt-5">
                         <?php
@@ -743,11 +741,12 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
         
         </div> -->
 
-<div class="row p-2 ">
-    <button type="submit" class="btn my-3">Envoyer le formulaire -></button>
+        <div class="row p-2 ">
+            <button type="submit" class="btn my-3">Envoyer le formulaire -></button>
+        </div>
+    </form>
 </div>
-</form>
-</div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
