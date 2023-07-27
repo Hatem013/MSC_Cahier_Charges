@@ -1,60 +1,13 @@
 <?php
-
-include_once ROOT . 'views/home/header.php';
-include_once ROOT . 'views/home/footer.php';
-?>
-
-<?php
 session_start();
-$_SESSION['currentStep'] = 1;
-require_once ROOT . 'App/Model.php';
 
-class ClientModel extends Model
-{
-    public function insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo)
-    {
+// Inclure les fichiers d'en-tête et de pied de page
+include_once  ROOT . '/views/home/header.php';
+include_once  ROOT . '/views/home/footer.php';
+require_once  ROOT . '/App/Model.php';
+require_once  ROOT . 'Public/php/traitement_formulaire.php';
 
-        $logovalue = ($logo === 'oui') ? 1 : 0;
-        $sql = "INSERT INTO clients (nom, prenom, email, telephone, adresse, profession, secteur, logo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logovalue]);
-    }
-}
-function validateForm($formData)
-{
-    $errors = [];
-
-    if (empty($formData['nom'])) {
-        $errors['nom'] = 'Le champ nom est requis.';
-    }
-
-    if (empty($formData['prenom'])) {
-        $errors['prenom'] = 'Le champ prénom est requis.';
-    }
-
-    if (empty($formData['email']) || !filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = 'Veuillez entrer une adresse email valide.';
-    }
-
-    if (empty($formData['telephone'])) {
-        $errors['telephone'] = 'Le champ téléphone est requis.';
-    }
-    if (empty($formData['adresse'])) {
-        $errors['adresse'] = 'Le champ adresse est requis.';
-    }
-
-    if (empty($formData['profession'])) {
-        $errors['profession'] = 'Le champ profession est requis.';
-    }
-
-    if (empty($formData['secteur'])) {
-        $errors['secteur'] = 'Le champ secteur est requis.';
-    }
-
-    return $errors;
-}
 ?>
-
 <div class="container formulaire">
 
     <div class="container">
@@ -275,15 +228,16 @@ function validateForm($formData)
                                         <label for="nom_ent">Nom commercial</label>
                                         <input type="text" class="form-control" id="nom_ent" name="nom_ent" required>
 
+
                                     </div>
                                 </div>
-
                                 <!-- Email -->
                                 <div class="col-6">
                                     <div class="form-group">
 
                                         <label for="prenom_ent">Adresse email :</label>
                                         <input type="email" class="form-control" id="email_ent" name="email_ent" required>
+
 
                                     </div>
                                 </div>
@@ -302,6 +256,7 @@ function validateForm($formData)
                                     <input type="tel" class="form-control" id="telephone_ent" name="telephone_ent" required>
                                 </div>
                             </div>
+
                             <div class="form-group my-3 col-6">
                                 <label for="secteur_ent">Secteur d'activité :</label>
                                 <input type="text" class="form-control" id="secteur_ent" name="secteur_ent" required>
@@ -319,6 +274,7 @@ function validateForm($formData)
                                     <label id="logo_label_non" class="btn" for="logo_non">Non</label>
                                 </div>
 
+
                                 <!-- Import logo -->
                                 <div id="logo_file_field" style="display: none;">
                                     <div class="form-group my-4">
@@ -331,18 +287,23 @@ function validateForm($formData)
                             </div>
                             <div class="col"><img id="logo_file_preview" src="#" style="width:150px" /></div>
                         </div>
+
                         <!-- Pas de logo -->
+
                         <div id="logo_alert_field" style="display: none;">
                             <div class="form-group my-4">
                                 <p>⚠️ Le logo étant nécessaire, une proposition vous sera faites afin de vous créer un logo personnalisé ⚠️</p>
                             </div>
                         </div>
 
+
                         <!-- Preview du logo si importé -->
+
                         <script>
                             if (logo_file.files.length == 0) {
                                 logo_file_preview.style.display = "none"
                             }
+
 
                             logo_file.onchange = evt => {
                                 const [file] = logo_file.files
@@ -606,6 +567,7 @@ function validateForm($formData)
         </form>
     </div>
 
+
     <div class="container">
         <div class="container text-center mt-4 mb-5">
             <h1>Suite du formulaire</h1>
@@ -643,6 +605,7 @@ function validateForm($formData)
                 <div class="row">
                     <div class="row">
                         <?php
+
                         $imageFolder = "./Public/asset/image/";
                         for ($i = 1; $i <= 9; $i += 2) {
                             $image1Name = "framef" . $i . ".svg";
