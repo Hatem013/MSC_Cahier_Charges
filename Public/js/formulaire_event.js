@@ -16,7 +16,9 @@ const formulaires_btn = [
 
 for (let i = 0; i <= formulaires_btn.length; i++) {
   formulaires_btn[i].addEventListener("click", showNextForm);
-}
+};
+
+
 
 function showNextForm() {
   var name = this.id.slice(0, 10);
@@ -24,8 +26,19 @@ function showNextForm() {
   var next_number = parseInt(number) + 1;
   var completed_form = document.getElementById(name + number);
   var next_form = document.getElementById(name + next_number);
+  var completed_form_input = completed_form.getElementsByTagName("input");
 
-  completed_form.classList.add("d-none");
+
+  for (var i = 0; i <= completed_form_input.length -1; i++) {
+    if (!completed_form_input[i].value == '') {
+        var reponse = "oui"
+ } else {
+        var reponse = "non"
+ }
+ } 
+
+ if (reponse == "oui") {
+     completed_form.classList.add("d-none");
 
   if (next_number <= formulaires.length) {
       next_form.classList.remove("d-none");
@@ -33,6 +46,11 @@ function showNextForm() {
   } else {
     document.getElementById("form_btn").classList.remove("d-none");
   }
+ } else {
+    console.log("non")
+ }
+  
 
-}
+};
+
 
