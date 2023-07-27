@@ -2,56 +2,61 @@
 session_start();
 
 // Inclure les fichiers d'en-tête et de pied de page
-include_once  ROOT . '/views/home/header.php';
-include_once  ROOT . '/views/home/footer.php';
-require_once  ROOT . '/App/Model.php';
+include_once  ROOT . 'views/home/header.php';
+include_once  ROOT . 'views/home/footer.php';
+require_once  ROOT . 'App/Model.php';
 require_once  ROOT . 'Public/php/traitement_formulaire.php';
-
 ?>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link href="./Public/css/main.css" rel="stylesheet" type="text/css">
+<link href="./Public/css/coloris.min.css" rel="stylesheet"/>
 <div class="container formulaire">
+    <form method="post" action="">
 
-    <div class="container">
-        <div class="row">
+        <!-- Formulaire 1-->
+        <div id="formulaire1" class="container">
+            <div class="row">
 
-            <div class="container text-center mt-4">
-                <h1 class="mb-5">Création de votre site</h1>
-            </div>
+                <div class="container text-center mt-4">
+                    <h1 class="mb-5">Création de votre site</h1>
+                </div>
 
-            <ul class="progressbar">
-                <li <?php if ($_SESSION['currentStep'] == 1) {
-                        echo 'class="active"';
-                    } ?>><img src="./Public/asset/svg/one.svg" class="logo_current_progress"></li>
-                <li class="in_progress"> -----🚧----- </li>
-                <li <?php if ($_SESSION['currentStep'] == 2) {
-                        echo 'class="active"';
-                    } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_progress"></a></li>
-                <li class="in_progress"> ----------- </li>
-                <li <?php if ($_SESSION['currentStep'] == 3) {
-                        echo 'class="active"';
-                    } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
-                <li class="in_progress"> ----------- </li>
-                <li <?php if ($_SESSION['currentStep'] == 4) {
-                        echo 'class="active"';
-                    } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
-                <li class="in_progress"> ----------- </li>
-                <li <?php if ($_SESSION['currentStep'] == 5) {
-                        echo 'class="active"';
-                    } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-                <li class="in_progress"> ----------- </li>
-                <li <?php if ($_SESSION['currentStep'] == 6) {
-                        echo 'class="active"';
-                    } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-            </ul>
+                <ul class="progressbar">
+                    <li <?php if ($_SESSION['currentStep'] == 1) {
+                            echo 'class="active"';
+                        } ?>><img src="./Public/asset/svg/one.svg" class="logo_current_progress"></li>
+                    <li class="in_progress"> -----🚧----- </li>
+                    <li <?php if ($_SESSION['currentStep'] == 2) {
+                            echo 'class="active"';
+                        } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_progress"></a></li>
+                    <li class="in_progress"> ----------- </li>
+                    <li <?php if ($_SESSION['currentStep'] == 3) {
+                            echo 'class="active"';
+                        } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
+                    <li class="in_progress"> ----------- </li>
+                    <li <?php if ($_SESSION['currentStep'] == 4) {
+                            echo 'class="active"';
+                        } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
+                    <li class="in_progress"> ----------- </li>
+                    <li <?php if ($_SESSION['currentStep'] == 5) {
+                            echo 'class="active"';
+                        } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+                    <li class="in_progress"> ----------- </li>
+                    <li <?php if ($_SESSION['currentStep'] == 6) {
+                            echo 'class="active"';
+                        } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+                </ul>
 
-            <div class="container">
+                <div class="container">
 
-                <!-- Container formulaire-->
-                <div class="row justify-content-center">
+                    <!-- Container formulaire-->
+                    <div class="row justify-content-center">
 
-                    <div class="col-md-8">
-                        <p class="text-center mb-5">Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>
-                        <!-- Formulaire -->
-                        <form method="post" action="">
+                        <div class="col-md-8">
+                            <p class="text-center mb-5">Vous avez un projet de site internet ? Renseignez vos informations nous nous occupons du reste.</p>
+                            <!-- Formulaire -->
+
 
                             <!-- Nom et prénom -->
                             <div class="row my-3">
@@ -118,106 +123,105 @@ require_once  ROOT . 'Public/php/traitement_formulaire.php';
                                 </div>
                             </div>
 
-                            <!-- Bouton d'envoie -->
-                            <div class="row p-2 ">
-                                <button type="submit" class="btn my-3">Étape suivante -></button>
-                            </div>
-                        </form>
 
-                        <!-- Message d'erreur -->
-                        <div>
 
-                            <?php
-                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                $clientModel = new ClientModel();
-                                $clientModel->getConnexion();
+                            <!-- Message d'erreur -->
+                            <div>
 
-                                $formErrors = validateForm($_POST);
+                                <?php
+                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                    $clientModel = new ClientModel();
+                                    $clientModel->getConnexion();
 
-                                if (empty($formErrors)) {
-                                    $nom = $_POST['nom'];
-                                    $prenom = $_POST['prenom'];
-                                    $email = $_POST['email'];
-                                    $telephone = $_POST['telephone'];
-                                    $adresse = $_POST['adresse'];
-                                    $profession = $_POST['profession'];
-                                    $secteur = $_POST['secteur'];
-                                    $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
+                                    $formErrors = validateForm($_POST);
 
-                                    try {
-                                        $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
+                                    if (empty($formErrors)) {
+                                        $nom = $_POST['nom'];
+                                        $prenom = $_POST['prenom'];
+                                        $email = $_POST['email'];
+                                        $telephone = $_POST['telephone'];
+                                        $adresse = $_POST['adresse'];
+                                        $profession = $_POST['profession'];
+                                        $secteur = $_POST['secteur'];
+                                        $logo = isset($_POST['logo']) ? $_POST['logo'] : '';
 
-                                        $_SESSION['nom'] = $nom;
-                                        $_SESSION['prenom'] = $prenom;
-                                        $_SESSION['email'] = $email;
-                                        $_SESSION['telephone'] = $telephone;
-                                        $_SESSION['adresse'] = $adresse;
-                                        $_SESSION['profession'] = $profession;
-                                        $_SESSION['secteur'] = $secteur;
-                                        $_SESSION['logo'] = $logo;
+                                        try {
+                                            $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur, $logo);
 
-                                        header("Location: http://localhost/MSC-1/client2");
-                                        exit();
-                                    } catch (PDOException $e) {
-                                        // Affichage d'une erreur en cas de problème avec la base de données
-                                        echo "Erreur : " . $e->getMessage();
-                                    }
-                                } else {
-                                    // Affichage des erreurs de validation
-                                    foreach ($formErrors as $fieldName => $errorMessage) {
-                                        echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
+                                            $_SESSION['nom'] = $nom;
+                                            $_SESSION['prenom'] = $prenom;
+                                            $_SESSION['email'] = $email;
+                                            $_SESSION['telephone'] = $telephone;
+                                            $_SESSION['adresse'] = $adresse;
+                                            $_SESSION['profession'] = $profession;
+                                            $_SESSION['secteur'] = $secteur;
+                                            $_SESSION['logo'] = $logo;
+
+                                            header("Location: http://localhost/MSC-1/client2");
+                                            exit();
+                                        } catch (PDOException $e) {
+                                            // Affichage d'une erreur en cas de problème avec la base de données
+                                            echo "Erreur : " . $e->getMessage();
+                                        }
+                                    } else {
+                                        // Affichage des erreurs de validation
+                                        foreach ($formErrors as $fieldName => $errorMessage) {
+                                            echo "<p>Erreur pour le champ $fieldName : $errorMessage</p>";
+                                        }
                                     }
                                 }
-                            }
-                            ?>
-                        </div>
+                                ?>
+                            </div>
 
+                            <div class="row p-2">
+                                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
 
-    <div class="container">
+        <!-- Formulaire 2-->
+        <div id="formulaire2" class="container d-none">
 
-        <div class="container text-center mt-4 mb-5">
-            <h1 class="mb-4">Information concernant votre entreprise</h1>
-            <p><?php echo 'Bonjour ' . $_SESSION['pseudo'] ?> veuillez rentrer les informations concernant votre entreprise afin de faciliter la création de votre site.</p>
-        </div>
-        <ul class="progressbar">
-            <li <?php if ($_SESSION['currentStep'] == 1) {
-                    echo 'class="active"';
-                } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
-            <li class="progressed"> -----✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 2) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_current_progress"></a></li>
-            <li class="in_progress"> -----🚧------ </li>
-            <li <?php if ($_SESSION['currentStep'] == 3) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
-            <li class="in_progress"> ----------- </li>
-            <li <?php if ($_SESSION['currentStep'] == 4) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
-            <li class="in_progress"> ----------- </li>
-            <li <?php if ($_SESSION['currentStep'] == 5) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-            <li class="in_progress"> ----------- </li>
-            <li <?php if ($_SESSION['currentStep'] == 6) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-        </ul>
-        <div class="container">
+            <div class="container text-center mt-4 mb-5">
+                <h1 class="mb-4">Information concernant votre entreprise</h1>
+                <p><?php echo 'Bonjour ' . $_SESSION['pseudo'] ?> veuillez rentrer les informations concernant votre entreprise afin de faciliter la création de votre site.</p>
+            </div>
+            <ul class="progressbar">
+                <li <?php if ($_SESSION['currentStep'] == 1) {
+                        echo 'class="active"';
+                    } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+                <li class="progressed"> -----✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 2) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_current_progress"></a></li>
+                <li class="in_progress"> -----🚧------ </li>
+                <li <?php if ($_SESSION['currentStep'] == 3) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
+                <li class="in_progress"> ----------- </li>
+                <li <?php if ($_SESSION['currentStep'] == 4) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
+                <li class="in_progress"> ----------- </li>
+                <li <?php if ($_SESSION['currentStep'] == 5) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+                <li class="in_progress"> ----------- </li>
+                <li <?php if ($_SESSION['currentStep'] == 6) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+            </ul>
+            <div class="container">
 
-            <!-- Container formulaire-->
-            <div class="row justify-content-center">
-                <div class="col-md-8">
+                <!-- Container formulaire-->
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
 
-                    <!-- Formulaire -->
-                    <form method="post" action="">
+                        <!-- Formulaire -->
+
 
                         <!-- Nom -->
                         <div class="testing">
@@ -322,62 +326,62 @@ require_once  ROOT . 'Public/php/traitement_formulaire.php';
                             <label class="mb-2" for="message_ent">Parlez-nous un peu plus de votre entreprise (Les services que vous proposez, ce que vendez ou créez etc..) :</label>
                             <textarea class="form-control" name="message_ent" id="message_ent" rows="12" required></textarea>
                         </div>
-                </div>
+
+                        <div class="row p-2">
+                            <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                        </div>
+                    </div>
 
 
-                <!-- Bouton d'envoie -->
-                <div class="row p-2 ">
-                    <button type="submit" class="btn my-3">Étape suivante -></button>
-                </div>
-                </form>
 
-                <!-- Message d'erreur -->
-                <div>
-                    <?php
-                    var_dump($_POST);
-                    ?>
 
+
+                    <div>
+                        <?php
+                        var_dump($_POST);
+                        ?>
+
+                    </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <div class="container">
+        <!-- Formulaire 3-->
+        <div id="formulaire3" class="container d-none">
 
-        <div class="container text-center mt-4 mb-5">
-            <h1>Suite du formulaire</h1>
-            <h2>Entrez les différentes informations pour un site plus personnel</h2>
-        </div>
-        <ul class="progressbar">
-            <li <?php if ($_SESSION['currentStep'] == 1) {
-                    echo 'class="active"';
-                } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
-            <li class="progressed"> -----✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 2) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 3) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_current_progress"></a></li>
-            <li class="in_progress"> ------🚧----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 4) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
-            <li class="in_progress"> ----------- </li>
-            <li <?php if ($_SESSION['currentStep'] == 5) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-            <li class="in_progress"> ----------- </li>
-            <li <?php if ($_SESSION['currentStep'] == 6) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-        </ul>
+            <div class="container text-center mt-4 mb-5">
+                <h1>Suite du formulaire</h1>
+                <h2>Entrez les différentes informations pour un site plus personnel</h2>
+            </div>
+            <ul class="progressbar">
+                <li <?php if ($_SESSION['currentStep'] == 1) {
+                        echo 'class="active"';
+                    } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+                <li class="progressed"> -----✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 2) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 3) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_current_progress"></a></li>
+                <li class="in_progress"> ------🚧----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 4) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
+                <li class="in_progress"> ----------- </li>
+                <li <?php if ($_SESSION['currentStep'] == 5) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+                <li class="in_progress"> ----------- </li>
+                <li <?php if ($_SESSION['currentStep'] == 6) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+            </ul>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form method="post" action="">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+
 
                     <!-- Type de site -->
                     <div class="form-group mb-5">
@@ -420,54 +424,54 @@ require_once  ROOT . 'Public/php/traitement_formulaire.php';
                     </div>
 
 
+
                     <div class="row p-2">
-                        <button type="submit" class="btn my-3">Étape suivante -></button>
+                        <button type="button" class="btn my-3">Passer à l'étape suivante</button>
                     </div>
 
 
-                    <?php
-                    var_dump($_POST);
-                    ?>
-                </form>
+
+
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="container">
-        <div class="container text-center mt-4 mb-5">
-            <h1>Suite du formulaire</h1>
-            <h2>Entrez les différentes informations pour un site plus personnel</h2>
-        </div>
+        <!-- Formulaire 4-->
+        <div id="formulaire4" class="container d-none">
+            <div class="container text-center mt-4 mb-5">
+                <h1>Suite du formulaire</h1>
+                <h2>Entrez les différentes informations pour un site plus personnel</h2>
+            </div>
 
-        <ul class="progressbar">
-            <li <?php if ($_SESSION['currentStep'] == 1) {
-                    echo 'class="active"';
-                } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 2) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 3) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 4) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_current_progress"></a></li>
-            <li class="in_progress"> ------🚧----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 5) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-            <li class="in_progress"> ----------- </li>
-            <li <?php if ($_SESSION['currentStep'] == 6) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-        </ul>
+            <ul class="progressbar">
+                <li <?php if ($_SESSION['currentStep'] == 1) {
+                        echo 'class="active"';
+                    } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 2) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 3) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 4) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_current_progress"></a></li>
+                <li class="in_progress"> ------🚧----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 5) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
+                <li class="in_progress"> ----------- </li>
+                <li <?php if ($_SESSION['currentStep'] == 6) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+            </ul>
 
 
-        <form method="post" action="">
+
 
             <!-- Header ordinateur-->
             <div class="row mb-3" id="header_desktop_div">
@@ -555,50 +559,54 @@ require_once  ROOT . 'Public/php/traitement_formulaire.php';
                                 }
                                 ?>
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
             </div>
 
-            <div class="row p-2 justify-content-center text-center">
-                <div class="col-6"><button type="submit" class="btn my-3">Formulaire suivant</button></div>
+            <div class="row p-2">
+                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
             </div>
 
-        </form>
-    </div>
 
 
-    <div class="container">
-        <div class="container text-center mt-4 mb-5">
-            <h1>Suite du formulaire</h1>
-            <h2>Entrez les différentes informations pour un site plus personnel</h2>
         </div>
-        <ul class="progressbar">
-            <li <?php if ($_SESSION['currentStep'] == 1) {
-                    echo 'class="active"';
-                } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 2) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 3) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 4) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_previous_progress"></a></li>
-            <li class="progressed"> ------✔️----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 5) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_current_progress"></a></li>
-            <li class="in_progress"> ------🚧----- </li>
-            <li <?php if ($_SESSION['currentStep'] == 6) {
-                    echo 'class="active"';
-                } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-        </ul>
-        <form method="post" action="">
+
+        <!-- Formulaire 5-->
+        <div id="formulaire5" class="container d-none">
+            <div class="container text-center mt-4 mb-5">
+                <h1>Suite du formulaire</h1>
+                <h2>Entrez les différentes informations pour un site plus personnel</h2>
+            </div>
+            <ul class="progressbar">
+                <li <?php if ($_SESSION['currentStep'] == 1) {
+                        echo 'class="active"';
+                    } ?>><img src="./Public/asset/svg/one.svg" class="logo_previous_progress"></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 2) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client2" ?>><img src="./Public/asset/svg/two.svg" class="logo_previous_progress"></a></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 3) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client3" ?>><img src="./Public/asset/svg/three.svg" class="logo_previous_progress"></a></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 4) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client4" ?>><img src="./Public/asset/svg/four.svg" class="logo_previous_progress"></a></li>
+                <li class="progressed"> ------✔️----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 5) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client5" ?>><img src="./Public/asset/svg/five.svg" class="logo_current_progress"></a></li>
+                <li class="in_progress"> ------🚧----- </li>
+                <li <?php if ($_SESSION['currentStep'] == 6) {
+                        echo 'class="active"';
+                    } ?>><a href=<?php ROOT . "views/client6" ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
+            </ul>
+
             <h1>Suite du formulaire</h1>
             <h2>Choisissez un type de footer</h2>
             <div class="row">
@@ -631,20 +639,24 @@ require_once  ROOT . 'Public/php/traitement_formulaire.php';
                         }
                         ?>
 
-                        <div class="row p-2">
-                            <button type="submit" class="btn my-3">Formulaire suivant</button>
-                        </div>
+
 
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
 
-    <div class="container">
-        <div class="container text-center mt-4 mb-5">
-            <h1>Choisissez votre palette de couleurs</h1>
-            <form method="post" action="">
+            </div>
+
+            <div class="row p-2">
+                <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+            </div>
+
+        </div>
+
+        <!-- Formulaire 6
+        <div id="formulaire6" class="container">
+            <div class="container text-center mt-4 mb-5">
+                <h1>Choisissez votre palette de couleurs</h1>
+
                 <div class="container row mt-5 mb-5">
                     <div class="color-palettes col-md-12 mt-5">
                         <?php
@@ -685,7 +697,7 @@ require_once  ROOT . 'Public/php/traitement_formulaire.php';
 
                         // Affichage des 3 dernières images dans une div séparée
                     ?>
-                        <div class="row">
+                    <div class="row">
                             <div class="col-md-12">
                             <?php
                             echo '<label for="body' . $i . '">';
@@ -695,17 +707,25 @@ require_once  ROOT . 'Public/php/traitement_formulaire.php';
                         }
                             ?>
                             </div>
-                        </div>
+                    </div>
                 </div>
+
+                <div class="row p-2">
+                    <button type="button" class="btn my-3">Passer à l'étape suivante</button>
+                </div>
+            </div>
+
+        
+        </div> -->
+
+        <div class="row p-2 ">
+            <button type="submit" class="btn my-3">Envoyer le formulaire -></button>
         </div>
-        <div class="row p-2">
-            <button type="submit" class="btn my-3">Formulaire suivant</button>
-        </div>
-        </form>
-    </div>
+    </form>
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="./Public/js/progress.js"></script>
 <script src="./Public/js/header_form.js"></script>
 <script src="./Public/js/coloris.min.js"></script>
