@@ -2,8 +2,8 @@
 
 define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
-require_once(ROOT.'app/Model.php');
-require_once(ROOT.'app/Controller.php');
+require_once(ROOT.'App/Model.php');
+require_once(ROOT.'App/Controller.php');
 
 
 $params = explode('/', $_GET['p']);

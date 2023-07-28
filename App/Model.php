@@ -2,7 +2,7 @@
 
 abstract class Model{
     private $host = "localhost";
-    private $dbname = "msc_msc";
+    private $dbname = "j";
     private $username = "root";
     private $password = "";
 
