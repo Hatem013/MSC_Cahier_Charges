@@ -68,12 +68,10 @@ function showNextForm() {
         window.scrollTo(0, 0);
       }, 230);
 
-      
       formulaires_btn.forEach((button) => Hide(button));
       formulaires.forEach((form) => Show(form));
 
       Show(document.getElementById("form_btn"));
-      
     }
 
     // Sinon ...
