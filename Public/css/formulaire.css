@@ -102,3 +102,11 @@ input[type="radio"] {
 .logo_input_label {
     border: 1px solid white;
 }
+
+#alert_logo {
+  border: 1px solid white; 
+  border-radius: 10px; 
+  padding: 10px; 
+  background-color: yellow; 
+  color:black;
+}

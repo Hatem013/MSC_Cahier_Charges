@@ -293,7 +293,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
         </div>
 
         <!-- Formulaire 3-->
-        <div id="formulaire3" class="container d-none ">
+        <div id="formulaire3" class="container d-none">
 
             <div class="container text-center mt-4 mb-5">
                 <h1>Suite du formulaire</h1>
@@ -359,13 +359,13 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                         <?php for ($i = 1; $i <= 3; $i++) { ?>
                             <div class="row mx-2">
 
-                                <div class="form-group mb-3" id="label_couleur_div<?php echo $i; ?>" style="display: none;">
+                                <div class="form-group mb-3 d-none" id="label_couleur_div<?php echo $i; ?>">
                                     <label class="color_title" id="label_couleur<?php echo $i; ?>"
                                         for="couleur<?php echo $i; ?>">Couleur <?php echo ($i == 1) ? 'principale' : (($i == 2) ? 'secondaire' : 'tertiaire'); ?></label>
                                 </div>
                                 <div class="form-group mb-5">
-                                    <input type="text" data-coloris name="couleur<?php echo $i; ?>"
-                                        id="couleur<?php echo $i; ?>" style="display: none;">
+                                    <input type="text" data-coloris class="d-none" name="couleur<?php echo $i; ?>"
+                                        id="couleur<?php echo $i; ?>">
 
                                 </div>
 
@@ -380,16 +380,16 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                             <div class="form-group" required>
                                 <label for="logo">Avez-vous un logo ?</label>
                                 <input type="radio" name="logo" id="logo_oui" value="oui"
-                                    onclick="showLogoFields(); logoSelectionValidate()" required>
+                                    onclick="showLogoFields()" required>
                                 <label id="logo_label_oui" class="btn" for="logo_oui">Oui</label>
                                 <input type="radio" name="logo" id="logo_non" value="non"
-                                    onclick="showLogoFields(); logoSelectionValidate()" required>
+                                    onclick="showLogoFields()" required>
                                 <label id="logo_label_non" class="btn" for="logo_non">Non</label>
                             </div>
 
 
                             <!-- Import logo -->
-                            <div id="logo_file_field" style="display: none;">
+                            <div id="logo_file_field" class="d-none">
                                 <div class="form-group my-4">
                                     <label id="logo_import_label" for="logo_file" class="btn">
                                         <i class="fa fa-cloud-upload"></i> Cliquez ici pour importez votre fichier
@@ -403,33 +403,12 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
 
                     <!-- Pas de logo -->
 
-                    <div id="logo_alert_field" style="display: none;">
+                    <div id="logo_alert_field" class="d-none">
                         <div class="form-group my-4">
-                            <p>⚠️ Le logo étant nécessaire, une proposition vous sera faites afin de vous créer un
-                                logo personnalisé ⚠️</p>
+                            <p id="alert_logo"><b><u>Attention</u> :</b> Le logo étant nécessaire, une proposition vous sera faites afin de vous en créer un personnalisé. Le coût de création vous sera ainsi rajouté sur le devis.  </p>
                         </div>
                     </div>
 
-
-                    <!-- Preview du logo si importé -->
-
-                    <script>
-                        if (logo_file.files.length == 0) {
-                            logo_file_preview.style.display = "none"
-                        }
-
-
-                        logo_file.onchange = evt => {
-                            const [file] = logo_file.files
-                            if (file) {
-                                logo_file_preview.src = URL.createObjectURL(file)
-                                logo_file_preview.style.display = "unset"
-                            }
-                            logo_import_label.innerHTML = "Cliquez ici pour modifier votre logo";
-                            logo_import_label.classList.add("btn_validate");
-
-                        }
-                    </script>
 
                     <!-- Message -->
                     <div class="form-group my-3">
@@ -502,7 +481,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                 </div>
 
                 <div class="col-6 d-none" id="header_desktop_selection_display" style="min-height: 120px;">
-                    <div class="collapse collapse-horizontal" id="collapseHeader">
+                    <div class="collapse" id="collapseHeader">
                         <div class="card card-body" id="header_desktop_card">
 
                             <?php
@@ -548,7 +527,7 @@ require_once ROOT . 'Public/php/traitement_formulaire.php';
                 </div>
 
                 <div class="col-6 d-none" id="header_mobile_selection_display" style="min-height: 120px;">
-                    <div class="collapse collapse-horizontal" id="collapseHeaderMobile">
+                    <div class="collapse" id="collapseHeaderMobile">
                         <div class="card card-body" id="header_mobile_card">
                             <div class="row">
                                 <?php

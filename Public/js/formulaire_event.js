@@ -14,43 +14,61 @@ const formulaires_btn = [
   document.getElementById("formulaire5_btn"),
 ];
 
-for (let i = 0; i <= formulaires_btn.length; i++) {
-  formulaires_btn[i].addEventListener("click", showNextForm);
-};
+const formulaire1_input = [
+
+]
+
+
+// On automatise l'affichage des prochain formulaire en fonction du nombre de formulaires dans la const
+
+  formulaires_btn.forEach(button =>button.addEventListener("click", showNextForm));
+
 
 
 
 function showNextForm() {
-  var name = this.id.slice(0, 10);
-  var number = this.id.slice(10, 11);
-  var next_number = parseInt(number) + 1;
-  var completed_form = document.getElementById(name + number);
-  var next_form = document.getElementById(name + next_number);
-  var completed_form_input = completed_form.getElementsByTagName("input");
+
+  // On récupere l'id du bouton du formulaire en cours
+  let name = this.id.slice(0, 10);
+  let number = this.id.slice(10, 11);
+  
+  // On récupere le formulaire en cours grâce à l'id du bouton
+  let completed_form = document.getElementById(name + number);
+ 
+  // Recupere tout les input du formulaire en cours
+  let completed_form_input = completed_form.getElementsByTagName("input");
+  
+  // Recupere l'id du prochain formulaire
+  let next_number = parseInt(number) + 1;
+  let next_form = document.getElementById(name + next_number);
 
 
-  for (var i = 0; i <= completed_form_input.length -1; i++) {
+  // Vérifie si tous les champs sont remplis dans le formulaire en cours, et on renvoie un booléen
+  for (let i = 0; i <= completed_form_input.length -1; i++) {
     if (!completed_form_input[i].value == '') {
-        var reponse = "oui"
+        var filled = true;
  } else {
-        var reponse = "non"
+        var filled = false;
  }
  } 
 
- if (reponse == "oui") {
-     completed_form.classList.add("d-none");
-
-  if (next_number <= formulaires.length) {
+ // Si tous les champs sont remplis alors on active le script
+ if (filled === true) {
+   
+  // On verifie si le formulaire suivant existe, s'il existe on affiche le formulaire suivant, et s'il n'existe pas on affiche le bouton d'envoie du formulaire
+   if (next_number <= formulaires.length) {
+      completed_form.classList.add("d-none");
       next_form.classList.remove("d-none");
-
   } else {
+    completed_form.classList.add("d-none");
     document.getElementById("form_btn").classList.remove("d-none");
   }
+
+  // Sinon ...
  } else {
     console.log("non")
  }
   
-
 };
 
 

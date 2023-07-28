@@ -1,54 +1,94 @@
-////////////////// Logo ////////////////// 
 
-var logoOui = document.getElementById("logo_oui");
-var logoNon = document.getElementById("logo_non");
-var logoFileField = document.getElementById("logo_file_field");
-var createLogoField = document.getElementById("logo_alert_field");
-var logoFilePreview = document.getElementById("logo_file_preview");
-var logoFile = document.getElementById("logo_file");
+////////////////// Fonction globale ////////////////
+
+function Show(name) {
+  name.classList.remove("d-none");
+}
+
+function Hide(name) {
+  name.classList.add("d-none");
+}
+
+function Validate(name) {
+  name.classList.add("btn_validate");
+}
+
+function Unvalidate(name) {
+  name.classList.remove("btn_validate");
+}
+
+////////////////// Logo //////////////////
+
+const logoOui = document.getElementById("logo_oui");
+const labelOui = document.getElementById("logo_label_oui");
+const logoNon = document.getElementById("logo_non");
+const labelNon = document.getElementById("logo_label_non");
+const logoFileField = document.getElementById("logo_file_field");
+const alertLogoField = document.getElementById("logo_alert_field");
+const logoFilePreview = document.getElementById("logo_file_preview");
+const logoFile = document.getElementById("logo_file");
+const importLabel = document.getElementById("logo_import_label");
 
 // Affiche la preview si "Oui" est sélectionné, sinon affiche le message
 function showLogoFields() {
+  
+  // On vérifie quel bouton a été sélectionné
   if (logoOui.checked) {
-    logoFileField.style.display = "unset";
-    createLogoField.style.display = "none";
+    
+    // Si on a un logo, on affiche l'input file et on le passe en required
+    Show(logoFileField);
     logoFile.required = true;
 
-    if (logoFile.files.length == 0) {
-      logoFilePreview.style.display = "none";
-    } else {
-      logoFilePreview.style.display = "unset";
-    }
+    // On cache le message d'alerte
+    Hide(alertLogoField);
+
+    // On valide le bouton et invalide l'autre
+    Validate(labelOui);
+    Unvalidate(labelNon); 
+
+
+    // Si on n'a pas de logo, on cache l'input file et on le passe en non required
   } else if (logoNon.checked) {
-    logoFileField.style.display = "none";
-
-    createLogoField.style.display = "unset";
-
-    logoFilePreview.style.display = "none";
+    Hide(logoFileField);
+    Hide(logoFilePreview);
 
     logoFile.required = false;
-  }
-}
 
-// Change la couleur du bouton
-function logoSelectionValidate() {
-  var selected = document.querySelector('input[name="logo"]:checked').value;
-  var labelOui = document.getElementById("logo_label_oui");
-  var labelNon = document.getElementById("logo_label_non");
-  var importLabel = document.getElementById("logo_import_label");
+    // On affiche le message d'alerte
+    Show(alertLogoField);
 
-  if (selected == "oui") {
-    labelOui.classList.add("btn_validate");
-    labelNon.classList.remove("btn_validate");
+    // On valide le bouton et invalide les deux autres
+    Validate(labelNon);
+    Unvalidate(labelOui);
+    Unvalidate(importLabel);
+
+    // On update le label du bouton import 
     importLabel.innerHTML = "Cliquez ici pour importer votre logo";
-  } else {
-    labelNon.classList.add("btn_validate");
-    labelOui.classList.remove("btn_validate");
-    importLabel.innerHTML = "Cliquez ici pour modifier votre logo";
-    importLabel.classList.remove("btn_validate");
+
+    // On vide l'input file de tout import 
     logo_file.value = null;
   }
 }
+
+// S'il n'y a pas de fichier, on cache la div preview
+if (logoFile.files.length == 0) {
+  Hide(logoFilePreview);
+}
+
+// Lorsqu'on insère un fichier, on affiche la div preview et on redirige l'src du fichier vers l'src de la preview;
+logoFile.addEventListener("change", () => {
+  const [file] = logoFile.files
+  if (file) {
+      logoFilePreview.src = URL.createObjectURL(file)
+      Show(logoFilePreview)
+  }
+  // Puis on change le label du logo.
+  importLabel.innerHTML = "Cliquez ici pour modifier votre logo";
+  Validate(importLabel);
+  Show(importLabel);
+
+})
+
 
 ////// Couleurs
 function showColorFields() {
@@ -56,55 +96,40 @@ function showColorFields() {
 
   // Affiche les champs de couleur et les labels en fonction du nombre sélectionné
   for (var i = 1; i <= 3; i++) {
-    var couleurField = document.getElementById("couleur" + i);
-    var couleurLabel = document.getElementById("label_couleur_div" + i);
+    const couleurField = document.getElementById("couleur" + i);
+    const couleurLabel = document.getElementById("label_couleur_div" + i);
 
     if (i <= nombreCouleurs) {
-      couleurField.style.display = "unset";
-      couleurLabel.style.display = "unset";
+      Show(couleurField);
+      Show(couleurLabel);
     } else {
-      couleurField.style.display = "none";
-      couleurLabel.style.display = "none";
+      Hide(couleurField);
+      Hide(couleurLabel);
     }
   }
 }
 
-
 const couleurField = [
   document.getElementById("couleur1"),
   document.getElementById("couleur2"),
-  document.getElementById("couleur3")
-]
+  document.getElementById("couleur3"),
+];
 
 const couleurLabel = [
   document.getElementById("label_couleur1"),
   document.getElementById("label_couleur2"),
-  document.getElementById("label_couleur3")
-]
+  document.getElementById("label_couleur3"),
+];
 
 
-couleurField[0].addEventListener("change", ()=>{
-  couleurLabel[0].style.backgroundColor = couleurField[0].value
-})
+// On change le background des label en fonction de la couleur séléctionnée
 
-couleurField[1].addEventListener("change", ()=>{
-  couleurLabel[1].style.backgroundColor = couleurField[1].value
-})
-couleurField[2].addEventListener("change", ()=>{
-  couleurLabel[2].style.backgroundColor = couleurField[2].value
-}) 
-
-
-
-
-/* color picker test (ne pas toucher)
-var test1 = document.getElementById("couleur" + 1);
-var test2 = document.getElementById("label-couleur" + 1);
-var test3 = document.getElementById("lblclr");
-
-test1.addEventListener("change", testing);
-
-function testing() {
-  test3.style.backgroundColor = test1.value;
-}
-*/
+couleurField[0].addEventListener("change", () => {
+  couleurLabel[0].style.backgroundColor = couleurField[0].value;
+});
+couleurField[1].addEventListener("change", () => {
+  couleurLabel[1].style.backgroundColor = couleurField[1].value;
+});
+couleurField[2].addEventListener("change", () => {
+  couleurLabel[2].style.backgroundColor = couleurField[2].value;
+});
