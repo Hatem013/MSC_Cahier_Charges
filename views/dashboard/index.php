@@ -36,7 +36,7 @@ if (isset($_POST['logout'])) {
     <div class="row mt-5">
         <!-- Bouton "Créer site" -->
         <div class="col-md-4">
-            <button class="btn btn-primary btn-block"> <a href="http://localhost/MSC-1/client1"> Créer site</a></button>
+            <button class="btn btn-primary btn-block"> <a href="http://localhost/MSC-1/client"> Créer site</a></button>
         </div>
         <!-- Bouton "Voir mon site" -->
         <div class="col-md-4">
