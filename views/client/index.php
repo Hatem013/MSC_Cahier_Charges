@@ -4,7 +4,6 @@ session_start();
 // Inclure les fichiers d'en-tête et de pied de page
 include_once ROOT . 'views/home/header.php';
 include_once ROOT . 'views/home/footer.php';
-include_once ROOT . 'views/home/form_step.php';
 require_once ROOT . 'App/Model.php';
 require_once ROOT . 'Public/php/traitement_formulaire.php';
 ?>
