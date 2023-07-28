@@ -1,3 +1,6 @@
 body {
-    background-image: url(../asset/image/bg_msc.png);
+  
+    background-image: linear-gradient(rgba(0,0,0,0.5),black),url(../asset/image/bg_msc.png);
+    
+    
 }
