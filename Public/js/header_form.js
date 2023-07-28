@@ -1,3 +1,25 @@
+////////////////// Fonction globale ////////////////
+
+function Show(name) {
+  name.classList.remove("d-none");
+}
+
+function Hide(name) {
+  name.classList.add("d-none");
+}
+
+function Validate(name) {
+  name.classList.add("btn_validate");
+}
+
+function Unvalidate(name) {
+  name.classList.remove("btn_validate");
+}
+
+function Text(name, text) {
+  name.innerHTML = text;
+}
+
 class Header {
   constructor(
     button,
@@ -45,26 +67,24 @@ const header_mobile = new Header(
 /////////////// Desktop ///////////////
 
 // Boucle desktop
-for (var i = 0; i < header_desktop.input_div.length; i++) {
- // header_desktop.input_div[i].addEventListener("mouseover", mouseoverScale);
-  header_desktop.input_div[i].addEventListener("click", selectHeaderDesktop);
-}
+
+header_desktop.input_div.forEach(input => input.addEventListener("click", selectHeaderDesktop))
 
 // Selectionne l'input
 function selectHeaderDesktop() {
   if (!header_desktop.button.classList.contains("btn_validate")) {
     // Bouton de validation
-    header_desktop.button.classList.add("btn_validate");
-    header_desktop.button.innerHTML = "Cliquez ici pour modifier votre choix";
+    Validate(header_desktop.button);
+    Text(header_desktop.button, "Cliquez ici pour modifier votre choix");
 
     // Affiche la div
-    header_mobile.div.classList.remove("d-none");
+    Show(header_mobile.div);
 
     // Affichage du preview
-    header_desktop.menu.classList.add("d-none");
+    Hide(header_desktop.menu);
     new bootstrap.Collapse(header_desktop.collapse);
-    header_desktop.preview_div.classList.remove("d-none");
-    header_mobile.menu.classList.remove("d-none");
+    Show(header_desktop.preview_div);
+    Show(header_mobile.menu);
 
     // Trigger bootstrap mobile
     new bootstrap.Collapse(header_mobile.collapse);
@@ -80,9 +100,8 @@ function selectHeaderDesktop() {
 
   // Affiche la preview
   header_desktop.preview_img.src = this.src;
-  header_desktop.menu.classList.add("d-none");
-  header_desktop.preview_div.classList.remove("d-none");
- 
+  Hide(header_desktop.menu);
+  Show(header_desktop.preview_div);
 }
 
 // Afficher le menu desktop
@@ -92,14 +111,14 @@ function desktopMenuDisplay() {
 
   // Si aucune selection n'a été faite auparavant, affiche le menu de selection
   if (selected == null) {
-    header_desktop.menu.classList.remove("d-none");
+    Show(header_desktop.menu);
     header_desktop.menu.classList.remove("show");
     new bootstrap.Collapse(header_desktop.collapse);
 
     // Si une selection a été faite auparavant, cacher la preview jusqu'à qu'une nouvelle selection soit faite
   } else {
-    header_desktop.menu.classList.remove("d-none");
-    header_desktop.preview_div.classList.add("d-none");
+    Show(header_desktop.menu);
+    Hide(header_desktop.preview_div);
     new bootstrap.Collapse(header_desktop.collapse);
   }
 }
@@ -107,56 +126,46 @@ function desktopMenuDisplay() {
 /////////////// Mobile ///////////////
 
 // Boucle mobile
-for (var i = 0; i < header_mobile.input_div.length; i++) {
-  //header_mobile.input_div[i].addEventListener("mouseover", mouseoverScale);
-  header_mobile.input_div[i].addEventListener("click", selectMobileHeader); 
-
-}
+header_mobile.input_div.forEach(input => input.addEventListener("click", selectMobileHeader))
 
 // Selectionne l'input
 function selectMobileHeader() {
-
-
   if (!header_mobile.button.classList.contains("btn_validate")) {
-    header_mobile.button.classList.add("btn_validate");
-    header_mobile.button.innerHTML = "Cliquez ici pour modifier votre choix";
+    Validate(header_mobile.button);
+    Text(header_mobile.button, "Cliquez ici pour modifier votre choix");
 
     // Trigger bootstrap
     new bootstrap.Collapse(header_mobile.collapse);
     setTimeout(() => {
       window.scrollTo(0, 250);
     }, 230);
-
-    
   } else {
     new bootstrap.Collapse(header_mobile.collapse);
   }
 
   // Affiche la preview
-  header_mobile.menu.classList.add("d-none");
-  header_mobile.preview_div.classList.remove("d-none");
+  Hide(header_mobile.menu);
+  Show(header_mobile.preview_div);
   header_mobile.preview_img.src = this.src;
 }
 
 // Afficher le menu desktop
 function mobileMenuDisplay() {
-
   // On vérifie d'abord si une selection a été faite via la valeur de l'input
   var selected = document.querySelector('input[name="header_mobile"]:checked');
 
   // Si aucune selection n'a été faite auparavant, affiche le menu de selection
   if (selected == null) {
-    header_mobile.menu.classList.remove("d-none");
+    Show(header_mobile.menu);
     new bootstrap.Collapse(header_mobile.collapse);
 
-  // Si une selection a été faite auparavant, cacher la preview jusqu'à qu'une nouvelle selection soit faite
+    // Si une selection a été faite auparavant, cacher la preview jusqu'à qu'une nouvelle selection soit faite
   } else {
-    header_mobile.menu.classList.remove("d-none");
-    header_mobile.preview_div.classList.add("d-none");
+    Show(header_mobile.menu);
+    Hide(header_mobile.preview_div);
     new bootstrap.Collapse(header_mobile.collapse);
   }
 }
-
 
 /////////////// Mouseover trigger scale up and down ///////////////
 function mouseoverScale() {

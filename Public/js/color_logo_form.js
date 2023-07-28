@@ -1,4 +1,3 @@
-
 ////////////////// Fonction globale ////////////////
 
 function Show(name) {
@@ -17,6 +16,10 @@ function Unvalidate(name) {
   name.classList.remove("btn_validate");
 }
 
+function Text(name, text) {
+  name.innerHTML = text;
+}
+
 ////////////////// Logo //////////////////
 
 const logoOui = document.getElementById("logo_oui");
@@ -31,10 +34,8 @@ const importLabel = document.getElementById("logo_import_label");
 
 // Affiche la preview si "Oui" est sélectionné, sinon affiche le message
 function showLogoFields() {
-  
   // On vérifie quel bouton a été sélectionné
   if (logoOui.checked) {
-    
     // Si on a un logo, on affiche l'input file et on le passe en required
     Show(logoFileField);
     logoFile.required = true;
@@ -44,8 +45,7 @@ function showLogoFields() {
 
     // On valide le bouton et invalide l'autre
     Validate(labelOui);
-    Unvalidate(labelNon); 
-
+    Unvalidate(labelNon);
 
     // Si on n'a pas de logo, on cache l'input file et on le passe en non required
   } else if (logoNon.checked) {
@@ -62,10 +62,10 @@ function showLogoFields() {
     Unvalidate(labelOui);
     Unvalidate(importLabel);
 
-    // On update le label du bouton import 
-    importLabel.innerHTML = "Cliquez ici pour importer votre logo";
+    // On update le label du bouton import
+    Text(importLabel, "Cliquez ici pour importer votre logo");
 
-    // On vide l'input file de tout import 
+    // On vide l'input file de tout import
     logo_file.value = null;
   }
 }
@@ -77,18 +77,16 @@ if (logoFile.files.length == 0) {
 
 // Lorsqu'on insère un fichier, on affiche la div preview et on redirige l'src du fichier vers l'src de la preview;
 logoFile.addEventListener("change", () => {
-  const [file] = logoFile.files
+  const [file] = logoFile.files;
   if (file) {
-      logoFilePreview.src = URL.createObjectURL(file)
-      Show(logoFilePreview)
+    logoFilePreview.src = URL.createObjectURL(file);
+    Show(logoFilePreview);
   }
   // Puis on change le label du logo.
-  importLabel.innerHTML = "Cliquez ici pour modifier votre logo";
+  Text(importLabel, "Cliquez ici pour modifier votre logo");
   Validate(importLabel);
   Show(importLabel);
-
-})
-
+});
 
 ////// Couleurs
 function showColorFields() {
@@ -120,7 +118,6 @@ const couleurLabel = [
   document.getElementById("label_couleur2"),
   document.getElementById("label_couleur3"),
 ];
-
 
 // On change le background des label en fonction de la couleur séléctionnée
 
