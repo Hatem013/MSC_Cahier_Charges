@@ -1,6 +1,6 @@
 <?php
 
-class Client1 extends Controller{
+class Test extends Controller{
     public function index(){
         $this->render('index');
     }
