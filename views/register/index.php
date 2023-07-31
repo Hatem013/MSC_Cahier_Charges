@@ -70,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['pseudo'] = $formData['pseudo'];
         $_SESSION['nom'] = $formData['nom'];
         $_SESSION['prenom'] = $formData['prenom'];
-        $_SESSION['pseudo'] = $formData['pseudo'];
         $_SESSION['email'] = $formData['email'];
 
         // Redirection vers le dashboard
@@ -121,4 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn my-3">Créer un compte</button>
         </div>
     </form>
+    <?php
+    var_dump($_SESSION['client_id']);?>
 </div>

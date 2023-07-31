@@ -1,39 +1,45 @@
 <?php
-include_once ROOT . 'App/Model.php';
+session_start();
+require_once ROOT . '/App/Model.php'; // Assurez-vous que le chemin vers Model.php est correct
 
-class ClientModel extends Model
+class NouveauCahierModel extends Model
 {
-    public function insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop)
+    public $table = 'nouveau_cahier';
+
+    public function insertNouveauCahier($client_id, $nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop)
     {
-        $sql = "INSERT INTO nouveau_cahier (nom, prenom, email, telephone, adresse, profession, secteur_activite, nom_entreprise, email_entreprise, telephone_entreprise, adresse_entreprise, secteur_entreprise, type_site, nombre_couleurs, couleur1, couleur2, couleur3, logo, logo_file, message_entreprise, header_desktop, header_mobile, footer_desktop) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO nouveau_cahier (client_id, nom, prenom, email, telephone, adresse, profession, secteur_activite, nom_entreprise, email_entreprise, telephone_entreprise, adresse_entreprise, secteur_entreprise, type_site, nombre_couleurs, couleur1, couleur2, couleur3, logo, logo_file, message_entreprise, header_desktop, header_mobile, footer_desktop) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        // Utiliser la connexion définie dans la classe parente Model
         $stmt = $this->connexion->prepare($sql);
-        $stmt->execute([$nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop]);
+        return $stmt->execute([$client_id, $nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop]);
     }
 }
 
-// Vérifier si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Simplification des vérifications des champs requis
-    $nom = isset($_POST['nom']) ? htmlspecialchars(trim($_POST['nom'])) : '';
-    $prenom = isset($_POST['prenom']) ? htmlspecialchars(trim($_POST['prenom'])) : '';
-    $email = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '';
-    $telephone = isset($_POST['telephone']) ? htmlspecialchars(trim($_POST['telephone'])) : '';
-    $adresse = isset($_POST['adresse']) ? htmlspecialchars(trim($_POST['adresse'])) : '';
-    $profession = isset($_POST['profession']) ? htmlspecialchars(trim($_POST['profession'])) : '';
-    $secteur_activite = isset($_POST['secteur_activite']) ? htmlspecialchars(trim($_POST['secteur_activite'])) : '';
-    $nom_entreprise = isset($_POST['nom_entreprise']) ? htmlspecialchars(trim($_POST['nom_entreprise'])) : '';
-    $email_entreprise = isset($_POST['email_entreprise']) ? htmlspecialchars(trim($_POST['email_entreprise'])) : '';
-    $telephone_entreprise = isset($_POST['telephone_entreprise']) ? htmlspecialchars(trim($_POST['telephone_entreprise'])) : '';
-    $adresse_entreprise = isset($_POST['adresse_entreprise']) ? htmlspecialchars(trim($_POST['adresse_entreprise'])) : '';
-    $secteur_entreprise = isset($_POST['secteur_entreprise']) ? htmlspecialchars(trim($_POST['secteur_entreprise'])) : '';
-    $type_site = isset($_POST['type_site']) ? htmlspecialchars(trim($_POST['type_site'])) : '';
-    $nombre_couleurs = isset($_POST['nombre_couleurs']) ? htmlspecialchars(trim($_POST['nombre_couleurs'])) : '';
-    $couleur1 = isset($_POST['couleur1']) ? htmlspecialchars(trim($_POST['couleur1'])) : '';
-    $couleur2 = isset($_POST['couleur2']) ? htmlspecialchars(trim($_POST['couleur2'])) : '';
-    $couleur3 = isset($_POST['couleur3']) ? htmlspecialchars(trim($_POST['couleur3'])) : '';
-    $logo = isset($_POST['logo']) ? htmlspecialchars(trim($_POST['logo'])) : '';
+function validateForm($formData)
+{
+    $errors = [];
+
+    // Validation et échappement des données utilisateur pour prévenir les attaques XSS
+    $nom = htmlspecialchars(trim($formData['nom']));
+    $prenom = htmlspecialchars(trim($formData['prenom']));
+    $email = htmlspecialchars(trim($formData['email']));
+    $telephone = htmlspecialchars(trim($formData['telephone']));
+    $adresse = htmlspecialchars(trim($formData['adresse']));
+    $profession = htmlspecialchars(trim($formData['profession']));
+    $secteur_activite = htmlspecialchars(trim($formData['secteur_activite']));
+    $nom_entreprise = htmlspecialchars(trim($formData['nom_entreprise']));
+    $email_entreprise = htmlspecialchars(trim($formData['email_entreprise']));
+    $telephone_entreprise = htmlspecialchars(trim($formData['telephone_entreprise']));
+    $adresse_entreprise = htmlspecialchars(trim($formData['adresse_entreprise']));
+    $secteur_entreprise = htmlspecialchars(trim($formData['secteur_entreprise']));
+    $type_site = htmlspecialchars(trim($formData['type_site']));
+    $nombre_couleurs = htmlspecialchars(trim($formData['nombre_couleurs']));
+    $couleur1 = htmlspecialchars(trim($formData['couleur1']));
+    $couleur2 = htmlspecialchars(trim($formData['couleur2']));
+    $couleur3 = htmlspecialchars(trim($formData['couleur3']));
+    $logo = htmlspecialchars(trim($formData['logo']));
     $logo_file = '';
-    $logoPathString = '';
 
     if ($logo === 'oui') {
         $logoFile = $_FILES['logo_file'];
@@ -43,47 +49,121 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $allowedExtensions = ['jpg', 'jpeg', 'png'];
             $fileExtension = strtolower(pathinfo($logoFile['name'], PATHINFO_EXTENSION));
             if (!in_array($fileExtension, $allowedExtensions)) {
-                $formErrors['logo-file'] = 'Le format du logo doit être JPG, JPEG, PNG ou GIF.';
+                $errors['logo-file'] = 'Le format du logo doit être JPG, JPEG, PNG ou GIF.';
             } else {
-                // Renommer le fichier
-                $newLogoName = hash('sha256', uniqid() . $logoFile['name']) . '.' . $fileExtension;
+                // Renommer le fichier avec le pseudo du client
+                $pseudo_client = $nom . '_' . $prenom;
+                $newLogoName = hash('sha256', $pseudo_client . $logoFile['name']) . '.' . $fileExtension;
+                $uploadPath =  './Public/uploads/' . $newLogoName;
 
                 // Déplacer le fichier vers le dossier uploads
-                $uploadPath =  './Public/uploads/' . $newLogoName;
                 if (!move_uploaded_file($logoFile['tmp_name'], $uploadPath)) {
-                    $formErrors['logo-file'] = 'Une erreur est survenue lors du téléchargement du logo.';
+                    $errors['logo-file'] = 'Une erreur est survenue lors du téléchargement du logo.';
                 } else {
                     // Le chemin du fichier pour enregistrement dans la base de données
-                    $logoPathString = $uploadPath;
+                    $logo_file = $uploadPath;
                 }
             }
         } else {
-            $formErrors['logo-file'] = 'Veuillez télécharger votre logo.';
+            $errors['logo-file'] = 'Veuillez télécharger votre logo.';
         }
     }
 
     // Simplification des autres vérifications des champs requis
-    $message_entreprise = isset($_POST['message_entreprise']) ? htmlspecialchars(trim($_POST['message_entreprise'])) : '';
-    $header_desktop = isset($_POST['header_desktop']) ? htmlspecialchars(trim($_POST['header_desktop'])) : '';
-    $header_mobile = isset($_POST['header_mobile']) ? htmlspecialchars(trim($_POST['header_mobile'])) : '';
-    $footer_desktop = isset($_POST['footer_desktop']) ? htmlspecialchars(trim($_POST['footer_desktop'])) : '';
+    $message_entreprise = htmlspecialchars(trim($formData['message_entreprise']));
+    $header_desktop = htmlspecialchars(trim($formData['header_desktop']));
+    $header_mobile = htmlspecialchars(trim($formData['header_mobile']));
+    $footer_desktop = htmlspecialchars(trim($formData['footer_desktop']));
 
-    // Effectuer l'insertion dans la base de données si aucun champ n'est vide
-    if (
-        !empty($nom) && !empty($prenom) && !empty($email) && !empty($telephone) && !empty($adresse) &&
-        !empty($profession) && !empty($secteur_activite) && !empty($nom_entreprise) && !empty($email_entreprise) &&
-        !empty($telephone_entreprise) && !empty($adresse_entreprise) && !empty($secteur_entreprise) && !empty($type_site) &&
-        !empty($nombre_couleurs) && !empty($couleur1) && !empty($couleur2) && !empty($couleur3) && !empty($logo) &&
-        !empty($message_entreprise) && !empty($header_desktop) && !empty($header_mobile) && !empty($footer_desktop)
-    ) {
-        $clientModel = new ClientModel();
-        $clientModel->getConnexion();
+    // Vous pouvez ajouter d'autres validations ici selon vos besoins
+
+    return [
+        'client_id' => $_SESSION['client_id'],
+        'nom' => $nom,
+        'prenom' => $prenom,
+        'email' => $email,
+        'telephone' => $telephone,
+        'adresse' => $adresse,
+        'profession' => $profession,
+        'secteur_activite' => $secteur_activite,
+        'nom_entreprise' => $nom_entreprise,
+        'email_entreprise' => $email_entreprise,
+        'telephone_entreprise' => $telephone_entreprise,
+        'adresse_entreprise' => $adresse_entreprise,
+        'secteur_entreprise' => $secteur_entreprise,
+        'type_site' => $type_site,
+        'nombre_couleurs' => $nombre_couleurs,
+        'couleur1' => $couleur1,
+        'couleur2' => $couleur2,
+        'couleur3' => $couleur3,
+        'logo' => $logo,
+        'logo_file' => $logo_file,
+        'message_entreprise' => $message_entreprise,
+        'header_desktop' => $header_desktop,
+        'header_mobile' => $header_mobile,
+        'footer_desktop' => $footer_desktop,
+        'errors' => $errors
+    ];
+}
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Valider les données du formulaire
+    $formData = validateForm($_POST);
+
+    // S'il n'y a pas d'erreurs de validation, enregistrer les données dans la base de données
+    if (empty($formData['errors'])) {
         try {
-            $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop);
-            header('Location: http://localhost/MSC-1/dashboard');
-            exit;
+            $nouveauCahierModel = new NouveauCahierModel();
+            $conn = $nouveauCahierModel->getConnexion();
+
+            // Insérer les données dans la table nouveau_cahier en incluant l'ID du client
+            $result = $nouveauCahierModel->insertNouveauCahier(
+                $formData['client_id'],
+                $formData['nom'],
+                $formData['prenom'],
+                $formData['email'],
+                $formData['telephone'],
+                $formData['adresse'],
+                $formData['profession'],
+                $formData['secteur_activite'],
+                $formData['nom_entreprise'],
+                $formData['email_entreprise'],
+                $formData['telephone_entreprise'],
+                $formData['adresse_entreprise'],
+                $formData['secteur_entreprise'],
+                $formData['type_site'],
+                $formData['nombre_couleurs'],
+                $formData['couleur1'],
+                $formData['couleur2'],
+                $formData['couleur3'],
+                $formData['logo'],
+                $formData['logo_file'],
+                $formData['message_entreprise'],
+                $formData['header_desktop'],
+                $formData['header_mobile'],
+                $formData['footer_desktop']
+            );
+
+            // Vérifier les résultats
+            var_dump($formData['client_id']);
+            var_dump($result);
+
+            if ($result) {
+                // Requête exécutée avec succès
+                header('Location: http://localhost/MSC-1/dashboard');
+                exit; // Ajoutez cette ligne pour terminer le script ici
+            } else {
+                // Erreur lors de l'exécution de la requête
+                $errorInfo = $stmt->errorInfo();
+                echo "Erreur lors de l'exécution de la requête : " . $errorInfo[2];
+                exit; // Ajoutez cette ligne pour terminer le script en cas d'erreur
+            }
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            // Erreur lors de la préparation de la requête
+            echo "Erreur lors de la préparation de la requête : " . $e->getMessage();
+            exit; // Ajoutez cette ligne pour terminer le script en cas d'erreur
         }
     }
 }
+?>
