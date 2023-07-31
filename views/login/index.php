@@ -40,6 +40,9 @@ function validateForm($formData) {
       $errors['password'] = 'Le champ mot de passe est requis.';
   }
 
+  // Initialisez $formData['errors'] avec un tableau vide
+  $formData['errors'] = $errors;
+
   return ['identifiant' => $identifiant, 'password' => $password, 'errors' => $errors];
 }
 
@@ -73,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $_SESSION['client_id'] = $user->id;
                 $_SESSION['pseudo'] = $user->pseudo;
+                $_SESSION['email'] = $user->email;
                 // Rediriger l'utilisateur vers le dashboard ou toute autre page appropriée
                 header("Location: http://localhost/MSC-1/dashboard");
                 exit();

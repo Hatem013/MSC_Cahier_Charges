@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['pseudo']) || !isset($_SESSION['email'])) {
+    header('Location: http://localhost/MSC-1/login');
+    exit();
+}
+
+
 
 // Inclure les fichiers d'en-tête et de pied de page
 include_once ROOT . 'views/home/header.php';
@@ -86,8 +94,8 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
 
                             <!-- Adresse email -->
                             <div class="form-group my-3">
-                                <label for="email">Adresse email :</label>
-                                <input type="email" class="form-control" id="email" name="email" required">
+                                <label for="email_entreprise">Adresse email :</label>
+                                <input type="email" class="form-control" id="email_entreprise" name="email_entreprise" required">
                             </div>
 
                             <!-- Numéro de téléphone -->
@@ -335,14 +343,13 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                                 <label id="logo_label_non" class="btn" for="logo_non">Non</label>
                             </div>
 
-
                             <!-- Import logo -->
                             <div id="logo_file_field" class="d-none">
                                 <div class="form-group my-4">
                                     <label id="logo_import_label" for="logo_file" class="btn">
                                         <i class="fa fa-cloud-upload"></i> Cliquez ici pour importez votre fichier
                                     </label>
-                                    <input type="file" accept="image/*" name="logo_file" id="logo_file">
+                                    <input type="file" enctype="multipart/form-data" accept="image/*" name="logo_file" id="logo_file">
                                 </div>
                             </div>
                         </div>
@@ -672,6 +679,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
         var_dump($_POST);
             ?>
 </div>
+
 
 
 

@@ -1,8 +1,10 @@
 <?php
+session_start();
+
 include_once ROOT . 'views/home/header.php';
 include_once ROOT . 'views/home/footer.php';
 require_once ROOT . 'App/Model.php';
-session_start();
+
 
 // Fonction pour déconnecter l'utilisateur
 function deconnexion() {
@@ -36,7 +38,7 @@ if (isset($_POST['logout'])) {
     <div class="row mt-5">
         <!-- Bouton "Créer site" -->
         <div class="col-md-4">
-            <button class="btn btn-primary btn-block"> <a href="http://localhost/MSC-1/client"> Créer site</a></button>
+            <button class="btn btn-primary btn-block"> <a href="http://localhost/MSC-1/test"> Créer site</a></button>
         </div>
         <!-- Bouton "Voir mon site" -->
         <div class="col-md-4">
