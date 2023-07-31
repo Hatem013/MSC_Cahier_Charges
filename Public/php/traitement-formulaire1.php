@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $logoPathString = '';
 
     if ($logo === 'oui') {
-        $logoFile = $_POST['logo_file'];
+        $logoFile = $_FILES['logo_file'];
 
         if (!empty($logoFile['name'])) {
             // Vérifier le type de fichier
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $newLogoName = hash('sha256', uniqid() . $logoFile['name']) . '.' . $fileExtension;
 
                 // Déplacer le fichier vers le dossier uploads
-                $uploadPath = ROOT . 'Public/uploads/' . $newLogoName;
+                $uploadPath =  './Public/uploads/' . $newLogoName;
                 if (!move_uploaded_file($logoFile['tmp_name'], $uploadPath)) {
                     $formErrors['logo-file'] = 'Une erreur est survenue lors du téléchargement du logo.';
                 } else {
@@ -79,12 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $clientModel = new ClientModel();
         $clientModel->getConnexion();
         try {
-            $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logoPathString, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop);
+            $clientModel->insertClient($nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop);
             header('Location: http://localhost/MSC-1/dashboard');
             exit;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-   
 }
