@@ -22,7 +22,7 @@ abstract class Model{
     }
 
     public function getAll(){
-        $sql = "SELECT * FROM".$this->table;
+        $sql = "SELECT * FROM " . $this->table;
 
         $query = $this->connexion->prepare($sql);
         $query->execute();
@@ -31,7 +31,7 @@ abstract class Model{
     }
 
     public function getOne(){
-        $sql = "SELECT * FROM ".$this->table." WHERE id = :id";
+        $sql = "SELECT * FROM ". $this->table." WHERE id = :id";
 
         $query = $this->connexion->prepare($sql);
         $query->bindValue(':id', $this->id, PDO::PARAM_INT);
