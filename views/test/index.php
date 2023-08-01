@@ -21,7 +21,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
 <link href="./Public/css/main.css" rel="stylesheet" type="text/css">
 <link href="./Public/css/coloris.min.css" rel="stylesheet" />
 <div class="container formulaire">
-    <form method="post" action="">
+    <form method="post" enctype="multipart/form-data" action="">
 
         <!-- Formulaire 1-->
         <div id="formulaire1" class="container ">
@@ -349,7 +349,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                                     <label id="logo_import_label" for="logo_file" class="btn">
                                         <i class="fa fa-cloud-upload"></i> Cliquez ici pour importez votre fichier
                                     </label>
-                                    <input type="file" enctype="multipart/form-data" accept="image/*" name="logo_file" id="logo_file">
+                                    <input type="file" accept="image/*" name="logo_file" id="logo_file">
                                 </div>
                             </div>
                         </div>
@@ -677,6 +677,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
     </form>
     <?php
         var_dump($_POST);
+        
             ?>
 </div>
 
