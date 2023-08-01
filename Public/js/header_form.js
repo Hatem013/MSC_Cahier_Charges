@@ -20,6 +20,10 @@ function Text(name, text) {
   name.innerHTML = text;
 }
 
+function GetElement(id) {
+  return document.getElementById(id);
+}
+
 class Header {
   constructor(
     button,
@@ -43,32 +47,34 @@ class Header {
 }
 
 const header_desktop = new Header(
-  document.getElementById("header_desktop_btn"),
+  GetElement("header_desktop_btn"),
   document.querySelectorAll(".collapse")[1],
   document.querySelectorAll(".header_input "),
   document.querySelectorAll(".headerTaille "),
-  document.getElementById("header_desktop_selection_display"),
-  document.getElementById("header_desktop_preview"),
-  document.getElementById("header_desktop_preview_img"),
-  document.getElementById("header_desktop_div")
+  GetElement("header_desktop_selection_display"),
+  GetElement("header_desktop_preview"),
+  GetElement("header_desktop_preview_img"),
+  GetElement("header_desktop_div")
 );
 
 const header_mobile = new Header(
-  document.getElementById("header_mobile_btn"),
+  GetElement("header_mobile_btn"),
   document.querySelectorAll(".collapse")[2],
   document.querySelectorAll(".header_mobile_input "),
   document.querySelectorAll(".headerMobileTaille "),
-  document.getElementById("header_mobile_selection_display"),
-  document.getElementById("header_mobile_preview"),
-  document.getElementById("header_mobile_preview_img"),
-  document.getElementById("header_mobile_div")
+  GetElement("header_mobile_selection_display"),
+  GetElement("header_mobile_preview"),
+  GetElement("header_mobile_preview_img"),
+  GetElement("header_mobile_div")
 );
 
 /////////////// Desktop ///////////////
 
 // Boucle desktop
 
-header_desktop.input_div.forEach(input => input.addEventListener("click", selectHeaderDesktop))
+header_desktop.input_div.forEach((input) =>
+  input.addEventListener("click", selectHeaderDesktop)
+);
 
 // Selectionne l'input
 function selectHeaderDesktop() {
@@ -126,7 +132,9 @@ function desktopMenuDisplay() {
 /////////////// Mobile ///////////////
 
 // Boucle mobile
-header_mobile.input_div.forEach(input => input.addEventListener("click", selectMobileHeader))
+header_mobile.input_div.forEach((input) =>
+  input.addEventListener("click", selectMobileHeader)
+);
 
 // Selectionne l'input
 function selectMobileHeader() {
