@@ -22,9 +22,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
 <link href="./Public/css/coloris.min.css" rel="stylesheet" />
 <div class="container formulaire">
     <form method="post" enctype="multipart/form-data" action="">
-
-        
-        
+  
 
         <!-- Formulaire 1-->
         <div id="formulaire1" class="container">
@@ -98,13 +96,13 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                                 <div class="form-group my-3 col-6">
                                     <label for="adresse_ent">Adresse postale :</label>
                                     <input type="text" class="form-control" id="adresse_entreprise" name="adresse_entreprise"
-                                        required">
+                                        required>
                                 </div>
 
                                 <!-- Numéro de téléphone -->
                                 <div class="form-group my-3 col-6">
                                     <label for="telephone_ent">Numéro de téléphone :</label>
-                                    <input type="tel" class="form-control" id="telephone_entreprise" name="telephone_entreprise"
+                                    <input type="tel" class="form-control" pattern="^[0-9]{10}$" id="telephone_entreprise" name="telephone_entreprise"
                                         required>
                                 </div>
                             </div>
@@ -198,7 +196,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                         <label class="mb-2" for="nombre-couleurs">Faites glisser la barre ci-dessous pour choisir le
                             nombre et les couleurs de votre site</label>
                         <input type="range" class="form-range" name="nombre_couleurs" id="nombre-couleurs" min="0"
-                            max="3" value="0" oninput="showColorFields()">
+                            max="3" value="0" oninput="showColorFields()" required>
 
                     </div>
 
@@ -344,7 +342,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                                 echo '<div class="row">';
 
                                 echo '<label for="header' . $i . '">';
-                                echo '<input type="radio" class="form-check-input header_input" id="header' . $i . '" name="header_desktop" value="' . $image1Path . '">';
+                                echo '<input type="radio" class="form-check-input header_input" id="header' . $i . '" name="header_desktop" value="' . $image1Path . '" required>';
                                 echo '<img class="headerTaille img-fluid" src="' . $image1Path . '" alt="Header ' . $i . '">';
                                 echo '</label>';
                                 echo '</div>';
@@ -394,7 +392,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
 
 
                                     echo '<label class="col-3" for="header_mobile' . $i . '">';
-                                    echo '<input type="radio" class="form-check-input header_mobile_input"  id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '">';
+                                    echo '<input type="radio" class="form-check-input header_mobile_input"  id="header_mobile' . $i . '" name="header_mobile" value="' . $image1Path . '" required>';
                                     echo '<img class="headerMobileTaille img-fluid" src="' . $image1Path . '" alt="Header_mobile ' . $i . '">';
                                     echo '</label>';
                                 }

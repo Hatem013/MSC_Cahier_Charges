@@ -24,7 +24,7 @@ const formulaires_btn = [
   GetElement("formulaire1_btn"),
   GetElement("formulaire2_btn"),
   GetElement("formulaire3_btn"),
-  GetElement("formulaire4_btn"),
+  GetElement("formulaire4_btn")
 ];
 
 let next_number = null;
@@ -52,20 +52,29 @@ function showNextForm() {
   next_number = parseInt(number) + 1;
   next_form = GetElement(name + next_number);
 
-  // Vérifie si tous les champs sont remplis dans le formulaire en cours, et on renvoie un booléen
+
+  var input = [];
+  var filled = null;
+
   for (let i = 0; i <= completed_form_input.length - 1; i++) {
-    if (!completed_form_input[i].value == "") {
-      var filled = true;
-    } else {
-      var filled = false;
-    }
+   input.push(completed_form_input[i].reportValidity())
+  };
+
+  let check = arr => arr.every(v => v === true);
+  
+  if(check(input)) {
+    filled = true
+  } else {
+    filled = false
   }
 
+  
+  
   // Si tous les champs sont remplis alors on active le script
   if (filled === true) {
     // On verifie si le formulaire suivant existe, s'il existe on affiche le formulaire suivant, et s'il n'existe pas on affiche le bouton d'envoie du formulaire
     gotoNext();
-  }
+  } 
 
 
   // Dans le cas où on n'a pas de logo à importer (obligé de faire un script exprès car l'automatisation plus haut interfère)
@@ -83,6 +92,7 @@ function showNextForm() {
       }
     }
   }
+  
 }
 
 function gotoNext() {
