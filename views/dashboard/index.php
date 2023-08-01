@@ -33,7 +33,8 @@ if (isset($_POST['logout'])) {
 ?>
 
 <div class="container mt-5">
-    <h1 class="text-center">Bienvenue <?php echo htmlspecialchars($_SESSION['pseudo']); ?></h1>
+    <div class="row">
+    <h1 class="text-center mt-5 text-light">Bienvenue <?php echo htmlspecialchars($_SESSION['pseudo']); ?></h1>
 
     <div class="row mt-5">
         <!-- Bouton "Créer site" -->
@@ -69,4 +70,5 @@ if (isset($_POST['logout'])) {
     <form method="post" class="mt-5 text-center" action="">
         <button type="submit" name="logout" class="btn btn-danger">Déconnexion</button>
     </form>
+</div>
 </div>
