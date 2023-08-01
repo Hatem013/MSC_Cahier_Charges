@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ROOT . '/App/Model.php'; // Assurez-vous que le chemin vers Model.php est correct
+require_once ROOT . '/App/Model.php';
 
 class NouveauCahierModel extends Model
 {
@@ -69,13 +69,12 @@ function validateForm($formData)
         }
     }
 
-    // Simplification des autres vérifications des champs requis
+
     $message_entreprise = htmlspecialchars(trim($formData['message_entreprise']));
     $header_desktop = htmlspecialchars(trim($formData['header_desktop']));
     $header_mobile = htmlspecialchars(trim($formData['header_mobile']));
     $footer_desktop = htmlspecialchars(trim($formData['footer_desktop']));
 
-    // Vous pouvez ajouter d'autres validations ici selon vos besoins
 
     return [
         'client_id' => $_SESSION['client_id'],
