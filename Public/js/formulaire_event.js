@@ -18,7 +18,6 @@ const formulaires = [
   GetElement("formulaire2"),
   GetElement("formulaire3"),
   GetElement("formulaire4"),
-  GetElement("formulaire5"),
 ];
 
 const formulaires_btn = [
@@ -26,7 +25,6 @@ const formulaires_btn = [
   GetElement("formulaire2_btn"),
   GetElement("formulaire3_btn"),
   GetElement("formulaire4_btn"),
-  GetElement("formulaire5_btn"),
 ];
 
 let next_number = null;
@@ -71,7 +69,7 @@ function showNextForm() {
 
 
   // Dans le cas où on n'a pas de logo à importer (obligé de faire un script exprès car l'automatisation plus haut interfère)
-  if (filled === false && completed_form == GetElement("formulaire3")) {
+  if (filled === false && completed_form == GetElement("formulaire2")) {
     if (
       completed_form_input[0].value !== "0" &&
       completed_form_input[1].value !== "" &&

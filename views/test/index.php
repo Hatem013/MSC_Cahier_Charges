@@ -23,128 +23,11 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
 <div class="container formulaire">
     <form method="post" enctype="multipart/form-data" action="">
 
-        <!-- Formulaire 1-->
-        <div id="formulaire1" class="container ">
-            <div class="row">
-                <div class="container text-center mt-4">
-                    <h1 class="mb-5">Création de votre site</h1>
-                </div>
-
-                <ul class="progressbar">
-                    <li <?php if ($_SESSION['currentStep'] == 1) {
-                        echo 'class="active"';
-                    } ?>><img       src="./Public/asset/svg/one.svg" class="logo_current_progress"></li>
-                    <li class="in_progress"> -----🚧----- </li>
-                    <li <?php if ($_SESSION['currentStep'] == 2) {
-                        echo 'class="active"';
-                    } ?>><img src="./Public/asset/svg/two.svg" class="logo_progress"></a></li>
-                    <li class="in_progress"> ----------- </li>
-                    <li <?php if ($_SESSION['currentStep'] == 3) {
-                        echo 'class="active"';
-                    } ?>><img src="./Public/asset/svg/three.svg" class="logo_progress"></a></li>
-                    <li class="in_progress"> ----------- </li>
-                    <li <?php if ($_SESSION['currentStep'] == 4) {
-                        echo 'class="active"';
-                    } ?>><img src="./Public/asset/svg/four.svg" class="logo_progress"></a></li>
-                    <li class="in_progress"> ----------- </li>
-                    <li <?php if ($_SESSION['currentStep'] == 5) {
-                        echo 'class="active"';
-                    } ?>><img src="./Public/asset/svg/five.svg" class="logo_progress"></a></li>
-                    <li class="in_progress"> ----------- </li>
-                    <li <?php if ($_SESSION['currentStep'] == 6) {
-                        echo 'class="active"';
-                    } ?>><img src="./Public/asset/svg/six.svg" class="logo_progress"></a></li>
-                </ul>
-
-                <div class="container">
-
-                    <!-- Container formulaire-->
-                    <div class="row justify-content-center">
-
-                        <div class="col-md-8">
-                            <p class="text-center mb-5">Vous avez un projet de site internet ? Renseignez vos
-                                informations nous nous occupons du reste.</p>
-                            <!-- Formulaire -->
-
-
-                            <!-- Nom et prénom -->
-                            <div class="row my-3">
-
-                                <!-- Nom-->
-                                <div class="col-6">
-                                    <div class="form-group ">
-
-
-                                        <label for="nom">Nom :</label>
-                                        <input type="text" class="form-control" id="nom" name="nom" required>
-
-                                    </div>
-                                </div>
-
-                                <!-- Prénom-->
-                                <div class="col-6">
-                                    <div class="form-group ">
-
-                                        <label for="prenom">Prénom :</label>
-                                        <input type="text" class="form-control" id="prenom" name="prenom" required>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Adresse email -->
-                            <div class="form-group my-3">
-                                <label for="email_entreprise">Adresse email :</label>
-                                <input type="email" class="form-control" id="email_entreprise" name="email_entreprise" required">
-                            </div>
-
-                            <!-- Numéro de téléphone -->
-                            <div class="form-group my-3">
-                                <label for="telephone">Numéro de téléphone :</label>
-                                <input type="tel" class="form-control" id="telephone" name="telephone" required>
-                            </div>
-
-                            <!-- Adresse postale -->
-                            <div class="form-group my-3">
-                                <label for="adresse">Adresse postale :</label>
-                                <input type="text" class="form-control" id="adresse" name="adresse" required>
-                            </div>
-
-
-                            <!-- Profession + Secteur d'activité -->
-                            <div class="row">
-
-                                <!-- Profession -->
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="profession">Profession :</label>
-                                        <input type="text" class="form-control" id="profession" name="profession"
-                                            required>
-                                    </div>
-
-                                </div>
-
-                                <!-- Secteur d'activité-->
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="secteur">Secteur d'activité :</label>
-                                        <input type="text" class="form-control" id="secteur" name="secteur_activite" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row p-2">
-                                <button type="button" id="formulaire1_btn" class="btn my-3">Passer à l'étape suivante</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         
 
-        <!-- Formulaire 2-->
-        <div id="formulaire2" class="container d-none">
+        <!-- Formulaire 1-->
+        <div id="formulaire1" class="container">
 
             <div class="container text-center mt-4 mb-5">
                 <h1 class="mb-4">Information concernant votre entreprise</h1>
@@ -185,10 +68,8 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                     <div class="col-md-8">
 
                         <!-- Formulaire -->
-
-
-                        <!-- Nom -->
                         <div class="container">
+                            <!-- Nom -->
                             <div class="row my-3">
                                 <div class="col-6">
                                     <div class="form-group ">
@@ -228,13 +109,23 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                                 </div>
                             </div>
 
-                            <div class="form-group my-3 col-6">
-                                <label for="secteur_entreprise">Secteur d'activité :</label>
-                                <input type="text" class="form-control" id="secteur_entreprise" name="secteur_entreprise" required>
+                            <div class="row">
+                                <div class="form-group my-3 col-6">
+                                    <label for="secteur_entreprise">Secteur d'activité :</label>
+                                    <input type="text" class="form-control" id="secteur_entreprise" name="secteur_entreprise" required>
+                                </div>
+                         
+                                 <div class="form-group my-3 col-6 ">
+                                    <label for="profession">Profession :</label>
+                                    <input type="text" class="form-control" id="profession" name="profession"
+                                                required>
+                                </div>
                             </div>
 
+                            
+
                             <div class="row p-2">
-                                <button type="button" id="formulaire2_btn" class="btn my-3">Passer à l'étape suivante</button>
+                                <button type="button" id="formulaire1_btn" class="btn my-3">Passer à l'étape suivante</button>
                             </div>
                         </div>
 
@@ -249,7 +140,8 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
             </div>
         </div>
 
-        <div id="formulaire3" class="container d-none">
+        <!-- Formulaire 2-->
+        <div id="formulaire2" class="d-none container">
 
             <div class="container text-center mt-4 mb-5">
                 <h1>Suite du formulaire</h1>
@@ -374,15 +266,15 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                     </div>
 
                     <div class="row p-2">
-                        <button type="button" id="formulaire3_btn" class="btn my-3">Passer à l'étape suivante</button>
+                        <button type="button" id="formulaire2_btn" class="btn my-3">Passer à l'étape suivante</button>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- Formulaire 4-->
-        <div id="formulaire4" class="container d-none">
+        <!-- Formulaire 3-->
+        <div id="formulaire3" class="container d-none">
             <div class="container text-center mt-4 mb-5">
                 <h1>Suite du formulaire</h1>
                 <h2>Entrez les différentes informations pour un site plus personnel</h2>
@@ -517,15 +409,15 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
             </div>
 
             <div class="row p-2">
-                <button type="button" id="formulaire4_btn" class="btn my-3">Passer à l'étape suivante</button>
+                <button type="button" id="formulaire3_btn" class="btn my-3">Passer à l'étape suivante</button>
             </div>
 
 
 
         </div>
 
-        <!-- Formulaire 5-->
-        <div id="formulaire5" class="container d-none">
+        <!-- Formulaire 4-->
+        <div id="formulaire4" class="container d-none">
             <div class="container text-center mt-4 mb-5">
                 <h1>Suite du formulaire</h1>
                 <h2>Entrez les différentes informations pour un site plus personnel</h2>
@@ -600,7 +492,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
             </div>
 
             <div class="row p-2">
-                <button type="button" id="formulaire5_btn" class="btn my-3">Passer à l'étape suivante</button>
+                <button type="button" id="formulaire4_btn" class="btn my-3">Passer à l'étape suivante</button>
             </div>
 
         </div>
