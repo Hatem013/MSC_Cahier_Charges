@@ -20,17 +20,21 @@ function Text(name, text) {
   name.innerHTML = text;
 }
 
+function GetElement(id) {
+  return document.getElementById(id);
+}
+
 ////////////////// Logo //////////////////
 
-const logoOui = document.getElementById("logo_oui");
-const labelOui = document.getElementById("logo_label_oui");
-const logoNon = document.getElementById("logo_non");
-const labelNon = document.getElementById("logo_label_non");
-const logoFileField = document.getElementById("logo_file_field");
-const alertLogoField = document.getElementById("logo_alert_field");
-const logoFilePreview = document.getElementById("logo_file_preview");
-const logoFile = document.getElementById("logo_file");
-const importLabel = document.getElementById("logo_import_label");
+const logoOui = GetElement("logo_oui");
+const labelOui = GetElement("logo_label_oui");
+const logoNon = GetElement("logo_non");
+const labelNon = GetElement("logo_label_non");
+const logoFileField = GetElement("logo_file_field");
+const alertLogoField = GetElement("logo_alert_field");
+const logoFilePreview = GetElement("logo_file_preview");
+const logoFile = GetElement("logo_file");
+const importLabel = GetElement("logo_import_label");
 
 // Affiche la preview si "Oui" est sélectionné, sinon affiche le message
 function showLogoFields() {
@@ -90,12 +94,12 @@ logoFile.addEventListener("change", () => {
 
 ////// Couleurs
 function showColorFields() {
-  var nombreCouleurs = document.getElementById("nombre-couleurs").value;
+  var nombreCouleurs = GetElement("nombre-couleurs").value;
 
   // Affiche les champs de couleur et les labels en fonction du nombre sélectionné
   for (var i = 1; i <= 3; i++) {
-    const couleurField = document.getElementById("couleur" + i);
-    const couleurLabel = document.getElementById("label_couleur_div" + i);
+    const couleurField = GetElement("couleur" + i);
+    const couleurLabel = GetElement("label_couleur_div" + i);
 
     if (i <= nombreCouleurs) {
       Show(couleurField);
@@ -108,19 +112,18 @@ function showColorFields() {
 }
 
 const couleurField = [
-  document.getElementById("couleur1"),
-  document.getElementById("couleur2"),
-  document.getElementById("couleur3"),
+  GetElement("couleur1"),
+  GetElement("couleur2"),
+  GetElement("couleur3"),
 ];
 
 const couleurLabel = [
-  document.getElementById("label_couleur1"),
-  document.getElementById("label_couleur2"),
-  document.getElementById("label_couleur3"),
+  GetElement("label_couleur1"),
+  GetElement("label_couleur2"),
+  GetElement("label_couleur3"),
 ];
 
-// On change le background des label en fonction de la couleur séléctionnée
-
+// On change le background des label en fonction de la couleur sélectionnée
 couleurField[0].addEventListener("change", () => {
   couleurLabel[0].style.backgroundColor = couleurField[0].value;
 });
