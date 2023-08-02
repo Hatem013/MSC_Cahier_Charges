@@ -1,241 +1,297 @@
 <?php
-// Vérifier si l'administrateur est connecté
-// Si non, rediriger vers la page de connexion
+include_once ROOT . 'views/home/header.php';
+include_once ROOT . 'views/home/footer.php';    
+require_once ROOT . 'App/Model.php';
+
 session_start();
+
 if (!isset($_SESSION['admin_id'])) {
     header('Location: http://localhost/MSC-1/adminlogin');
     exit;
 }
 
-// Inclure les fichiers nécessaires ici (header, footer, etc.)
-include_once ROOT . 'views/home/header.php';
-include_once ROOT . 'views/home/footer.php';
-require_once ROOT . 'App/Model.php'; 
-
 class AdminModel extends Model
 {
-    public function getClientsAndNouveauCahiers()
+    public function getAllClients()
     {
-        $sql = "SELECT c.id AS client_id, c.nom AS client_nom, c.prenom AS client_prenom, c.email AS client_email, c.telephone AS client_telephone, c.adresse AS client_adresse, nc.* FROM clients c LEFT JOIN nouveau_cahier nc ON c.id = nc.client_id";
+        $sql = "SELECT * FROM clients";
         $stmt = $this->connexion->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateClient($id, $data)
+    public function getAllNouveauCahiers()
     {
-        // Construction de la clause SQL dynamiquement
-        $columns = array_keys($data);
-        $values = array_values($data);
-        $placeholders = implode('=?, ', $columns) . '=?';
-        $sql = "UPDATE clients SET $placeholders WHERE id=?";
-        $values[] = $id;
-
+        $sql = "SELECT * FROM nouveau_cahier";
         $stmt = $this->connexion->prepare($sql);
-        return $stmt->execute($values);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateNouveauCahier($id, $data)
+    // Méthode pour récupérer les nouveaux cahiers associés à un client
+    public function getNouveauCahiersByClientId($clientId)
     {
-        // Construction de la clause SQL dynamiquement
-        $columns = array_keys($data);
-        $values = array_values($data);
-        $placeholders = implode('=?, ', $columns) . '=?';
-        $sql = "UPDATE nouveau_cahier SET $placeholders WHERE id=?";
-        $values[] = $id;
-
+        $sql = "SELECT * FROM nouveau_cahier WHERE client_id = :client_id";
         $stmt = $this->connexion->prepare($sql);
-        return $stmt->execute($values);
+        $stmt->bindParam(':client_id', $clientId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Méthode pour mettre à jour les données d'un client
+    public function updateClient($clientId, $data)
+    {
+        $sql = "UPDATE clients SET nom = :nom, prenom = :prenom, pseudo = :pseudo, email = :email WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindParam(':nom', $data['nom']);
+        $stmt->bindParam(':prenom', $data['prenom']);
+        $stmt->bindParam(':pseudo', $data['pseudo']);
+        $stmt->bindParam(':email', $data['email']);
+        $stmt->bindParam(':id', $clientId);
+        return $stmt->execute();
+    }
+
+    // Méthode pour mettre à jour les données d'un nouveau cahier
+    public function updateNouveauCahier($cahierId, $data)
+    {
+        $sql = "UPDATE nouveau_cahier SET secteur_activite = :secteur_activite, nom_entreprise = :nom_entreprise WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindParam(':secteur_activite', $data['secteur_activite']);
+        $stmt->bindParam(':nom_entreprise', $data['nom_entreprise']);
+        $stmt->bindParam(':id', $cahierId);
+        return $stmt->execute();
+    }
+
+    // Méthode pour supprimer un client et ses données associées
+    public function deleteClient($clientId)
+    {
+        // Logique pour supprimer les données associées du client (par exemple, les cahiers liés)
+        // Ensuite, supprimez le client lui-même
+        $sql = "DELETE FROM clients WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindParam(':id', $clientId);
+        return $stmt->execute();
+    }
+
+    // Autres méthodes si nécessaire
 }
 
-// Vérifier si le formulaire a été soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Valider les données du formulaire et les mettre dans un tableau
-    $formDataClient = [
-        'nom' => htmlspecialchars(trim($_POST['nom'])),
-        'prenom' => htmlspecialchars(trim($_POST['prenom'])),
-        'email' => htmlspecialchars(trim($_POST['email'])),
-        'telephone' => intval($_POST['telephone']),
-        'adresse' => htmlspecialchars(trim($_POST['adresse'])),
-    ];
+$adminModel = new AdminModel();
+$adminModel->getConnexion();
 
-    $formDataNouveauCahier = [
-        'secteur_activite' => htmlspecialchars(trim($_POST['secteur_activite'])),
-        'nom_entreprise' => htmlspecialchars(trim($_POST['nom_entreprise'])),
-        'email_entreprise' => htmlspecialchars(trim($_POST['email_entreprise'])),
-        'telephone_entreprise' => intval($_POST['telephone_entreprise']),
-        'adresse_entreprise' => htmlspecialchars(trim($_POST['adresse_entreprise'])),
-        'secteur_entreprise' => htmlspecialchars(trim($_POST['secteur_entreprise'])),
-        'type_site' => htmlspecialchars(trim($_POST['type_site'])),
-        'nombre_couleurs' => intval($_POST['nombre_couleurs']),
-        'couleur1' => htmlspecialchars(trim($_POST['couleur1'])),
-        'couleur2' => htmlspecialchars(trim($_POST['couleur2'])),
-        'couleur3' => htmlspecialchars(trim($_POST['couleur3'])),
-        'logo' => isset($_POST['logo']) ? 1 : 0,
-        'logo_file' => '',
-        'message_entreprise' => htmlspecialchars(trim($_POST['message_entreprise'])),
-        'header_desktop' => htmlspecialchars(trim($_POST['header_desktop'])),
-        'header_mobile' => htmlspecialchars(trim($_POST['header_mobile'])),
-        'footer_desktop' => htmlspecialchars(trim($_POST['footer_desktop'])),
-    ];
+$clients = $adminModel->getAllClients();
+$nouveauxCahiers = $adminModel->getAllNouveauCahiers();
 
-    // Vérifier si le logo doit être mis à jour
-    if (isset($_POST['logo']) && $_POST['logo'] === 'oui') {
-        $logoFile = $_FILES['logo_file'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if ($_POST['action'] === 'modifier_client') {
+        $clientId = $_POST['client_id'];
+        $nom = htmlspecialchars(trim($_POST['nom']));
+        $prenom = htmlspecialchars(trim($_POST['prenom']));
+        $pseudo = htmlspecialchars(trim($_POST['pseudo']));
+        $email = htmlspecialchars(trim($_POST['email']));
 
-        if (!empty($logoFile['name'])) {
-            // Vérifier le type de fichier
-            $allowedExtensions = ['jpg', 'jpeg', 'png'];
-            $fileExtension = strtolower(pathinfo($logoFile['name'], PATHINFO_EXTENSION));
-            if (!in_array($fileExtension, $allowedExtensions)) {
-                $formErrors['logo-file'] = 'Le format du logo doit être JPG, JPEG, PNG ou GIF.';
-            } else {
-                // Renommer le fichier avec le pseudo du client
-                $pseudo_client = $formDataClient['nom'] . '_' . $formDataClient['prenom'];
-                $newLogoName = hash('sha256', $pseudo_client . $logoFile['name']) . '.' . $fileExtension;
-                $uploadPath =  './Public/uploads/' . $newLogoName;
+        $data = [
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'pseudo' => $pseudo,
+            'email' => $email,
+        ];
+        $adminModel->updateClient($clientId, $data);
+    } elseif ($_POST['action'] === 'modifier_cahier') {
+        $cahierId = $_POST['cahier_id'];
+        $secteur_activite = htmlspecialchars(trim($_POST['secteur_activite']));
+        $nom_entreprise = htmlspecialchars(trim($_POST['nom_entreprise']));
+        // Ajoutez ici la validation des données du formulaire de modification pour le cahier
 
-                // Déplacer le fichier vers le dossier uploads
-                if (!move_uploaded_file($logoFile['tmp_name'], $uploadPath)) {
-                    $formErrors['logo-file'] = 'Une erreur est survenue lors du téléchargement du logo.';
-                } else {
-                    // Le chemin du fichier pour enregistrement dans la base de données
-                    $formDataNouveauCahier['logo_file'] = $uploadPath;
-                }
-            }
-        } else {
-            $formErrors['logo-file'] = 'Veuillez télécharger votre logo.';
-        }
-    }
-
-    // Effectuer les mises à jour dans la base de données si aucun champ n'est vide
-    if (
-        !empty($formDataClient['nom']) && !empty($formDataClient['prenom']) && !empty($formDataClient['email']) &&
-        !empty($formDataClient['telephone']) && !empty($formDataClient['adresse']) &&
-        !empty($formDataNouveauCahier['secteur_activite']) && !empty($formDataNouveauCahier['nom_entreprise']) &&
-        !empty($formDataNouveauCahier['email_entreprise']) && !empty($formDataNouveauCahier['telephone_entreprise']) &&
-        !empty($formDataNouveauCahier['adresse_entreprise']) && !empty($formDataNouveauCahier['secteur_entreprise']) &&
-        !empty($formDataNouveauCahier['type_site']) && !empty($formDataNouveauCahier['nombre_couleurs']) &&
-        !empty($formDataNouveauCahier['couleur1']) && !empty($formDataNouveauCahier['couleur2']) &&
-        !empty($formDataNouveauCahier['couleur3']) && !empty($formDataNouveauCahier['message_entreprise']) &&
-        !empty($formDataNouveauCahier['header_desktop']) && !empty($formDataNouveauCahier['header_mobile']) &&
-        !empty($formDataNouveauCahier['footer_desktop'])
-    ) {
-        // Vérifier si $_SESSION['admin_id'] est défini, sinon rediriger vers la page appropriée
-        if (isset($_SESSION['admin_id'])) {
-            try {
-                $adminModel = new AdminModel();
-                $conn = $adminModel->getConnexion();
-
-                // Mettre à jour les données dans la table clients
-                $clientId = intval($_POST['client_id']);
-                $resultClient = $adminModel->updateClient($clientId, $formDataClient);
-
-                // Mettre à jour les données dans la table nouveau_cahier
-                $nouveauCahierId = intval($_POST['id']);
-                $resultNouveauCahier = $adminModel->updateNouveauCahier($nouveauCahierId, $formDataNouveauCahier);
-
-                // Vérifier les résultats
-                if ($resultClient && $resultNouveauCahier) {
-                    // Mises à jour réussies
-                    header('Location: http://localhost/MSC-1/admin_dashboard');
-                    exit;
-                } else {
-                    // Erreur lors de la mise à jour
-                    $errorInfoClient = $stmtClient->errorInfo();
-                    $errorInfoNouveauCahier = $stmtNouveauCahier->errorInfo();
-                    echo "Erreur lors de la mise à jour : " . $errorInfoClient[2] . " / " . $errorInfoNouveauCahier[2];
-                    exit;
-                }
-            } catch (PDOException $e) {
-                // Erreur lors de la préparation de la mise à jour
-                echo "Erreur lors de la préparation de la mise à jour : " . $e->getMessage();
-                exit;
-            }
-        } else {
-            // Rediriger vers la page de connexion si l'administrateur n'est pas connecté
-            header('Location: http://localhost/MSC-1/admin_login');
-            exit;
-        }
+        $data = [
+            'secteur_activite' => $secteur_activite,
+            'nom_entreprise' => $nom_entreprise,
+            // Ajoutez ici les autres champs du cahier à mettre à jour
+        ];
+        $adminModel->updateNouveauCahier($cahierId, $data);
+    } elseif ($_POST['action'] === 'supprimer_client') {
+        $clientId = $_POST['client_id'];
+        $adminModel->deleteClient($clientId);
+      
     }
 }
-
 ?>
+<!-- Page admin -->
+<div class="container formulaire">
+    <div class="row">
+        <h1>Admin Page</h1>
+        <div class="col-lg-12">
+            <h2>Clients</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered text-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Pseudo</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php foreach ($clients as $client) : ?>
+                        <tr>
+                            <td><?= $client['id'] ?></td>
+                            <td><?= $client['nom'] ?></td>
+                            <td><?= $client['prenom'] ?></td>
+                            <td><?= $client['pseudo'] ?></td>
+                            <td><?= $client['email'] ?></td>
+                            <td>
+                                <button type="button" class="btn btn-info" onclick="toggleNouveauxCahiers(<?= $client['id'] ?>)">Afficher</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifierClientModal<?= $client['id'] ?>">Modifier</button>
+                                <form method="post" style="display: inline-block;">
+                                    <input type="hidden" name="client_id" value="<?= $client['id'] ?>">
+                                    <input type="submit" name="action" value="supprimer_client" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce client?');">
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<div class="container">
-    <h1>Gestion des Clients et Nouveau Cahier</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>Téléphone</th>
-                <th>Adresse</th>
-                <th>Profession</th>
-                <th>Secteur d'activité</th>
-                <th>Nom de l'entreprise</th>
-                <th>Email de l'entreprise</th>
-                <th>Téléphone de l'entreprise</th>
-                <th>Adresse de l'entreprise</th>
-                <th>Secteur de l'entreprise</th>
-                <th>Type de site</th>
-                <th>Nombre de couleurs</th>
-                <th>Couleur 1</th>
-                <th>Couleur 2</th>
-                <th>Couleur 3</th>
-                <th>Logo</th>
-                <th>Message de l'entreprise</th>
-                <th>Header Desktop</th>
-                <th>Header Mobile</th>
-                <th>Footer Desktop</th>
-                <th>Modifier</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $adminModel = new AdminModel();
-            $clientsAndNouveauCahiers = $adminModel->getClientsAndNouveauCahiers();
-            foreach ($clientsAndNouveauCahiers as $data) : ?>
-                <tr>
-                    <form method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="client_id" value="<?= $data['id'] ?>">
-                        <input type="hidden" name="id" value="<?= $data['nouveau_cahier_id'] ?>">
-                        <td><input type="text" name="nom" value="<?= $data['nom'] ?>"></td>
-                        <td><input type="text" name="prenom" value="<?= $data['prenom'] ?>"></td>
-                        <td><input type="text" name="email" value="<?= $data['email'] ?>"></td>
-                        <td><input type="text" name="telephone" value="<?= $data['telephone'] ?>"></td>
-                        <td><input type="text" name="adresse" value="<?= $data['adresse'] ?>"></td>
-                        <td><input type="text" name="profession" value="<?= $data['profession'] ?>"></td>
-                        <td><input type="text" name="secteur_activite" value="<?= $data['secteur_activite'] ?>"></td>
-                        <td><input type="text" name="nom_entreprise" value="<?= $data['nom_entreprise'] ?>"></td>
-                        <td><input type="text" name="email_entreprise" value="<?= $data['email_entreprise'] ?>"></td>
-                        <td><input type="text" name="telephone_entreprise" value="<?= $data['telephone_entreprise'] ?>"></td>
-                        <td><input type="text" name="adresse_entreprise" value="<?= $data['adresse_entreprise'] ?>"></td>
-                        <td><input type="text" name="secteur_entreprise" value="<?= $data['secteur_entreprise'] ?>"></td>
-                        <td><input type="text" name="type_site" value="<?= $data['type_site'] ?>"></td>
-                        <td><input type="number" name="nombre_couleurs" value="<?= $data['nombre_couleurs'] ?>"></td>
-                        <td><input type="color" name="couleur1" value="<?= $data['couleur1'] ?>"></td>
-                        <td><input type="color" name="couleur2" value="<?= $data['couleur2'] ?>"></td>
-                        <td><input type="color" name="couleur3" value="<?= $data['couleur3'] ?>"></td>
-                        <td>
-                            <?php if ($data['logo_file']) : ?>
-                                <img src="<?= $data['logo_file'] ?>" alt="Logo" style="max-height: 50px;">
-                            <?php else : ?>
-                                Pas de logo
-                            <?php endif; ?>
-                            <input type="checkbox" name="logo" value="oui"> Mettre à jour le logo
-                            <input type="file" name="logo_file" accept="image/*">
-                        </td>
-                        <td><input type="text" name="message_entreprise" value="<?= $data['message_entreprise'] ?>"></td>
-                        <td><input type="text" name="header_desktop" value="<?= $data['header_desktop'] ?>"></td>
-                        <td><input type="text" name="header_mobile" value="<?= $data['header_mobile'] ?>"></td>
-                        <td><input type="text" name="footer_desktop" value="<?= $data['footer_desktop'] ?>"></td>
-                        <td><button type="submit" class="btn btn-primary">Modifier</button></td>
-                    </form>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <!-- Tableau des nouveaux cahiers -->
+    <?php foreach ($clients as $client) : ?>
+        <div class="col-lg-6">
+            <h2>Cahiers associés au client <?= $client['id'] ?></h2>
+            <div class="table-responsive" id="cahiers_client_<?= $client['id'] ?>" style="display: none;">
+                <table class="table table-bordered text-light">
+                    <tr>
+                        <th>Profession</th>
+                        <th>Nom de l'entreprise</th>
+                        <th>Email de l'entreprise</th>
+                        <th>Téléphone de l'entreprise</th>
+                        <th>Adresse de l'entreprise</th>
+                        <th>Secteur de l'entreprise</th>
+                        <th>Type de site</th>
+                        <th>Nombre de couleurs</th>
+                        <th>Couleur 1</th>
+                        <th>Couleur 2</th>
+                        <th>Couleur 3</th>
+                        <th>Logo</th>
+                        <th>Fichier logo</th>
+                        <th>Message de l'entreprise</th>
+                        <th>Header desktop</th>
+                        <th>Header mobile</th>
+                        <th>Footer desktop</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php foreach ($nouveauxCahiers as $cahier) : ?>
+                        <?php if ($cahier['client_id'] == $client['id']) : ?>
+                            <tr>
+                                <td><?= $cahier['profession'] ?></td>
+                                <td><?= $cahier['nom_entreprise'] ?></td>
+                                <td><?= $cahier['email_entreprise'] ?></td>
+                                <td><?= $cahier['telephone_entreprise'] ?></td>
+                                <td><?= $cahier['adresse_entreprise'] ?></td>
+                                <td><?= $cahier['secteur_entreprise'] ?></td>
+                                <td><?= $cahier['type_site'] ?></td>
+                                <td><?= $cahier['nombre_couleurs'] ?></td>
+                                <td><?= $cahier['couleur1'] ?></td>
+                                <td><?= $cahier['couleur2'] ?></td>
+                                <td><?= $cahier['couleur3'] ?></td>
+                                <td><?= $cahier['logo'] ?></td>
+                                <td><?= $cahier['logo_file'] ?></td>
+                                <td><?= $cahier['message_entreprise'] ?></td>
+                                <td><?= $cahier['header_desktop'] ?></td>
+                                <td><?= $cahier['header_mobile'] ?></td>
+                                <td><?= $cahier['footer_desktop'] ?></td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifierCahierModal<?= $cahier['id'] ?>">Modifier</button>
+                                    <form method="post" style="display: inline-block;">
+                                        <input type="hidden" name="cahier_id" value="<?= $cahier['id'] ?>">
+                                        <input type="submit" name="action" value="supprimer_cahier" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce cahier?');">
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </div>
+    <?php endforeach; ?>
 </div>
+
+<!-- Modals pour modifier le client -->
+<?php foreach ($clients as $client) : ?>
+    <div class="modal fade" id="modifierClientModal<?= $client['id'] ?>" tabindex="-1" aria-labelledby="modifierClientModalLabel<?= $client['id'] ?>" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modifierClientModalLabel<?= $client['id'] ?>">Modifier le client <?= $client['id'] ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <input type="hidden" name="client_id" value="<?= $client['id'] ?>">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="nom" name="nom" value="<?= $client['nom'] ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom" value="<?= $client['prenom'] ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pseudo" class="form-label">Pseudo</label>
+                            <input type="text" class="form-control" id="pseudo" name="pseudo" value="<?= $client['pseudo'] ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?= $client['email'] ?>">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" name="action" value="modifier_client" class="btn btn-primary">Enregistrer les modifications</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<!-- Modals pour modifier le cahier -->
+<?php foreach ($nouveauxCahiers as $cahier) : ?>
+    <div class="modal fade" id="modifierCahierModal<?= $cahier['id'] ?>" tabindex="-1" aria-labelledby="modifierCahierModalLabel<?= $cahier['id'] ?>" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modifierCahierModalLabel<?= $cahier['id'] ?>">Modifier le cahier <?= $cahier['id'] ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <input type="hidden" name="cahier_id" value="<?= $cahier['id'] ?>">
+                        <div class="mb-3">
+                            <label for="secteur_activite" class="form-label">Secteur d'activité</label>
+                            <input type="text" class="form-control" id="secteur_activite" name="secteur_activite" value="<?= $cahier['secteur_activite'] ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nom_entreprise" class="form-label">Nom de l'entreprise</label>
+                            <input type="text" class="form-control" id="nom_entreprise" name="nom_entreprise" value="<?= $cahier['nom_entreprise'] ?>">
+                        </div>
+                        <!-- Ajouter ici tous les autres champs du cahier à modifier -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" name="action" value="modifier_cahier" class="btn btn-primary">Enregistrer les modifications</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<script>
+    function toggleNouveauxCahiers(clientId) {
+        const tableId = 'cahiers_client_' + clientId;
+        const tableElement = document.getElementById(tableId);
+        tableElement.style.display = (tableElement.style.display === 'none') ? 'table' : 'none';
+    }
+    <?php if (isset($_POST['action']) && ($_POST['action'] == 'modifier_client' || $_POST['action'] == 'modifier_cahier')) : ?>
+        window.location.reload();
+    <?php endif; ?>
+</script>
