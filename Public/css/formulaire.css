@@ -90,8 +90,10 @@ input[type="radio"] {
 
 #header_desktop_preview_img,
 #header_mobile_preview_img,
+#footer_desktop_preview_img,
+#footer_mobile_preview_img,
 .headerTaille,
-.headerMobileTaille {
+.headerMobileTaille, .footerTaille, .footerMobileTaille {
   border: 2px solid white;
   border-radius: 10px;
 }

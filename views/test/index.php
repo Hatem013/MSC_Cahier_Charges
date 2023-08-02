@@ -139,7 +139,7 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
         </div>
 
         <!-- Formulaire 2-->
-        <div id="formulaire2" class="d-none container">
+        <div id="formulaire2" class=" container d-none">
 
             <div class="container text-center mt-4 mb-5">
                 <h1>Suite du formulaire</h1>
@@ -452,42 +452,150 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
 
             <h1>Suite du formulaire</h1>
             <h2>Choisissez un type de footer</h2>
-            <div class="row">
-                <div class="row">
-                    <div class="row">
-                        <?php
 
-                        $imageFolder = "./Public/asset/image/";
-                        for ($i = 1; $i <= 9; $i += 2) {
-                            $image1Name = "framef" . $i . ".svg";
-                            $image2Name = "framef" . ($i + 1) . ".svg";
-                            $image1Path = $imageFolder . $image1Name;
-                            $image2Path = $imageFolder . $image2Name;
-
-                            echo '<div class="col-md-6">';
-                            echo '<label for="footer' . $i . '">';
-                            echo '<input type="radio" id="footer' . $i . '" name="footer_desktop" value="' . $image1Path . '">';
-                            echo '<img class="footerTaille img-fluid" src="' . $image1Path . '" alt="Footer ' . $i . '">';
-                            echo '</label>';
-
-                            // Vérifie si l'image suivante existe
-                            if (file_exists($image2Path)) {
-                                echo '<label for="footer' . ($i + 1) . '">';
-                                echo '<input type="radio" id="footer' . ($i + 1) . '" name="footer_desktop" value="' . $image2Path . '">';
-                                echo '<img class="footerTaille img-fluid" src="' . $image2Path . '" alt="Footer ' . ($i + 1) . '">';
-                                echo '</label>';
-                            }
-
-                            echo '</div>';
-                        }
-                        ?>
-
-
-
-                    </div>
+            <!-- Footer ordinateur-->
+            <div class="row mb-3" id="footer_desktop_div">
+                <div class="col-3 p-5">
+                    <p>
+                        <button class="btn" id="footer_desktop_btn" type="button"
+                            onclick="desktopFooterMenuDisplay();setTimeout(() => { window.scrollTo(0,250);}, 230);">
+                            Selectionnez votre footer sur ordinateur
+                        </button>
+                    </p>
                 </div>
 
+                <div class="col-6 d-none justify-content-center p-5 text-center" id="footer_desktop_preview">
+                    <img id="footer_desktop_preview_img" src="">
+                </div>
+
+                <div class="col-6 d-none" id="footer_desktop_selection_display" style="min-height: 120px;">
+                    <div class="collapse" id="collapseFooter">
+                        <div class="card card-body" id="footer_desktop_card">
+
+                            <?php
+                            $imageFolder = "./Public/asset/image/";
+
+                            for ($i = 1; $i <= 6; $i++) {
+                                $image1Name = "framef" . $i . ".svg";
+                                $image1Path = $imageFolder . $image1Name;
+
+                                // Affichage des 3 dernières images dans une div séparée
+                            
+                                echo '<div class="container footer_desktop">';
+                                echo '<div class="row">';
+
+                                echo '<label for="footer' . $i . '">';
+                                echo '<input type="radio" class="form-check-input footer_input" id="footer' . $i . '" name="footer_desktop" value="' . $image1Path . '" required>';
+                                echo '<img class="footerTaille img-fluid" src="' . $image1Path . '" alt="Footer ' . $i . '">';
+                                echo '</label>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                            ?>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Footer mobile-->
+            <div class="row mb-3 d-none" id="footer_mobile_div">
+                <div class="col-3 p-5">
+                    <p>
+                        <button class="btn" id="footer_mobile_btn" type="button"
+                            onclick="mobileFooterMenuDisplay();setTimeout(() => { window.scrollTo(0,250);}, 230);">
+                            Selectionnez votre footer sur mobile
+                        </button>
+                    </p>
+                </div>
+
+                <div class="col-6 d-none justify-content-center p-5 text-center" id="footer_mobile_preview">
+                    <img id="footer_mobile_preview_img" src="">
+                </div>
+
+                <div class="col-6 d-none" id="footer_mobile_selection_display" style="min-height: 120px;">
+                    <div class="collapse" id="collapseMobileFooter">
+                        <div class="card card-body" id="footer_mobile_card">
+
+                            <?php
+                            $imageFolder = "./Public/asset/image/";
+
+                            for ($i = 1; $i <= 6; $i++) {
+                                $image1Name = "framef" . $i . ".svg";
+                                $image1Path = $imageFolder . $image1Name;
+
+                                // Affichage des 3 dernières images dans une div séparée
+                            
+                                echo '<div class="container footer_mobile">';
+                                echo '<div class="row">';
+
+                                echo '<label for="footer_mobile' . $i . '">';
+                                echo '<input type="radio" class="form-check-input footer_input" id="footer_mobile' . $i . '" name="footer_mobile" value="' . $image1Path . '" required>';
+                                echo '<img class="footerMobileTaille img-fluid" src="' . $image1Path . '" alt="Footer_mobile ' . $i . '">';
+                                echo '</label>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                            ?>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer mobile tests 
+            
+            <div class="row d-none" id="footer_mobile_div">
+                <div class="col-3 p-5">
+                    <p>
+                        <button class="btn btn-primary" id="footer_mobile_btn" type="button"
+                            onclick="mobileFooterMenuDisplay()">
+                            Selectionnez l'affichage sur mobile et tablette
+                        </button>
+                    </p>
+                </div>
+
+
+                <div class="col-6 d-none justify_content_center text-center" id="footer_mobile_preview">
+                    <img id="footer_mobile_preview_img" src="">
+                </div>
+
+                <div class="col-6 d-none" id="footer_mobile_selection_display" style="min-height: 120px;">
+                    <div class="collapse" id="collapseFooterMobile">
+                        <div class="card card-body" id="footer_mobile_card">
+                            <div class="row">
+                                <?php
+                                $imageFolder = "./Public/asset/image/";
+
+
+
+                                for ($i = 7; $i <= 10; $i++) {
+                                    $image1Name = "framef" . $i . ".svg";
+                                    $image1Path = $imageFolder . $image1Name;
+
+                                    // Affichage des 3 dernières images dans une div séparée
+                                
+
+
+
+
+
+                                    echo '<label class="col-3" for="footer_mobile' . $i . '">';
+                                    echo '<input type="radio" class="form-check-input footer_mobile_input"  id="footer_mobile' . $i . '" name="footer_mobile" value="' . $image1Path . '" required>';
+                                    echo '<img class="footerMobileTaille img-fluid" src="' . $image1Path . '" alt="Footer_mobile ' . $i . '">';
+                                    echo '</label>';
+                                }
+                                ?>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            -->
+           
 
             <div class="row p-2">
                 <button type="button" id="formulaire4_btn" class="btn my-3">Passer à l'étape suivante</button>
@@ -559,11 +667,13 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
             </div>
 
         
-        </div> -->
+        </div> 
+    -->
 
         <div class="row p-2 d-none" id="form_btn">
             <button type="submit"  class="btn my-3">Envoyer le formulaire -></button>
         </div>
+    
     </form>
     <?php
         var_dump($_POST);
@@ -577,8 +687,8 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
-<script src="./Public/js/progress.js"></script>
 <script src="./Public/js/formulaire_event.js"></script>
 <script src="./Public/js/header_form.js"></script>
+<script src="./Public/js/footer_form.js"></script>
 <script src="./Public/js/coloris.min.js"></script>
 <script src="./Public/js/color_logo_form.js"></script>
