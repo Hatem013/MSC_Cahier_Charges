@@ -24,7 +24,7 @@ const formulaires_btn = [
   GetElement("formulaire1_btn"),
   GetElement("formulaire2_btn"),
   GetElement("formulaire3_btn"),
-  GetElement("formulaire4_btn")
+  GetElement("formulaire4_btn"),
 ];
 
 let next_number = null;
@@ -52,47 +52,44 @@ function showNextForm() {
   next_number = parseInt(number) + 1;
   next_form = GetElement(name + next_number);
 
-
   var input = [];
   var filled = null;
 
   for (let i = 0; i <= completed_form_input.length - 1; i++) {
-   input.push(completed_form_input[i].reportValidity())
-  };
-
-  let check = arr => arr.every(v => v === true);
-  
-  if(check(input)) {
-    filled = true
-  } else {
-    filled = false
+    input.push(completed_form_input[i].reportValidity());
   }
 
-  
-  
+  let check = (arr) => arr.every((v) => v === true);
+
+  if (check(input)) {
+    filled = true;
+  } else {
+    filled = false;
+  }
+
   // Si tous les champs sont remplis alors on active le script
   if (filled === true) {
-    // On verifie si le formulaire suivant existe, s'il existe on affiche le formulaire suivant, et s'il n'existe pas on affiche le bouton d'envoie du formulaire
-    gotoNext();
-  } 
-
-
-  // Dans le cas où on n'a pas de logo à importer (obligé de faire un script exprès car l'automatisation plus haut interfère)
-  if (filled === false && completed_form == GetElement("formulaire2")) {
-    if (
-      completed_form_input[0].value !== "0" &&
-      completed_form_input[1].value !== "" &&
-      GetElement("message_ent").value !== ""
-    ) {
+    if (completed_form == formulaires[1]) {
       if (
-        labelNon.classList.contains("btn_validate") &&
-        GetElement("type_site").value !== ""
+        GetElement("message_ent").reportValidity() == true &&
+        GetElement("type_site").reportValidity() == true &&
+        completed_form_input[0].value !== "0" &&
+        completed_form_input[1].value !== ""
       ) {
-        gotoNext();
+        if (labelNon.classList.contains("btn_validate")) {
+          gotoNext();
+        } else if (labelOui.classList.contains("btn_validate")) {
+          gotoNext();
+        }
+      } else {
+        GetElement("message_ent").reportValidity();
+        GetElement("type_site").reportValidity();
       }
+    } else {
+      gotoNext();
     }
+    // On verifie si le formulaire suivant existe, s'il existe on affiche le formulaire suivant, et s'il n'existe pas on affiche le bouton d'envoie du formulaire
   }
-  
 }
 
 function gotoNext() {

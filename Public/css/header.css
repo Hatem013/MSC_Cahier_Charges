@@ -28,7 +28,7 @@
 }
 
 
-.headerTaille:hover, .headerMobileTaille:hover {
+.headerTaille:hover, .headerMobileTaille:hover, .footerTaille:hover, .footerMobileTaille:hover {
     transform: scale(1.2);
     transition-duration: 0.8s;
 }
