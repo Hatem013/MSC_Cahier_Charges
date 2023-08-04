@@ -6,13 +6,13 @@ class NouveauCahierModel extends Model
 {
     public $table = 'nouveau_cahier';
 
-    public function insertNouveauCahier($client_id, $nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop)
+    public function insertNouveauCahier($client_id, $nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop, $footer_mobile)
     {
-        $sql = "INSERT INTO nouveau_cahier (client_id, nom, prenom, email, telephone, adresse, profession, secteur_activite, nom_entreprise, email_entreprise, telephone_entreprise, adresse_entreprise, secteur_entreprise, type_site, nombre_couleurs, couleur1, couleur2, couleur3, logo, logo_file, message_entreprise, header_desktop, header_mobile, footer_desktop) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO nouveau_cahier (client_id, nom, prenom, email, telephone, adresse, profession, secteur_activite, nom_entreprise, email_entreprise, telephone_entreprise, adresse_entreprise, secteur_entreprise, type_site, nombre_couleurs, couleur1, couleur2, couleur3, logo, logo_file, message_entreprise, header_desktop, header_mobile, footer_desktop, footer_mobile) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Utiliser la connexion définie dans la classe parente Model
         $stmt = $this->connexion->prepare($sql);
-        return $stmt->execute([$client_id, $nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop]);
+        return $stmt->execute([$client_id, $nom, $prenom, $email, $telephone, $adresse, $profession, $secteur_activite, $nom_entreprise, $email_entreprise, $telephone_entreprise, $adresse_entreprise, $secteur_entreprise, $type_site, $nombre_couleurs, $couleur1, $couleur2, $couleur3, $logo, $logo_file, $message_entreprise, $header_desktop, $header_mobile, $footer_desktop, $footer_mobile]);
     }
 }
 
@@ -74,6 +74,7 @@ function validateForm($formData)
     $header_desktop = htmlspecialchars(trim($formData['header_desktop']));
     $header_mobile = htmlspecialchars(trim($formData['header_mobile']));
     $footer_desktop = htmlspecialchars(trim($formData['footer_desktop']));
+    $footer_mobile = htmlspecialchars(trim($formData['footer_mobile']));
 
 
     return [
@@ -101,6 +102,7 @@ function validateForm($formData)
         'header_desktop' => $header_desktop,
         'header_mobile' => $header_mobile,
         'footer_desktop' => $footer_desktop,
+        'footer_mobile' => $footer_mobile,
         'errors' => $errors
     ];
 }
@@ -141,7 +143,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $formData['message_entreprise'],
                 $formData['header_desktop'],
                 $formData['header_mobile'],
-                $formData['footer_desktop']
+                $formData['footer_desktop'],
+                $formData['footer_mobile']
             );
 
             // Vérifier les résultats

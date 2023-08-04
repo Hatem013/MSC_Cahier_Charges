@@ -526,6 +526,9 @@ require_once ROOT . 'Public/php/traitement-formulaire1.php';
                     </div>
                 </div>
             </div>
+            <div>
+                <button type="submit" class="btn btn-primary d-none" id="form_btn" name="form_btn">Envoyer le formulaire</button>
+            </div>
 
             <!-- Footer mobile tests 
             
